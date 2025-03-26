@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class LPNN_script : MonoBehaviour
@@ -9,7 +11,7 @@ public class LPNN_script : MonoBehaviour
     static void CreateLPNNObject(MenuCommand menuCommand)
     {
         // Create a custom game object
-        GameObject go = new GameObject("LPNN Parent");
+        GameObject go = new("LPNN Parent");
         go.AddComponent<LPNN_script>();
 
         // Ensure it gets reparented if this was a context click (otherwise does nothing)
@@ -19,6 +21,46 @@ public class LPNN_script : MonoBehaviour
         Selection.activeObject = go;
     }
     #endregion
+
+    [SerializeField] private List<BoxCollider> boundingVolumes;
+
+    private void Awake()
+    {
+        // if list not empty
+        //     get its bounding box
+        //     return
+        // if child exists
+        //     get its bounding box
+        //     return
+        // error
+
+        boundingVolumes ??= new List<BoxCollider>();
+
+        if (boundingVolumes.Count > 0)
+        {
+            boundingVolumes = new List<BoxCollider>();
+        }
+        GameObject boundingChildren;
+        if ( boundingChildren = transform.Find("BoundingVolumes").gameObject){
+            foreach (Transform child in boundingChildren.transform)
+            {
+                if (child.TryGetComponent<BoxCollider>(out var boxCollider))
+                {
+                    boundingVolumes.Add(boxCollider);
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError("No bounding volumes found");
+        }
+    }
+
+
+    // public void temp() {
+    //     Bounds bounds = boundingVolumes[0].bounds;
+    //     bounds.Encapsulate(boundingVolumes[1].bounds);
+    // }
 
 
 }
