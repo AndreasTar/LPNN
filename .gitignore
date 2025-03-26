@@ -237,3 +237,8 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+/Unity_diploma_Impl/Library/PackageCache
+/Unity_diploma_Impl/Temp
+/Unity_diploma_Impl/Library/ShaderCache
+/Unity_diploma_Impl/Library/Artifacts
+/Unity_diploma_Impl/Library/Bee/artifacts
