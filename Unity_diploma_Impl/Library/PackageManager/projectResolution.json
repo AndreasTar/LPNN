@@ -19,26 +19,6 @@
       "source": "registry",
       "testable": false
     },
-    "com.unity.collab-proxy@2.7.1": {
-      "name": "com.unity.collab-proxy",
-      "displayName": "Version Control",
-      "resolvedPath": "C:\\Users\\Andreas\\Desktop\\UniStuff\\Diploma\\project\\LPNN\\Unity_diploma_Impl\\Library\\PackageCache\\com.unity.collab-proxy@50ac96531b63",
-      "fingerprint": "50ac96531b6358586ccfdf8cc845939bf50d9fab",
-      "editorCompatibility": "2021.3.0f1",
-      "version": "2.7.1",
-      "source": "registry",
-      "testable": false
-    },
-    "com.unity.ide.rider@3.0.31": {
-      "name": "com.unity.ide.rider",
-      "displayName": "JetBrains Rider Editor",
-      "resolvedPath": "C:\\Users\\Andreas\\Desktop\\UniStuff\\Diploma\\project\\LPNN\\Unity_diploma_Impl\\Library\\PackageCache\\com.unity.ide.rider@7921be93db40",
-      "fingerprint": "7921be93db40ec070fcb01ed82d1c3df1bbdddcd",
-      "editorCompatibility": "2019.2.6f1",
-      "version": "3.0.31",
-      "source": "registry",
-      "testable": false
-    },
     "com.unity.ide.visualstudio@2.0.22": {
       "name": "com.unity.ide.visualstudio",
       "displayName": "Visual Studio Editor",
@@ -57,16 +37,6 @@
       "editorCompatibility": "2021.3.0a1",
       "version": "1.13.0",
       "source": "registry",
-      "testable": false
-    },
-    "com.unity.multiplayer.center@1.0.0": {
-      "name": "com.unity.multiplayer.center",
-      "displayName": "Multiplayer Center",
-      "resolvedPath": "C:\\Users\\Andreas\\Desktop\\UniStuff\\Diploma\\project\\LPNN\\Unity_diploma_Impl\\Library\\PackageCache\\com.unity.multiplayer.center@f502d8ac613f",
-      "fingerprint": "f502d8ac613fa076192423e73892fbd89eb4049b",
-      "editorCompatibility": "6000.0.0a1",
-      "version": "1.0.0",
-      "source": "builtin",
       "testable": false
     },
     "com.unity.render-pipelines.universal@17.0.3": {
@@ -143,14 +113,6 @@
       "source": "builtin",
       "testable": false
     },
-    "com.unity.modules.animation@1.0.0": {
-      "name": "com.unity.modules.animation",
-      "displayName": "Animation",
-      "resolvedPath": "C:\\YEET\\Programs\\Unity\\Versions\\6000.0.38f1\\Editor\\Data\\Resources\\PackageManager\\BuiltInPackages\\com.unity.modules.animation",
-      "version": "1.0.0",
-      "source": "builtin",
-      "testable": false
-    },
     "com.unity.modules.assetbundle@1.0.0": {
       "name": "com.unity.modules.assetbundle",
       "displayName": "Asset Bundle",
@@ -163,14 +125,6 @@
       "name": "com.unity.modules.audio",
       "displayName": "Audio",
       "resolvedPath": "C:\\YEET\\Programs\\Unity\\Versions\\6000.0.38f1\\Editor\\Data\\Resources\\PackageManager\\BuiltInPackages\\com.unity.modules.audio",
-      "version": "1.0.0",
-      "source": "builtin",
-      "testable": false
-    },
-    "com.unity.modules.cloth@1.0.0": {
-      "name": "com.unity.modules.cloth",
-      "displayName": "Cloth",
-      "resolvedPath": "C:\\YEET\\Programs\\Unity\\Versions\\6000.0.38f1\\Editor\\Data\\Resources\\PackageManager\\BuiltInPackages\\com.unity.modules.cloth",
       "version": "1.0.0",
       "source": "builtin",
       "testable": false
@@ -335,26 +289,10 @@
       "source": "builtin",
       "testable": false
     },
-    "com.unity.modules.vehicles@1.0.0": {
-      "name": "com.unity.modules.vehicles",
-      "displayName": "Vehicles",
-      "resolvedPath": "C:\\YEET\\Programs\\Unity\\Versions\\6000.0.38f1\\Editor\\Data\\Resources\\PackageManager\\BuiltInPackages\\com.unity.modules.vehicles",
-      "version": "1.0.0",
-      "source": "builtin",
-      "testable": false
-    },
     "com.unity.modules.video@1.0.0": {
       "name": "com.unity.modules.video",
       "displayName": "Video",
       "resolvedPath": "C:\\YEET\\Programs\\Unity\\Versions\\6000.0.38f1\\Editor\\Data\\Resources\\PackageManager\\BuiltInPackages\\com.unity.modules.video",
-      "version": "1.0.0",
-      "source": "builtin",
-      "testable": false
-    },
-    "com.unity.modules.vr@1.0.0": {
-      "name": "com.unity.modules.vr",
-      "displayName": "VR",
-      "resolvedPath": "C:\\YEET\\Programs\\Unity\\Versions\\6000.0.38f1\\Editor\\Data\\Resources\\PackageManager\\BuiltInPackages\\com.unity.modules.vr",
       "version": "1.0.0",
       "source": "builtin",
       "testable": false
@@ -367,26 +305,18 @@
       "source": "builtin",
       "testable": false
     },
-    "com.unity.modules.xr@1.0.0": {
-      "name": "com.unity.modules.xr",
-      "displayName": "XR",
-      "resolvedPath": "C:\\YEET\\Programs\\Unity\\Versions\\6000.0.38f1\\Editor\\Data\\Resources\\PackageManager\\BuiltInPackages\\com.unity.modules.xr",
-      "version": "1.0.0",
-      "source": "builtin",
-      "testable": false
-    },
-    "com.unity.modules.subsystems@1.0.0": {
-      "name": "com.unity.modules.subsystems",
-      "displayName": "Subsystems",
-      "resolvedPath": "C:\\YEET\\Programs\\Unity\\Versions\\6000.0.38f1\\Editor\\Data\\Resources\\PackageManager\\BuiltInPackages\\com.unity.modules.subsystems",
-      "version": "1.0.0",
-      "source": "builtin",
-      "testable": false
-    },
     "com.unity.modules.hierarchycore@1.0.0": {
       "name": "com.unity.modules.hierarchycore",
       "displayName": "Hierarchy Core",
       "resolvedPath": "C:\\YEET\\Programs\\Unity\\Versions\\6000.0.38f1\\Editor\\Data\\Resources\\PackageManager\\BuiltInPackages\\com.unity.modules.hierarchycore",
+      "version": "1.0.0",
+      "source": "builtin",
+      "testable": false
+    },
+    "com.unity.modules.animation@1.0.0": {
+      "name": "com.unity.modules.animation",
+      "displayName": "Animation",
+      "resolvedPath": "C:\\YEET\\Programs\\Unity\\Versions\\6000.0.38f1\\Editor\\Data\\Resources\\PackageManager\\BuiltInPackages\\com.unity.modules.animation",
       "version": "1.0.0",
       "source": "builtin",
       "testable": false

@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638785756284157923
-    m_Hash: 569983760
+      ticks: 638785808886440182
+    m_Hash: 3184125669
   m_LockFileStatus:
     m_FilePath: C:/Users/Andreas/Desktop/UniStuff/Diploma/project/LPNN/Unity_diploma_Impl/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638785756284265028
-    m_Hash: 4092243198
+      ticks: 638785808893224725
+    m_Hash: 4148101310
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -132,311 +132,6 @@ m_ResolvedPackages:
     compatibilityLevel: 0
     minimumPackageVersion: 2.0.5
     minimumUnityVersion: 2023.2.0a18
-- packageId: com.unity.collab-proxy@2.7.1
-  testable: 0
-  isDirectDependency: 1
-  version: 2.7.1
-  source: 1
-  resolvedPath: C:\Users\Andreas\Desktop\UniStuff\Diploma\project\LPNN\Unity_diploma_Impl\Library\PackageCache\com.unity.collab-proxy@50ac96531b63
-  assetPath: Packages/com.unity.collab-proxy
-  name: com.unity.collab-proxy
-  displayName: Version Control
-  author:
-    name: 
-    email: 
-    url: 
-  category: Editor
-  type: 
-  description: The package gives you the ability to use Unity Version Control in
-    the Unity editor. To use Unity Version Control, a subscription is required. Learn
-    more about how you can get started for free by visiting https://unity.com/solutions/version-control
-  errors: []
-  versions:
-    all:
-    - 1.2.3-preview
-    - 1.2.4-preview
-    - 1.2.6
-    - 1.2.7
-    - 1.2.9
-    - 1.2.11
-    - 1.2.15
-    - 1.2.16
-    - 1.2.17-preview.3
-    - 1.3.2
-    - 1.3.3
-    - 1.3.4
-    - 1.3.5
-    - 1.3.6
-    - 1.3.7
-    - 1.3.8
-    - 1.3.9
-    - 1.4.9
-    - 1.5.7
-    - 1.6.0
-    - 1.7.1
-    - 1.8.0
-    - 1.9.0
-    - 1.10.2
-    - 1.11.2
-    - 1.12.5
-    - 1.13.5
-    - 1.14.1
-    - 1.14.4
-    - 1.14.7
-    - 1.14.9
-    - 1.14.12
-    - 1.14.13
-    - 1.14.15
-    - 1.14.16
-    - 1.14.17
-    - 1.14.18
-    - 1.15.1
-    - 1.15.4
-    - 1.15.7
-    - 1.15.9
-    - 1.15.12
-    - 1.15.13
-    - 1.15.15
-    - 1.15.16
-    - 1.15.17
-    - 1.15.18
-    - 1.17.0
-    - 1.17.1
-    - 1.17.2
-    - 1.17.6
-    - 1.17.7
-    - 2.0.0-preview.6
-    - 2.0.0-preview.8
-    - 2.0.0-preview.15
-    - 2.0.0-preview.17
-    - 2.0.0-preview.20
-    - 2.0.0-preview.21
-    - 2.0.0-preview.22
-    - 2.0.0
-    - 2.0.1
-    - 2.0.3
-    - 2.0.4
-    - 2.0.5
-    - 2.0.7
-    - 2.1.0-preview.3
-    - 2.1.0-preview.5
-    - 2.1.0-preview.6
-    - 2.1.0
-    - 2.2.0
-    - 2.3.1
-    - 2.4.3
-    - 2.4.4
-    - 2.5.1
-    - 2.5.2
-    - 2.6.0
-    - 2.7.1
-    compatible:
-    - 2.6.0
-    - 2.7.1
-    recommended: 2.6.0
-    deprecated: []
-  dependencies: []
-  resolvedDependencies: []
-  keywords:
-  - backup
-  - cloud
-  - collab
-  - collaborate
-  - collaboration
-  - control
-  - devops
-  - plastic
-  - plasticscm
-  - source
-  - team
-  - teams
-  - version
-  - vcs
-  - uvcs
-  registry:
-    id: main
-    name: 
-    url: https://packages.unity.com
-    scopes: []
-    isDefault: 1
-    capabilities: 7
-    configSource: 0
-  hideInEditor: 1
-  entitlements:
-    licensingModel: 1
-  isAssetStorePackage: 0
-  datePublishedTicks: 638751271186710000
-  documentationUrl: https://docs.unity3d.com/Packages/com.unity.collab-proxy@2.7/manual/index.html
-  hasRepository: 1
-  repository:
-    type: git
-    url: https://github.cds.internal.unity3d.com/unity/com.unity.cloud.collaborate.git
-    revision: cf9c21f84be18cbe2d6a93ec7cfbeb01b4310bbe
-    path: 
-  unityLifecycle:
-    version: 2.6.0
-    nextVersion: 
-    recommendedVersion: 
-    isDeprecated: 0
-    deprecationMessage: 
-  isDeprecated: 0
-  deprecationMessage: 
-  git:
-    hash: 
-    revision: 
-  upmReserved: "{\"changelog\":\"### Added\\n\\n- You can now Shelve your selected
-    Pending Changes, inspect the shelves content, and apply them to your workspace.\\n-
-    You can now Shelve your Pending Changes when switching to another branch (or
-    changeset) and decide if you want to apply them automatically after the switch.\\n-
-    You can now create a code review from the list of branches (or changesets) opening
-    either the Desktop App or the Unity Cloud website.\\n\\n### Changed\\n\\n- Serialize
-    the Checkin comment and tick selection so they are kept on any domain reload
-    and play mode.\\n- Optimized incoming changes & merge to only reload the Package
-    Manager when needed.\\n- Added dedicated toolbar buttons to open the list of
-    branches and the Branch Explorer of the Desktop App.\\n- Reworded the changeset
-    context menu \\\"Undo this change\\\" to \\\"Revert this file to the previous
-    revision\\\" so it\u2019s more explicit.\\n- Moved the 'Unity Version Control'
-    menu item under 'Window'/'Version Control' submenu starting from Unity 6.1.\\n-
-    Improve the Create workspace window to suggest the matching Unity Cloud project
-    if it exists.\\n\\n### Fixed\\n\\n- Ensured ignore.conf is not being reformatted
-    when adding or removing an ignore rule, so it keeps empty lines and comments.\\n-
-    Fixed missing checked-out for renamed assets.\\n- Fixed rename asset leaves 'Added'
-    + 'Remove locally' status instead of 'Moved'.\\n- Fixed console error GUI Error:
-    Invalid GUILayout state in PlasticWindow view which is caused under some circumstances.\\n-
-    Fixed null exception on entering in Play Mode before creating the workspace.\\n-
-    Fixed lock statuses to correctly refresh in Project View and Inspector after
-    merging.\\n- Fixed a performance issue by preventing the ConfigureLogging call
-    on every domain reload when Unity Version Control is not used, reducing the load
-    time by ~200ms. .\\n- Fixed the create branch operation to work in Gluon mode
-    which uses partial workspaces.\"}"
-  assetStore:
-    productId: 
-  fingerprint: 50ac96531b6358586ccfdf8cc845939bf50d9fab
-  editorCompatibility:
-    compatibilityLevel: 0
-    minimumPackageVersion: 2.6.0
-    minimumUnityVersion: 2021.3.0f1
-- packageId: com.unity.ide.rider@3.0.31
-  testable: 0
-  isDirectDependency: 1
-  version: 3.0.31
-  source: 1
-  resolvedPath: C:\Users\Andreas\Desktop\UniStuff\Diploma\project\LPNN\Unity_diploma_Impl\Library\PackageCache\com.unity.ide.rider@7921be93db40
-  assetPath: Packages/com.unity.ide.rider
-  name: com.unity.ide.rider
-  displayName: JetBrains Rider Editor
-  author:
-    name: 
-    email: 
-    url: 
-  category: 
-  type: assets
-  description: The JetBrains Rider Editor package provides an integration for using
-    the JetBrains Rider IDE as a code editor for Unity. It adds support for generating
-    .csproj files for code completion and auto-discovery of installations.
-  errors: []
-  versions:
-    all:
-    - 1.0.2
-    - 1.0.6
-    - 1.0.8
-    - 1.1.0
-    - 1.1.1
-    - 1.1.2-preview
-    - 1.1.2-preview.2
-    - 1.1.3-preview.1
-    - 1.1.4-preview
-    - 1.1.4
-    - 1.2.0-preview
-    - 1.2.1
-    - 2.0.0-preview
-    - 2.0.1
-    - 2.0.2
-    - 2.0.3
-    - 2.0.5
-    - 2.0.7
-    - 3.0.1
-    - 3.0.2
-    - 3.0.3
-    - 3.0.4
-    - 3.0.5
-    - 3.0.6
-    - 3.0.7
-    - 3.0.9
-    - 3.0.10
-    - 3.0.12
-    - 3.0.13
-    - 3.0.14
-    - 3.0.15
-    - 3.0.16
-    - 3.0.17
-    - 3.0.18
-    - 3.0.20
-    - 3.0.21
-    - 3.0.22
-    - 3.0.24
-    - 3.0.25
-    - 3.0.26
-    - 3.0.27
-    - 3.0.28
-    - 3.0.31
-    - 3.0.34
-    - 3.0.35
-    compatible:
-    - 3.0.31
-    - 3.0.34
-    - 3.0.35
-    recommended: 3.0.35
-    deprecated: []
-  dependencies:
-  - name: com.unity.ext.nunit
-    version: 1.0.6
-  resolvedDependencies:
-  - name: com.unity.ext.nunit
-    version: 2.0.5
-  keywords: []
-  registry:
-    id: main
-    name: 
-    url: https://packages.unity.com
-    scopes: []
-    isDefault: 1
-    capabilities: 7
-    configSource: 0
-  hideInEditor: 1
-  entitlements:
-    licensingModel: 1
-  isAssetStorePackage: 0
-  datePublishedTicks: 638548308080000000
-  documentationUrl: https://docs.unity3d.com/Packages/com.unity.ide.rider@3.0/manual/index.html
-  hasRepository: 1
-  repository:
-    type: git
-    url: https://github.cds.internal.unity3d.com/unity/com.unity.ide.rider.git
-    revision: ccd778a2275ff09f1a83bc924cfb2fb4d5b63566
-    path: 
-  unityLifecycle:
-    version: 3.0.31
-    nextVersion: 
-    recommendedVersion: 
-    isDeprecated: 0
-    deprecationMessage: 
-  isDeprecated: 0
-  deprecationMessage: 
-  git:
-    hash: 
-    revision: 
-  upmReserved: '{"changelog":"fix RIDER-104519 Rider is reporting errors in scripts
-    that work fine in Unity when utilizing DOTS - when Player project, by generating
-    projects for all assemblies in \"com.unity.entities\", \"com.unity.collections\"\nfix
-    RIDER-111622 Unity Rider package is not compatible with Rider Dev builds"}'
-  assetStore:
-    productId: 
-  fingerprint: 7921be93db40ec070fcb01ed82d1c3df1bbdddcd
-  editorCompatibility:
-    compatibilityLevel: 0
-    minimumPackageVersion: 3.0.31
-    minimumUnityVersion: 2019.2.6f1
 - packageId: com.unity.ide.visualstudio@2.0.22
   testable: 0
   isDirectDependency: 1
@@ -700,96 +395,6 @@ m_ResolvedPackages:
     compatibilityLevel: 0
     minimumPackageVersion: 1.13.0
     minimumUnityVersion: 2021.3.0a1
-- packageId: com.unity.multiplayer.center@1.0.0
-  testable: 0
-  isDirectDependency: 1
-  version: 1.0.0
-  source: 2
-  resolvedPath: C:\Users\Andreas\Desktop\UniStuff\Diploma\project\LPNN\Unity_diploma_Impl\Library\PackageCache\com.unity.multiplayer.center@f502d8ac613f
-  assetPath: Packages/com.unity.multiplayer.center
-  name: com.unity.multiplayer.center
-  displayName: Multiplayer Center
-  author:
-    name: 
-    email: 
-    url: 
-  category: 
-  type: 
-  description: The multiplayer center provides a starting point to create multiplayer
-    games. It will recommend specific packages and enable you to easily access integrations,
-    samples and documentation.
-  errors: []
-  versions:
-    all:
-    - 0.2.1
-    - 0.3.0
-    - 0.4.0
-    - 1.0.0-pre.1
-    - 1.0.0-pre.2
-    - 1.0.0-pre.3
-    - 1.0.0
-    compatible:
-    - 1.0.0
-    recommended: 1.0.0
-    deprecated: []
-  dependencies:
-  - name: com.unity.modules.uielements
-    version: 1.0.0
-  resolvedDependencies:
-  - name: com.unity.modules.uielements
-    version: 1.0.0
-  - name: com.unity.modules.ui
-    version: 1.0.0
-  - name: com.unity.modules.imgui
-    version: 1.0.0
-  - name: com.unity.modules.jsonserialize
-    version: 1.0.0
-  - name: com.unity.modules.hierarchycore
-    version: 1.0.0
-  keywords:
-  - Multiplayer
-  - Netcode
-  - Services
-  - Tools
-  registry:
-    id: main
-    name: 
-    url: https://packages.unity.com
-    scopes: []
-    isDefault: 1
-    capabilities: 7
-    configSource: 0
-  hideInEditor: 1
-  entitlements:
-    licensingModel: 0
-  isAssetStorePackage: 0
-  datePublishedTicks: 0
-  documentationUrl: 
-  hasRepository: 0
-  repository:
-    type: 
-    url: 
-    revision: 
-    path: 
-  unityLifecycle:
-    version: 1.0.0
-    nextVersion: 
-    recommendedVersion: 
-    isDeprecated: 0
-    deprecationMessage: 
-  isDeprecated: 0
-  deprecationMessage: 
-  git:
-    hash: 
-    revision: 
-  upmReserved: 
-  assetStore:
-    productId: 
-  fingerprint: f502d8ac613fa076192423e73892fbd89eb4049b
-  editorCompatibility:
-    compatibilityLevel: 0
-    minimumPackageVersion: 1.0.0
-    minimumUnityVersion: 6000.0.0a1
 - packageId: com.unity.render-pipelines.universal@17.0.3
   testable: 0
   isDirectDependency: 1
@@ -1701,73 +1306,6 @@ m_ResolvedPackages:
     compatibilityLevel: 0
     minimumPackageVersion: 1.0.0
     minimumUnityVersion: 
-- packageId: com.unity.modules.animation@1.0.0
-  testable: 0
-  isDirectDependency: 1
-  version: 1.0.0
-  source: 2
-  resolvedPath: C:\YEET\Programs\Unity\Versions\6000.0.38f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.animation
-  assetPath: Packages/com.unity.modules.animation
-  name: com.unity.modules.animation
-  displayName: Animation
-  author:
-    name: 
-    email: 
-    url: 
-  category: 
-  type: module
-  description: 'The Animation module implements Unity''s animation system. Scripting
-    API: https://docs.unity3d.com/ScriptReference/UnityEngine.AnimationModule.html'
-  errors: []
-  versions:
-    all:
-    - 1.0.0
-    compatible:
-    - 1.0.0
-    recommended: 1.0.0
-    deprecated: []
-  dependencies: []
-  resolvedDependencies: []
-  keywords: []
-  registry:
-    id: main
-    name: 
-    url: https://packages.unity.com
-    scopes: []
-    isDefault: 1
-    capabilities: 7
-    configSource: 0
-  hideInEditor: 1
-  entitlements:
-    licensingModel: 0
-  isAssetStorePackage: 0
-  datePublishedTicks: 0
-  documentationUrl: 
-  hasRepository: 0
-  repository:
-    type: 
-    url: 
-    revision: 
-    path: 
-  unityLifecycle:
-    version: 1.0.0
-    nextVersion: 
-    recommendedVersion: 
-    isDeprecated: 0
-    deprecationMessage: 
-  isDeprecated: 0
-  deprecationMessage: 
-  git:
-    hash: 
-    revision: 
-  upmReserved: 
-  assetStore:
-    productId: 
-  fingerprint: 
-  editorCompatibility:
-    compatibilityLevel: 0
-    minimumPackageVersion: 1.0.0
-    minimumUnityVersion: 
 - packageId: com.unity.modules.assetbundle@1.0.0
   testable: 0
   isDirectDependency: 1
@@ -1862,77 +1400,6 @@ m_ResolvedPackages:
     deprecated: []
   dependencies: []
   resolvedDependencies: []
-  keywords: []
-  registry:
-    id: main
-    name: 
-    url: https://packages.unity.com
-    scopes: []
-    isDefault: 1
-    capabilities: 7
-    configSource: 0
-  hideInEditor: 1
-  entitlements:
-    licensingModel: 0
-  isAssetStorePackage: 0
-  datePublishedTicks: 0
-  documentationUrl: 
-  hasRepository: 0
-  repository:
-    type: 
-    url: 
-    revision: 
-    path: 
-  unityLifecycle:
-    version: 1.0.0
-    nextVersion: 
-    recommendedVersion: 
-    isDeprecated: 0
-    deprecationMessage: 
-  isDeprecated: 0
-  deprecationMessage: 
-  git:
-    hash: 
-    revision: 
-  upmReserved: 
-  assetStore:
-    productId: 
-  fingerprint: 
-  editorCompatibility:
-    compatibilityLevel: 0
-    minimumPackageVersion: 1.0.0
-    minimumUnityVersion: 
-- packageId: com.unity.modules.cloth@1.0.0
-  testable: 0
-  isDirectDependency: 1
-  version: 1.0.0
-  source: 2
-  resolvedPath: C:\YEET\Programs\Unity\Versions\6000.0.38f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.cloth
-  assetPath: Packages/com.unity.modules.cloth
-  name: com.unity.modules.cloth
-  displayName: Cloth
-  author:
-    name: 
-    email: 
-    url: 
-  category: 
-  type: module
-  description: 'The Cloth module implements cloth physics simulation through the
-    Cloth component. Scripting API: https://docs.unity3d.com/ScriptReference/UnityEngine.ClothModule.html'
-  errors: []
-  versions:
-    all:
-    - 1.0.0
-    compatible:
-    - 1.0.0
-    recommended: 1.0.0
-    deprecated: []
-  dependencies:
-  - name: com.unity.modules.physics
-    version: 1.0.0
-  resolvedDependencies:
-  - name: com.unity.modules.physics
-    version: 1.0.0
   keywords: []
   registry:
     id: main
@@ -3407,77 +2874,6 @@ m_ResolvedPackages:
     compatibilityLevel: 0
     minimumPackageVersion: 1.0.0
     minimumUnityVersion: 
-- packageId: com.unity.modules.vehicles@1.0.0
-  testable: 0
-  isDirectDependency: 1
-  version: 1.0.0
-  source: 2
-  resolvedPath: C:\YEET\Programs\Unity\Versions\6000.0.38f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.vehicles
-  assetPath: Packages/com.unity.modules.vehicles
-  name: com.unity.modules.vehicles
-  displayName: Vehicles
-  author:
-    name: 
-    email: 
-    url: 
-  category: 
-  type: module
-  description: 'The Vehicles module implements vehicle physics simulation through
-    the WheelCollider component. Scripting API: https://docs.unity3d.com/ScriptReference/UnityEngine.VehiclesModule.html'
-  errors: []
-  versions:
-    all:
-    - 1.0.0
-    compatible:
-    - 1.0.0
-    recommended: 1.0.0
-    deprecated: []
-  dependencies:
-  - name: com.unity.modules.physics
-    version: 1.0.0
-  resolvedDependencies:
-  - name: com.unity.modules.physics
-    version: 1.0.0
-  keywords: []
-  registry:
-    id: main
-    name: 
-    url: https://packages.unity.com
-    scopes: []
-    isDefault: 1
-    capabilities: 7
-    configSource: 0
-  hideInEditor: 1
-  entitlements:
-    licensingModel: 0
-  isAssetStorePackage: 0
-  datePublishedTicks: 0
-  documentationUrl: 
-  hasRepository: 0
-  repository:
-    type: 
-    url: 
-    revision: 
-    path: 
-  unityLifecycle:
-    version: 1.0.0
-    nextVersion: 
-    recommendedVersion: 
-    isDeprecated: 0
-    deprecationMessage: 
-  isDeprecated: 0
-  deprecationMessage: 
-  git:
-    hash: 
-    revision: 
-  upmReserved: 
-  assetStore:
-    productId: 
-  fingerprint: 
-  editorCompatibility:
-    compatibilityLevel: 0
-    minimumPackageVersion: 1.0.0
-    minimumUnityVersion: 
 - packageId: com.unity.modules.video@1.0.0
   testable: 0
   isDirectDependency: 1
@@ -3516,87 +2912,6 @@ m_ResolvedPackages:
   - name: com.unity.modules.ui
     version: 1.0.0
   - name: com.unity.modules.unitywebrequest
-    version: 1.0.0
-  keywords: []
-  registry:
-    id: main
-    name: 
-    url: https://packages.unity.com
-    scopes: []
-    isDefault: 1
-    capabilities: 7
-    configSource: 0
-  hideInEditor: 1
-  entitlements:
-    licensingModel: 0
-  isAssetStorePackage: 0
-  datePublishedTicks: 0
-  documentationUrl: 
-  hasRepository: 0
-  repository:
-    type: 
-    url: 
-    revision: 
-    path: 
-  unityLifecycle:
-    version: 1.0.0
-    nextVersion: 
-    recommendedVersion: 
-    isDeprecated: 0
-    deprecationMessage: 
-  isDeprecated: 0
-  deprecationMessage: 
-  git:
-    hash: 
-    revision: 
-  upmReserved: 
-  assetStore:
-    productId: 
-  fingerprint: 
-  editorCompatibility:
-    compatibilityLevel: 0
-    minimumPackageVersion: 1.0.0
-    minimumUnityVersion: 
-- packageId: com.unity.modules.vr@1.0.0
-  testable: 0
-  isDirectDependency: 1
-  version: 1.0.0
-  source: 2
-  resolvedPath: C:\YEET\Programs\Unity\Versions\6000.0.38f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.vr
-  assetPath: Packages/com.unity.modules.vr
-  name: com.unity.modules.vr
-  displayName: VR
-  author:
-    name: 
-    email: 
-    url: 
-  category: 
-  type: module
-  description: 'The VR module implements support for virtual reality devices in Unity.
-    Scripting API: https://docs.unity3d.com/ScriptReference/UnityEngine.VRModule.html'
-  errors: []
-  versions:
-    all:
-    - 1.0.0
-    compatible:
-    - 1.0.0
-    recommended: 1.0.0
-    deprecated: []
-  dependencies:
-  - name: com.unity.modules.jsonserialize
-    version: 1.0.0
-  - name: com.unity.modules.physics
-    version: 1.0.0
-  - name: com.unity.modules.xr
-    version: 1.0.0
-  resolvedDependencies:
-  - name: com.unity.modules.jsonserialize
-    version: 1.0.0
-  - name: com.unity.modules.physics
-    version: 1.0.0
-  - name: com.unity.modules.xr
-    version: 1.0.0
-  - name: com.unity.modules.subsystems
     version: 1.0.0
   keywords: []
   registry:
@@ -3705,156 +3020,6 @@ m_ResolvedPackages:
     compatibilityLevel: 0
     minimumPackageVersion: 1.0.0
     minimumUnityVersion: 
-- packageId: com.unity.modules.xr@1.0.0
-  testable: 0
-  isDirectDependency: 1
-  version: 1.0.0
-  source: 2
-  resolvedPath: C:\YEET\Programs\Unity\Versions\6000.0.38f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.xr
-  assetPath: Packages/com.unity.modules.xr
-  name: com.unity.modules.xr
-  displayName: XR
-  author:
-    name: 
-    email: 
-    url: 
-  category: 
-  type: module
-  description: 'The XR module contains the VR and AR related platform support functionality.
-    Scripting API: https://docs.unity3d.com/ScriptReference/UnityEngine.XRModule.html'
-  errors: []
-  versions:
-    all:
-    - 1.0.0
-    compatible:
-    - 1.0.0
-    recommended: 1.0.0
-    deprecated: []
-  dependencies:
-  - name: com.unity.modules.physics
-    version: 1.0.0
-  - name: com.unity.modules.jsonserialize
-    version: 1.0.0
-  - name: com.unity.modules.subsystems
-    version: 1.0.0
-  resolvedDependencies:
-  - name: com.unity.modules.physics
-    version: 1.0.0
-  - name: com.unity.modules.jsonserialize
-    version: 1.0.0
-  - name: com.unity.modules.subsystems
-    version: 1.0.0
-  keywords: []
-  registry:
-    id: main
-    name: 
-    url: https://packages.unity.com
-    scopes: []
-    isDefault: 1
-    capabilities: 7
-    configSource: 0
-  hideInEditor: 1
-  entitlements:
-    licensingModel: 0
-  isAssetStorePackage: 0
-  datePublishedTicks: 0
-  documentationUrl: 
-  hasRepository: 0
-  repository:
-    type: 
-    url: 
-    revision: 
-    path: 
-  unityLifecycle:
-    version: 1.0.0
-    nextVersion: 
-    recommendedVersion: 
-    isDeprecated: 0
-    deprecationMessage: 
-  isDeprecated: 0
-  deprecationMessage: 
-  git:
-    hash: 
-    revision: 
-  upmReserved: 
-  assetStore:
-    productId: 
-  fingerprint: 
-  editorCompatibility:
-    compatibilityLevel: 0
-    minimumPackageVersion: 1.0.0
-    minimumUnityVersion: 
-- packageId: com.unity.modules.subsystems@1.0.0
-  testable: 0
-  isDirectDependency: 0
-  version: 1.0.0
-  source: 2
-  resolvedPath: C:\YEET\Programs\Unity\Versions\6000.0.38f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.subsystems
-  assetPath: Packages/com.unity.modules.subsystems
-  name: com.unity.modules.subsystems
-  displayName: Subsystems
-  author:
-    name: 
-    email: 
-    url: 
-  category: 
-  type: module
-  description: 'The Subsystem module contains the definitions and runtime support
-    for general subsystems in Unity. Scripting API: https://docs.unity3d.com/ScriptReference/UnityEngine.SubsystemsModule.html'
-  errors: []
-  versions:
-    all:
-    - 1.0.0
-    compatible:
-    - 1.0.0
-    recommended: 1.0.0
-    deprecated: []
-  dependencies:
-  - name: com.unity.modules.jsonserialize
-    version: 1.0.0
-  resolvedDependencies:
-  - name: com.unity.modules.jsonserialize
-    version: 1.0.0
-  keywords: []
-  registry:
-    id: main
-    name: 
-    url: https://packages.unity.com
-    scopes: []
-    isDefault: 1
-    capabilities: 7
-    configSource: 0
-  hideInEditor: 1
-  entitlements:
-    licensingModel: 0
-  isAssetStorePackage: 0
-  datePublishedTicks: 0
-  documentationUrl: 
-  hasRepository: 0
-  repository:
-    type: 
-    url: 
-    revision: 
-    path: 
-  unityLifecycle:
-    version: 
-    nextVersion: 
-    recommendedVersion: 
-    isDeprecated: 0
-    deprecationMessage: 
-  isDeprecated: 0
-  deprecationMessage: 
-  git:
-    hash: 
-    revision: 
-  upmReserved: 
-  assetStore:
-    productId: 
-  fingerprint: 
-  editorCompatibility:
-    compatibilityLevel: 0
-    minimumPackageVersion: 1.0.0
-    minimumUnityVersion: 
 - packageId: com.unity.modules.hierarchycore@1.0.0
   testable: 0
   isDirectDependency: 0
@@ -3905,6 +3070,73 @@ m_ResolvedPackages:
     path: 
   unityLifecycle:
     version: 
+    nextVersion: 
+    recommendedVersion: 
+    isDeprecated: 0
+    deprecationMessage: 
+  isDeprecated: 0
+  deprecationMessage: 
+  git:
+    hash: 
+    revision: 
+  upmReserved: 
+  assetStore:
+    productId: 
+  fingerprint: 
+  editorCompatibility:
+    compatibilityLevel: 0
+    minimumPackageVersion: 1.0.0
+    minimumUnityVersion: 
+- packageId: com.unity.modules.animation@1.0.0
+  testable: 0
+  isDirectDependency: 0
+  version: 1.0.0
+  source: 2
+  resolvedPath: C:\YEET\Programs\Unity\Versions\6000.0.38f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.modules.animation
+  assetPath: Packages/com.unity.modules.animation
+  name: com.unity.modules.animation
+  displayName: Animation
+  author:
+    name: 
+    email: 
+    url: 
+  category: 
+  type: module
+  description: 'The Animation module implements Unity''s animation system. Scripting
+    API: https://docs.unity3d.com/ScriptReference/UnityEngine.AnimationModule.html'
+  errors: []
+  versions:
+    all:
+    - 1.0.0
+    compatible:
+    - 1.0.0
+    recommended: 1.0.0
+    deprecated: []
+  dependencies: []
+  resolvedDependencies: []
+  keywords: []
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+    configSource: 0
+  hideInEditor: 1
+  entitlements:
+    licensingModel: 0
+  isAssetStorePackage: 0
+  datePublishedTicks: 0
+  documentationUrl: 
+  hasRepository: 0
+  repository:
+    type: 
+    url: 
+    revision: 
+    path: 
+  unityLifecycle:
+    version: 1.0.0
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0
