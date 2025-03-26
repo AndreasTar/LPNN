@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class LPNN_script : MonoBehaviour
 {
-    // Add a menu item named "Do Something" to MyMenu in the menu bar.
-    [MenuItem("GameObject/Light/DoSomething", false)]
+    #region rightclickmenu
+    // Add a menu item named "LPNN Object" to MyMenu in the menu bar.
+    [MenuItem("GameObject/Light/LPNN Object", false)]
     static void CreateLPNNObject(MenuCommand menuCommand)
     {
         // Create a custom game object
@@ -17,10 +18,13 @@ public class LPNN_script : MonoBehaviour
         Undo.RegisterCreatedObjectUndo(go, "Create " + go.name);
         Selection.activeObject = go;
     }
+    #endregion
 
 
 }
 
+#region inspectorstuff
+#if UNITY_EDITOR
 
 [CustomEditor(typeof(LPNN_script))]
 public class LPNN_Inspector: Editor {
@@ -30,3 +34,6 @@ public class LPNN_Inspector: Editor {
         EditorGUILayout.LabelField("This is a custom inspector");
     }
 }
+
+#endif
+#endregion
