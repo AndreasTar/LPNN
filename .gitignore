@@ -249,3 +249,5 @@ crashlytics-build.properties
 /[Aa]ssets/Scenes/**/Lightmap*
 /[Aa]ssets/**/*.png*
 /[Aa]ssets/**/*.exr*
+/Unity_diploma_Impl/Library/Bee/CachedNodeOutput
+/Unity_diploma_Impl/Library/BurstCache
