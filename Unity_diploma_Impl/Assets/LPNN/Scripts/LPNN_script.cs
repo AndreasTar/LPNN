@@ -23,10 +23,11 @@ public class LPNN_script : MonoBehaviour
     }
     #endregion
 
-    [SerializeField] private List<Bounds> boundingVolumes;
     [NonSerialized] public Bounds bounds;
     [NonSerialized] public float voxelSize = 1;
     [NonSerialized] public bool vis_bounds = false;
+
+    private List<Bounds> boundingVolumes;
 
 
     private void Awake()
@@ -49,6 +50,12 @@ public class LPNN_script : MonoBehaviour
         if (vis_bounds) {
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(bounds.center, bounds.size);
+
+            Gizmos.color = Color.magenta;
+            foreach (var bound in boundingVolumes)
+            {
+                Gizmos.DrawWireCube(bound.center, bound.size);
+            }
         }
     }
 
@@ -79,6 +86,8 @@ public class LPNN_script : MonoBehaviour
             bounds.Encapsulate(bound);
         }
 
+        HandleUtility.Repaint();
+
     }
 
     public void PlaceVoxels() {
@@ -94,19 +103,12 @@ public class LPNN_script : MonoBehaviour
         voxelParent = new GameObject("VoxelsParent").transform;
         voxelParent.parent = transform;
 
-        // calculate the amount of voxels needed
+        // we add +1 and round so we wrap around the bounds even if we overshoot, its better
         Vector3Int voxelAmount = new(
             Mathf.RoundToInt(bounds.size.x+1 / voxelSize),
             Mathf.RoundToInt(bounds.size.y+1 / voxelSize),
             Mathf.RoundToInt(bounds.size.z+1 / voxelSize)
         );
-
-        // calculate the offset needed to center the voxels
-        // Vector3 offset = new(
-        //     bounds.size.x / 2 - voxelAmount.x * voxelSize / 2,
-        //     bounds.size.y / 2 - voxelAmount.y * voxelSize / 2,
-        //     bounds.size.z / 2 - voxelAmount.z * voxelSize / 2
-        // );
 
         // create the voxels
         for (int x = 0; x < voxelAmount.x; x++) {
@@ -121,19 +123,11 @@ public class LPNN_script : MonoBehaviour
                     voxel.GetComponent<MeshRenderer>().enabled = false;
                     voxel.name = $"{x}_{y}_{z}";
                     voxel.transform.localScale = new Vector3(voxelSize, voxelSize, voxelSize);
-                    //voxel.transform.localPosition += bounds.center;
                     voxel.transform.parent = voxelParent;
                 }
             }
         }
     }
-
-
-    // public void temp() {
-    //     Bounds bounds = boundingVolumes[0].bounds;
-    //     bounds.Encapsulate(boundingVolumes[1].bounds);
-    // }
-
 
 }
 
@@ -147,12 +141,12 @@ public class LPNN_Inspector: Editor {
 
         // TODO add all the tooltips
         // TODO maybe make enum choice between box voxels and arbitrary voxels so we can have equal size vs equal amount per axis
+        // TODO bounds is square, what if we want arbitrary size? like a Π shape or something?
 
         base.OnInspectorGUI();
         LPNN_script lpnn = (LPNN_script)target;
         EditorGUILayout.LabelField("This is a custom inspector");
 
-        
 
         GUIContent content = new("Bounds", "The Bounds that will be used to place the evaluation volumes.");
         EditorGUILayout.BoundsField(content, lpnn.bounds); // HACK this may need to be stored
