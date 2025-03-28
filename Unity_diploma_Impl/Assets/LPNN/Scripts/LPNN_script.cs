@@ -24,10 +24,11 @@ public class LPNN_script : MonoBehaviour
     #endregion
 
     [NonSerialized] public Bounds bounds;
-    [NonSerialized] public float voxelSize = 1;
-    [NonSerialized] public bool vis_bounds = false;
+    [NonSerialized] public float voxelSize = 1f;
+    [NonSerialized] public bool vis_bounds = true;
 
     private List<Bounds> boundingVolumes;
+    private List<Vector3> evalPoints;
 
 
     private void Awake()
@@ -45,7 +46,7 @@ public class LPNN_script : MonoBehaviour
         
     }
 
-    void OnDrawGizmosSelected()
+    void OnDrawGizmos()
     {
         if (vis_bounds) {
             Gizmos.color = Color.red;
@@ -55,6 +56,11 @@ public class LPNN_script : MonoBehaviour
             foreach (var bound in boundingVolumes)
             {
                 Gizmos.DrawWireCube(bound.center, bound.size);
+            }
+            Gizmos.color = Color.yellow;
+            foreach (var point in evalPoints)
+            {
+                Gizmos.DrawSphere(point, 0.05f);
             }
         }
     }
@@ -90,12 +96,22 @@ public class LPNN_script : MonoBehaviour
 
     }
 
+    private bool IsPointInsideBounds(Vector3 point) {
+        foreach (var bound in boundingVolumes)
+        {
+            if (bound.Contains(point) || bound.Intersects(new Bounds(point, new Vector3(voxelSize,voxelSize,voxelSize)))) return true;
+        }
+        return false;
+    }
+
     public void PlaceVoxels() {
 
         if (bounds.size == Vector3.zero) {
             Debug.LogError("Bounding volume is zero!"); // TODO info message on inspector instead?
             return;
         }
+        evalPoints ??= new List<Vector3>();
+        evalPoints.Clear();
 
         Transform voxelParent = transform.Find("VoxelsParent");
         if ( voxelParent != null) DestroyImmediate(voxelParent.gameObject);
@@ -105,25 +121,29 @@ public class LPNN_script : MonoBehaviour
 
         // we add +1 and round so we wrap around the bounds even if we overshoot, its better
         Vector3Int voxelAmount = new(
-            Mathf.RoundToInt(bounds.size.x+1 / voxelSize),
-            Mathf.RoundToInt(bounds.size.y+1 / voxelSize),
-            Mathf.RoundToInt(bounds.size.z+1 / voxelSize)
+            Mathf.RoundToInt((bounds.size.x+1) / voxelSize),
+            Mathf.RoundToInt((bounds.size.y+1) / voxelSize),
+            Mathf.RoundToInt((bounds.size.z+1) / voxelSize)
         );
 
         // create the voxels
         for (int x = 0; x < voxelAmount.x; x++) {
             for (int y = 0; y < voxelAmount.y; y++) {
                 for (int z = 0; z < voxelAmount.z; z++) {
-                    GameObject voxel = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    voxel.transform.position = new Vector3(
+                    var point = new Vector3(
                         bounds.min.x + x * voxelSize,
                         bounds.min.y + y * voxelSize,
                         bounds.min.z + z * voxelSize
                     );
-                    voxel.GetComponent<MeshRenderer>().enabled = false;
-                    voxel.name = $"{x}_{y}_{z}";
-                    voxel.transform.localScale = new Vector3(voxelSize, voxelSize, voxelSize);
-                    voxel.transform.parent = voxelParent;
+                    if (!IsPointInsideBounds(point)) continue;
+                    evalPoints.Add(point);
+                    
+                    // GameObject voxel = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    // voxel.transform.position = point;
+                    // voxel.GetComponent<MeshRenderer>().enabled = false;
+                    // voxel.name = $"{x}_{y}_{z}";
+                    // voxel.transform.localScale = new Vector3(voxelSize, voxelSize, voxelSize);
+                    // voxel.transform.parent = voxelParent;
                 }
             }
         }
@@ -162,19 +182,25 @@ public class LPNN_Inspector: Editor {
         EditorGUILayout.Space();
 
         if (GUILayout.Button("Calculate Bounds")) {
-            Debug.Log("Bounds calculated");
             lpnn.CalculateBoundingVolume();
+            Debug.Log("Bounds calculated");
         }
 
         EditorGUILayout.Space();
         EditorGUILayout.Separator();
         EditorGUILayout.Space();
 
-        EditorGUILayout.FloatField("Voxel Size (in meters)", 1); // HACK
+        float size = EditorGUILayout.FloatField("Voxel Size (in meters)", lpnn.voxelSize);
+        size = Mathf.Clamp(size, 0.05f, 100f);
+        if (size != lpnn.voxelSize) {
+            lpnn.voxelSize = size;
+            serializedObject.ApplyModifiedProperties();
+            if (size > 0.1f) lpnn.PlaceVoxels();
+        }
 
         if (GUILayout.Button("Place Voxels")) {
-            Debug.Log("Voxels placed");
             lpnn.PlaceVoxels();
+            Debug.Log("Voxels placed");
         }
     }
 }
