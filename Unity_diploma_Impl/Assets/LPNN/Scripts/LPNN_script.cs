@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class LPNN_script : MonoBehaviour
 {
@@ -52,16 +54,19 @@ public class LPNN_script : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(bounds.center, bounds.size);
 
-            Gizmos.color = Color.magenta;
-            foreach (var bound in boundingVolumes)
-            {
-                Gizmos.DrawWireCube(bound.center, bound.size);
+            if (boundingVolumes != null) {
+                Gizmos.color = Color.magenta;
+                foreach (var bound in boundingVolumes){
+                    Gizmos.DrawWireCube(bound.center, bound.size);
+                }
             }
-            Gizmos.color = Color.yellow;
-            foreach (var point in evalPoints)
-            {
-                Gizmos.DrawSphere(point, 0.05f);
+            if (evalPoints != null) {
+                Gizmos.color = Color.yellow;
+                foreach (var point in evalPoints){
+                    Gizmos.DrawSphere(point, 0.05f);
+                }
             }
+            
         }
     }
 
@@ -96,15 +101,7 @@ public class LPNN_script : MonoBehaviour
 
     }
 
-    private bool IsPointInsideBounds(Vector3 point) {
-        foreach (var bound in boundingVolumes)
-        {
-            if (bound.Contains(point) || bound.Intersects(new Bounds(point, new Vector3(voxelSize,voxelSize,voxelSize)))) return true;
-        }
-        return false;
-    }
-
-    public void PlaceVoxels() {
+    public void PlaceEvalPoints() {
 
         if (bounds.size == Vector3.zero) {
             Debug.LogError("Bounding volume is zero!"); // TODO info message on inspector instead?
@@ -135,9 +132,10 @@ public class LPNN_script : MonoBehaviour
                         bounds.min.y + y * voxelSize,
                         bounds.min.z + z * voxelSize
                     );
-                    if (!IsPointInsideBounds(point)) continue;
+                    if (!Utils.IsPointInsideBounds(point, ref boundingVolumes, voxelSize)) continue;
                     evalPoints.Add(point);
                     
+                    // TODO toggle to show voxels? is it needed?
                     // GameObject voxel = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     // voxel.transform.position = point;
                     // voxel.GetComponent<MeshRenderer>().enabled = false;
@@ -147,6 +145,40 @@ public class LPNN_script : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void EvaluateSH() {
+
+        List<Color[]> results = new();
+        if (evalPoints == null || evalPoints.Count == 0) {
+            Debug.LogError("No evaluation points found! Please place them first.");
+            return;
+        }
+
+        foreach (var p in evalPoints){
+            Color [] c = new Color[6];
+            SphericalHarmonicsL2 sh = new();
+
+            LightProbes.GetInterpolatedProbe(p, null, out sh);
+            sh.Evaluate(Utils.FixedDirections, c);
+            results.Add(c);
+        }
+
+        string destination = Application.dataPath + "/LPNN/Results/evals.txt";
+
+        string s = "";
+        foreach (var r in results){
+            foreach (var c in r) {
+                s += c.ToString("F4").Replace("RGBA(", "").Replace(")", "") + ",";
+                s += "\n";
+            }
+            s += "\n";
+        }
+        File.WriteAllText(destination, s);
+
+        Debug.Log($"Results saved to {destination}. Total: {results.Count} points.");
+        
+
     }
 
 }
@@ -195,12 +227,21 @@ public class LPNN_Inspector: Editor {
         if (size != lpnn.voxelSize) {
             lpnn.voxelSize = size;
             serializedObject.ApplyModifiedProperties();
-            if (size > 0.1f) lpnn.PlaceVoxels();
+            if (size > 0.1f) lpnn.PlaceEvalPoints();
         }
 
-        if (GUILayout.Button("Place Voxels")) {
-            lpnn.PlaceVoxels();
-            Debug.Log("Voxels placed");
+        if (GUILayout.Button("Place Evaluation Points")) {
+            lpnn.PlaceEvalPoints();
+            Debug.Log("EVs placed");
+        }
+
+        EditorGUILayout.Space();
+        EditorGUILayout.Separator();
+        EditorGUILayout.Space();
+
+        if (GUILayout.Button("Evaluate Spherical Harmonics")) {
+            lpnn.EvaluateSH();
+            Debug.Log("Evaluated");
         }
     }
 }
