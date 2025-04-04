@@ -1,12 +1,22 @@
+import math
 import torch
 import torch.nn as tnn
 import torch.optim as toptim
 import numpy as np
 import tensorflow as tf
-from keras import layers, models
+import keras
+from keras import layers, models, ops
 import tf2onnx
 import onnx
 import onnxruntime as ort
+
+print("TensorFlow version:", tf.__version__)
+print("Keras version:", keras.__version__)
+print("PyTorch version:", torch.__version__)
+print("ONNX version:", onnx.__version__)
+print("ONNX Runtime version:", ort.__version__)
+print("NumPy version:", np.__version__)
+
 
 
 def build_lightprobe_model(input_shape):
@@ -29,11 +39,13 @@ def build_lightprobe_model(input_shape):
 
     # Decoder with skip connections
     x = layers.Conv3DTranspose(128, 3, strides=2, padding='same', activation='relu')(x)
-    x = layers.Concatenate()([x, x2])
+    x_cropped = center_crop_to_match(x, x2)
+    x = layers.Concatenate()([x_cropped, x2])
     x = layers.Conv3D(128, 3, padding='same', activation='relu')(x)
 
     x = layers.Conv3DTranspose(64, 3, strides=2, padding='same', activation='relu')(x)
-    x = layers.Concatenate()([x, x1])
+    x_cropped = center_crop_to_match(x, x1)
+    x = layers.Concatenate()([x_cropped, x1])
     x = layers.Conv3D(64, 3, padding='same', activation='relu')(x)
 
     # Final output layer
@@ -45,19 +57,47 @@ def build_lightprobe_model(input_shape):
     return model
 
 
+def center_crop_to_match(source, target):
+    """
+    Crops `source` tensor so its spatial shape matches `target`.
+    Both are expected to be 5D tensors: (batch, depth, height, width, channels)
+    """
+    s = source.shape
+    t = target.shape
+    # crop = (s[1:4] - t[1:4]) // 2  # Get crop sizes for D, H, W
+    crop = tuple(map(lambda x, y: math.ceil(abs(x - y)/2), s[1:4], t[1:4]))
+
+    # Calculate how much to crop from the start and end of each dimension
+    crop_d_start = crop[0] // 2
+    crop_d_end = crop[0] - crop_d_start
+    crop_h_start = crop[1] // 2
+    crop_h_end = crop[1] - crop_h_start
+    crop_w_start = crop[2] // 2
+    crop_w_end = crop[2] - crop_w_start
+
+    crop = ((crop_d_start, crop_d_end), (crop_h_start, crop_h_end), (crop_w_start, crop_w_end))
+    print(f"Cropping: {crop}\nfor {s}, {t}")
+
+    res = keras.layers.Cropping3D(cropping=crop)(source)
+
+    print(f"result: {res.shape}")
+    return res
+
+
 
 def main():
 
     #LABELS
-    with open("C:\Users\Andreas\Desktop\UniStuff\Diploma\project\LPNN\Unity_diploma_Impl\Assets\LPNN\Results\comparisons.txt", "r") as f:
+    with open(r"C:\Users\Andreas\Desktop\UniStuff\Diploma\project\LPNN\Unity_diploma_Impl\Assets\LPNN\Results\comparisons.txt", "r") as f:
         label_lines = [line.strip() for line in f if line.strip() != '']
 
     labels = np.array([1.0 if l.lower() == "true" else 0.0 for l in label_lines], dtype=np.float32)
+    print("Did labels")
 
     #FEATURES
     features = []
 
-    with open("C:\Users\Andreas\Desktop\UniStuff\Diploma\project\LPNN\Unity_diploma_Impl\Assets\LPNN\Results\evals.txt", "r") as f:
+    with open(r"C:\Users\Andreas\Desktop\UniStuff\Diploma\project\LPNN\Unity_diploma_Impl\Assets\LPNN\Results\evals.txt", "r") as f:
         block = []
         for line in f:
             stripped = line.strip()
@@ -74,6 +114,7 @@ def main():
         features.append(np.array(block, dtype=np.float32).flatten())
 
     features = np.array(features, dtype=np.float32)  # shape: [N, 24]
+    print("Did features")
 
     #ATTRIBUTES
     # Determine voxel grid shape (manually for now)
@@ -86,6 +127,7 @@ def main():
     # Reshape
     X = features.reshape(D, H, W, -1)  # shape: [D, H, W, 24]
     y = labels.reshape(D, H, W)       # shape: [D, H, W]
+    print("Did attributes")
 
     #MODEL
     input_shape = (D, H, W, 24)
@@ -96,7 +138,7 @@ def main():
     y = np.expand_dims(y, axis=(0, -1)) # (1, D, H, W, 1)
 
     model.fit(X, y, epochs=50)
-
+    print("Did model")
 
     #SAVE
 
@@ -108,6 +150,7 @@ def main():
         opset=11,
         output_path="models/lightprobe_model.onnx"
     )
+    print("Did save")
 
     #SANITY CHECK
 
