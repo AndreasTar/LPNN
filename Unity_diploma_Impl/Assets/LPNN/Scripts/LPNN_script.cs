@@ -29,6 +29,8 @@ public class LPNN_script : MonoBehaviour
     [NonSerialized] public float voxelSize = 1f;
     [NonSerialized] public bool vis_bounds = true;
 
+    public LightProbeGroup predef_lightProbes;
+
     private List<Bounds> boundingVolumes;
     private List<Vector3> evalPoints;
 
@@ -181,6 +183,44 @@ public class LPNN_script : MonoBehaviour
 
     }
 
+    public void CompareLPGroup() {
+        if (predef_lightProbes == null) {
+            Debug.LogError("No LightProbeGroup found! Please assign one.");
+            return;
+        }
+
+        // TODO compare the results with the predefined light probes
+        // TODO save the results to a file
+
+        Vector3[] pLP_positions = predef_lightProbes.probePositions;
+        string s = "";
+        string destination = Application.dataPath + "/LPNN/Results/comparisons.txt";
+
+        Debug.Log($"{evalPoints.Count} {pLP_positions.Length}");
+
+        bool flag = false;
+        int count = 0;
+        foreach (var ep in evalPoints) {
+            foreach (var p in pLP_positions) {
+                // Debug.Log($"{ep} {p}");
+                if (Utils.IsPointInsideVoxel(p, ep, voxelSize)){
+                    s += $"{true}\n";
+                    flag = true;
+                    count++;
+                    break;
+                }
+            }
+
+            if (!flag) {
+                s += $"{false}\n";
+            }
+            flag = false;
+        }
+
+        File.WriteAllText(destination, s);
+        Debug.Log($"Results saved to {destination}. Total: {evalPoints.Count} lines. {count} Trues, {evalPoints.Count - count} Falses.");
+    }
+
 }
 
 #region inspectorstuff
@@ -242,6 +282,15 @@ public class LPNN_Inspector: Editor {
         if (GUILayout.Button("Evaluate Spherical Harmonics")) {
             lpnn.EvaluateSH();
             Debug.Log("Evaluated");
+        }
+
+        EditorGUILayout.Space();
+        EditorGUILayout.Separator();
+        EditorGUILayout.Space();
+
+        if (GUILayout.Button("Compare to Predefined LPGroup")) {
+            lpnn.CompareLPGroup();
+            Debug.Log("Compared");
         }
     }
 }

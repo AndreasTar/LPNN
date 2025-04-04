@@ -15,9 +15,18 @@ public class Utils {
     public static bool IsPointInsideBounds(Vector3 point, ref List<Bounds> bounds, float voxelSize) {
         foreach (var bound in bounds)
         {
-            if (bound.Contains(point) || bound.Intersects(new Bounds(point, new Vector3(voxelSize,voxelSize,voxelSize)))) return true;
+            if (IsPointInsideBound(point, bound, voxelSize)) return true;
         }
         return false;
+    }
+
+    public static bool IsPointInsideBound(Vector3 point, Bounds bound, float voxelSize) {
+        return bound.Contains(point) || bound.Intersects(new Bounds(point, new Vector3(voxelSize,voxelSize,voxelSize)));
+    }
+
+    public static bool IsPointInsideVoxel(Vector3 pointCenter, Vector3 pointTo, float voxelSize) {
+        Bounds bound = new(pointCenter, new Vector3(voxelSize,voxelSize,voxelSize));
+        return bound.Contains(pointTo);
     }
 
     public static void GenerateUniformSphereSampling(out List<Vector3> directions, int numDirections) {
