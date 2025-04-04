@@ -171,7 +171,7 @@ public class LPNN_script : MonoBehaviour
         string s = "";
         foreach (var r in results){
             foreach (var c in r) {
-                s += c.ToString("F4").Replace("RGBA(", "").Replace(")", "") + ",";
+                s += c.ToString("F4").Replace("RGBA(", "").Replace(")", "").Replace(",", " ");
                 s += "\n";
             }
             s += "\n";
