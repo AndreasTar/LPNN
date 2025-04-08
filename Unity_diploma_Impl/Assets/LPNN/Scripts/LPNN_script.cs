@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEngine;
@@ -33,6 +35,8 @@ public class LPNN_script : MonoBehaviour
 
     private List<Bounds> boundingVolumes;
     private List<Vector3> evalPoints;
+
+    private float[,,,,] features; // = new float[1, 11, 3, 9, 24]
 
 
     private void Awake()
@@ -125,6 +129,8 @@ public class LPNN_script : MonoBehaviour
             Mathf.RoundToInt((bounds.size.z+1) / voxelSize)
         );
 
+        features = new float[1, voxelAmount.x, voxelAmount.y, voxelAmount.z, 24]; // TODO make this dynamic
+
         // create the voxels
         for (int x = 0; x < voxelAmount.x; x++) {
             for (int y = 0; y < voxelAmount.y; y++) {
@@ -164,6 +170,14 @@ public class LPNN_script : MonoBehaviour
             LightProbes.GetInterpolatedProbe(p, null, out sh);
             sh.Evaluate(Utils.FixedDirections, c);
             results.Add(c);
+
+            for(int i = 0; i < 24; i+=4){
+                features[0, (int)p.x, (int)p.y, (int)p.z, i  ] = c[i].r;
+                features[0, (int)p.x, (int)p.y, (int)p.z, i+1] = c[i].g;
+                features[0, (int)p.x, (int)p.y, (int)p.z, i+2] = c[i].b;
+                features[0, (int)p.x, (int)p.y, (int)p.z, i+3] = c[i].a;
+            }
+
         }
 
         string destination = Application.dataPath + "/LPNN/Results/evals.txt";
@@ -202,7 +216,6 @@ public class LPNN_script : MonoBehaviour
         int count = 0;
         foreach (var ep in evalPoints) {
             foreach (var p in pLP_positions) {
-                // Debug.Log($"{ep} {p}");
                 if (Utils.IsPointInsideVoxel(p, ep, voxelSize)){
                     s += $"{true}\n";
                     flag = true;
@@ -221,6 +234,45 @@ public class LPNN_script : MonoBehaviour
         Debug.Log($"Results saved to {destination}. Total: {evalPoints.Count} lines. {count} Trues, {evalPoints.Count - count} Falses.");
     }
 
+    public void EvaluateModel() {
+        LightProbeAI modelScript = GetComponent<LightProbeAI>();
+        
+        float[] res = modelScript.Predict(features);
+        Debug.Log($"Model evaluated. Result: {res.Length} values.");
+        string destination = Application.dataPath + "/LPNN/Results/model_evals.txt";
+        File.WriteAllText(destination, res.ToLineSeparatedString());
+        Debug.Log($"Results saved to {destination}. Total: {res.Length} lines.");
+    }
+
+    public void PlacePredictions(float threshold){
+        
+        Transform lpGroup = transform.Find("Predicted LPGroup");
+        if ( lpGroup != null) DestroyImmediate(lpGroup.gameObject);
+        lpGroup = new GameObject("Predicted LPGroup").transform;
+        lpGroup.parent = transform;
+        lpGroup.gameObject.AddComponent<LightProbeGroup>();
+
+        List<Vector3> positions = new();
+
+        String[] predictions = File.ReadAllLines(Application.dataPath + "/LPNN/Results/model_evals.txt"); 
+        List<float> pred = new();
+        foreach (var p in predictions.ToList()) {
+            Debug.Log($"{p} {float.Parse(p)}");
+            pred.Add(float.Parse(p));
+        }
+
+        Debug.Log($"predicted {pred.Count} : {pred.ToLineSeparatedString()}");
+
+        for (int i = 0; i < pred.Count; i++){
+            if (pred[i] > threshold) {
+                positions.Add(evalPoints[i]);
+            }
+        }
+        lpGroup.GetComponent<LightProbeGroup>().probePositions = positions.ToArray();
+        Debug.Log($"Placed {positions.Count} predicted light probes.");
+        
+    }
+
 }
 
 #region inspectorstuff
@@ -228,6 +280,9 @@ public class LPNN_script : MonoBehaviour
 
 [CustomEditor(typeof(LPNN_script))]
 public class LPNN_Inspector: Editor {
+
+    private float threshold = 0.5f;
+
     public override void OnInspectorGUI()
     {
 
@@ -291,6 +346,26 @@ public class LPNN_Inspector: Editor {
         if (GUILayout.Button("Compare to Predefined LPGroup")) {
             lpnn.CompareLPGroup();
             Debug.Log("Compared");
+        }
+
+        EditorGUILayout.Space();
+        EditorGUILayout.Separator();
+        EditorGUILayout.Space();
+
+        if (GUILayout.Button("Evaluate with model")) {
+            lpnn.EvaluateModel();
+            Debug.Log("evaluated with model");
+        }
+
+        EditorGUILayout.Space();
+        EditorGUILayout.Separator();
+        EditorGUILayout.Space();
+
+        threshold = EditorGUILayout.Slider(threshold, 0f, 1f);
+
+        if (GUILayout.Button("Place Predicted LP")) {
+            lpnn.PlacePredictions(threshold);
+            Debug.Log("placed lp");
         }
     }
 }

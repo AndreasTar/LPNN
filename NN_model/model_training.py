@@ -147,7 +147,7 @@ def main():
     model_proto, _ = tf2onnx.convert.from_keras(
         model,
         input_signature=spec,
-        opset=11,
+        opset=15,
         output_path="models/lightprobe_model.onnx"
     )
     print("Did save")
