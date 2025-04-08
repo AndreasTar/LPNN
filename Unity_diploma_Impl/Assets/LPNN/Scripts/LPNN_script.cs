@@ -203,9 +203,6 @@ public class LPNN_script : MonoBehaviour
             return;
         }
 
-        // TODO compare the results with the predefined light probes
-        // TODO save the results to a file
-
         Vector3[] pLP_positions = predef_lightProbes.probePositions;
         string s = "";
         string destination = Application.dataPath + "/LPNN/Results/comparisons.txt";
@@ -256,8 +253,6 @@ public class LPNN_script : MonoBehaviour
             Debug.Log($"{p} {float.Parse(p)}");
             pred.Add(float.Parse(p));
         }
-
-        Debug.Log($"predicted {pred.Count} : {pred.ToLineSeparatedString()}");
 
         for (int i = 0; i < pred.Count; i++){
             if (pred[i] > threshold) {
