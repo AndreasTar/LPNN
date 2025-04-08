@@ -246,11 +246,7 @@ public class LPNN_script : MonoBehaviour
 
     public void PlacePredictions(float threshold){
         
-        Transform lpGroup = transform.Find("Predicted LPGroup");
-        if ( lpGroup != null) DestroyImmediate(lpGroup.gameObject);
-        lpGroup = new GameObject("Predicted LPGroup").transform;
-        lpGroup.parent = transform;
-        lpGroup.gameObject.AddComponent<LightProbeGroup>();
+        gameObject.GetOrAddComponent<LightProbeGroup>();
 
         List<Vector3> positions = new();
 
@@ -268,7 +264,7 @@ public class LPNN_script : MonoBehaviour
                 positions.Add(evalPoints[i]);
             }
         }
-        lpGroup.GetComponent<LightProbeGroup>().probePositions = positions.ToArray();
+        gameObject.GetComponent<LightProbeGroup>().probePositions = positions.ToArray();
         Debug.Log($"Placed {positions.Count} predicted light probes.");
         
     }
