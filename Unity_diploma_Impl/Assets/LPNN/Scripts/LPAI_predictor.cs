@@ -14,7 +14,7 @@ public class LightProbeAI : MonoBehaviour
     public int depth = 11;  // D
     public int height = 3;  // H
     public int width = 9;   // W
-    public int channels = 24; // C (in your case, 6 directions * RGBA)
+    public int channels = 24; // C
 
     void Start()
     {
