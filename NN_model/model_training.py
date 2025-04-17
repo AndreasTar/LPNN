@@ -19,40 +19,63 @@ print("NumPy version:", np.__version__)
 
 
 
-def build_lightprobe_model(input_shape):
-    inputs = layers.Input(shape=input_shape)  # (D, H, W, 24)
+def build_lightprobe_model(input_shape: tuple):
+    # inputs = layers.Input(shape=input_shape)  # (D, H, W, 24)
+
+    # # Encoder
+    # x1 = layers.Conv3D(32, 3, padding='same', activation='relu')(inputs)
+    # x1 = layers.BatchNormalization()(x1)
+
+    # x2 = layers.Conv3D(64, 3, strides=2, padding='same', activation='relu')(x1)
+    # x2 = layers.BatchNormalization()(x2)
+    # x2 = layers.Dropout(0.2)(x2)
+
+    # x3 = layers.Conv3D(128, 3, strides=2, padding='same', activation='relu')(x2)
+    # x3 = layers.BatchNormalization()(x3)
+    # x3 = layers.Dropout(0.3)(x3)
+
+    # # Bottleneck
+    # x = layers.Conv3D(256, 3, padding='same', activation='relu')(x3)
+
+    # # Decoder with skip connections
+    # x = layers.Conv3DTranspose(128, 3, strides=2, padding='same', activation='relu')(x)
+    # x_cropped = center_crop_to_match(x, x2)
+    # x = layers.Concatenate()([x_cropped, x2])
+    # x = layers.Conv3D(128, 3, padding='same', activation='relu')(x)
+
+    # x = layers.Conv3DTranspose(64, 3, strides=2, padding='same', activation='relu')(x)
+    # x_cropped = center_crop_to_match(x, x1)
+    # x = layers.Concatenate()([x_cropped, x1])
+    # x = layers.Conv3D(64, 3, padding='same', activation='relu')(x)
+
+    # # Final output layer
+    # x = layers.Conv3D(1, 1, activation='sigmoid')(x)  # Output: importance per voxel
+
+    """
+    Build a fully convolutional 3D CNN model that outputs a per-voxel importance score (0–1).
+    - input_channels: Number of channels per voxel (e.g. 4 for RGBA).
+    """
+    input_tensor = layers.Input(shape=(None, None, None, input_shape[3]))  # [D, H, W, C]
+
+    x = input_tensor
 
     # Encoder
-    x1 = layers.Conv3D(32, 3, padding='same', activation='relu')(inputs)
-    x1 = layers.BatchNormalization()(x1)
-
-    x2 = layers.Conv3D(64, 3, strides=2, padding='same', activation='relu')(x1)
-    x2 = layers.BatchNormalization()(x2)
-    x2 = layers.Dropout(0.2)(x2)
-
-    x3 = layers.Conv3D(128, 3, strides=2, padding='same', activation='relu')(x2)
-    x3 = layers.BatchNormalization()(x3)
-    x3 = layers.Dropout(0.3)(x3)
+    x = layers.Conv3D(32, kernel_size=3, padding='same', activation='relu')(x)
+    x = layers.Conv3D(64, kernel_size=3, padding='same', activation='relu')(x)
+    x = layers.Conv3D(128, kernel_size=3, padding='same', activation='relu')(x)
 
     # Bottleneck
-    x = layers.Conv3D(256, 3, padding='same', activation='relu')(x3)
+    x = layers.Conv3D(128, kernel_size=1, padding='same', activation='relu')(x)
 
-    # Decoder with skip connections
-    x = layers.Conv3DTranspose(128, 3, strides=2, padding='same', activation='relu')(x)
-    x_cropped = center_crop_to_match(x, x2)
-    x = layers.Concatenate()([x_cropped, x2])
-    x = layers.Conv3D(128, 3, padding='same', activation='relu')(x)
+    # Decoder-ish layers (upsample not needed, we keep the same size)
+    x = layers.Conv3D(64, kernel_size=3, padding='same', activation='relu')(x)
+    x = layers.Conv3D(32, kernel_size=3, padding='same', activation='relu')(x)
 
-    x = layers.Conv3DTranspose(64, 3, strides=2, padding='same', activation='relu')(x)
-    x_cropped = center_crop_to_match(x, x1)
-    x = layers.Concatenate()([x_cropped, x1])
-    x = layers.Conv3D(64, 3, padding='same', activation='relu')(x)
+    # Final 1×1×1 conv layer to produce per-voxel prediction
+    output = layers.Conv3D(1, kernel_size=1, padding='same', activation='sigmoid')(x)
 
-    # Final output layer
-    x = layers.Conv3D(1, 1, activation='sigmoid')(x)  # Output: importance per voxel
-
-    model = models.Model(inputs, x)
-    model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['mae'])
+    model = models.Model(input_tensor, outputs=output)
+    model.compile(optimizer='adam', loss='binary_crossentropy')
 
     return model
 

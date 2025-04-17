@@ -4,12 +4,12 @@ using UnityEngine;
 public class Utils {
 
     public static readonly Vector3[] FixedDirections = new Vector3[] {
-            new Vector3( 1.0f, 0.0f, 0.0f),
-            new Vector3(-1.0f, 0.0f, 0.0f),
-            new Vector3( 0.0f, 1.0f, 0.0f),
-            new Vector3( 0.0f,-1.0f, 0.0f),
-            new Vector3( 0.0f, 0.0f, 1.0f),
-            new Vector3( 0.0f, 0.0f,-1.0f)
+            new( 1.0f, 0.0f, 0.0f),
+            new(-1.0f, 0.0f, 0.0f),
+            new( 0.0f, 1.0f, 0.0f),
+            new( 0.0f,-1.0f, 0.0f),
+            new( 0.0f, 0.0f, 1.0f),
+            new( 0.0f, 0.0f,-1.0f)
     };
 
     public static bool IsPointInsideBounds(Vector3 point, ref List<Bounds> bounds, float voxelSize) {

@@ -35,6 +35,8 @@ public class LPNN_script : MonoBehaviour
 
     private List<Bounds> boundingVolumes;
     private List<Vector3> evalPoints;
+    private List<Vector3Int> epIndexes;
+    private Vector3Int voxelAmountperDir;
 
     private float[,,,,] features; // = new float[1, 11, 3, 9, 24]
 
@@ -116,6 +118,9 @@ public class LPNN_script : MonoBehaviour
         evalPoints ??= new List<Vector3>();
         evalPoints.Clear();
 
+        epIndexes ??= new List<Vector3Int>();
+        epIndexes.Clear();
+
         Transform voxelParent = transform.Find("VoxelsParent");
         if ( voxelParent != null) DestroyImmediate(voxelParent.gameObject);
 
@@ -130,7 +135,9 @@ public class LPNN_script : MonoBehaviour
         );
 
         features = new float[1, voxelAmount.x, voxelAmount.y, voxelAmount.z, 24]; // TODO make this dynamic
+        voxelAmountperDir = voxelAmount;
 
+        int xi=0, yi=0, zi=0;
         // create the voxels
         for (int x = 0; x < voxelAmount.x; x++) {
             for (int y = 0; y < voxelAmount.y; y++) {
@@ -142,6 +149,9 @@ public class LPNN_script : MonoBehaviour
                     );
                     if (!Utils.IsPointInsideBounds(point, ref boundingVolumes, voxelSize)) continue;
                     evalPoints.Add(point);
+                    epIndexes.Add(new Vector3Int(xi, yi, zi));
+
+                    zi ++;
                     
                     // TODO toggle to show voxels? is it needed?
                     // GameObject voxel = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -151,7 +161,11 @@ public class LPNN_script : MonoBehaviour
                     // voxel.transform.localScale = new Vector3(voxelSize, voxelSize, voxelSize);
                     // voxel.transform.parent = voxelParent;
                 }
+                zi = 0;
+                yi ++;
             }
+            yi = 0;
+            xi ++;
         }
     }
 
@@ -163,6 +177,7 @@ public class LPNN_script : MonoBehaviour
             return;
         }
 
+        int j = 0;
         foreach (var p in evalPoints){
             Color [] c = new Color[6];
             SphericalHarmonicsL2 sh = new();
@@ -171,14 +186,15 @@ public class LPNN_script : MonoBehaviour
             sh.Evaluate(Utils.FixedDirections, c);
             results.Add(c);
 
-            for(int i = 0; i < 24; i+=4){
-                features[0, (int)p.x, (int)p.y, (int)p.z, i  ] = c[i].r;
-                features[0, (int)p.x, (int)p.y, (int)p.z, i+1] = c[i].g;
-                features[0, (int)p.x, (int)p.y, (int)p.z, i+2] = c[i].b;
-                features[0, (int)p.x, (int)p.y, (int)p.z, i+3] = c[i].a;
+            for(int i = 0; i < 6; i++){
+                features[0, epIndexes[j].x, epIndexes[j].y, epIndexes[j].z, i*4  ] = c[i].r;
+                features[0, epIndexes[j].x, epIndexes[j].y, epIndexes[j].z, i*4+1] = c[i].g;
+                features[0, epIndexes[j].x, epIndexes[j].y, epIndexes[j].z, i*4+2] = c[i].b;
+                features[0, epIndexes[j].x, epIndexes[j].y, epIndexes[j].z, i*4+3] = c[i].a;
             }
-
+            j++;
         }
+
 
         string destination = Application.dataPath + "/LPNN/Results/evals.txt";
 
@@ -250,7 +266,6 @@ public class LPNN_script : MonoBehaviour
         String[] predictions = File.ReadAllLines(Application.dataPath + "/LPNN/Results/model_evals.txt"); 
         List<float> pred = new();
         foreach (var p in predictions.ToList()) {
-            Debug.Log($"{p} {float.Parse(p)}");
             pred.Add(float.Parse(p));
         }
 
