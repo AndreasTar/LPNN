@@ -36,7 +36,7 @@ public class LPNN_script : MonoBehaviour
     private List<Bounds> boundingVolumes;
     private List<Vector3> evalPoints;
     private List<Vector3Int> epIndexes;
-    private Vector3Int voxelAmountperDir;
+    [NonSerialized] public Vector3Int voxelAmountperDir;
 
     private float[,,,,] features; // = new float[1, 11, 3, 9, 24]
 
@@ -198,7 +198,7 @@ public class LPNN_script : MonoBehaviour
 
         string destination = Application.dataPath + "/LPNN/Results/evals.txt";
 
-        string s = "";
+        string s = $"{voxelAmountperDir.x} {voxelAmountperDir.y} {voxelAmountperDir.z}\n";
         foreach (var r in results){
             foreach (var c in r) {
                 s += c.ToString("F4").Replace("RGBA(", "").Replace(")", "").Replace(",", " ");
@@ -250,6 +250,7 @@ public class LPNN_script : MonoBehaviour
     public void EvaluateModel() {
         LightProbeAI modelScript = GetComponent<LightProbeAI>();
         
+        modelScript.SetDims(voxelAmountperDir);
         float[] res = modelScript.Predict(features);
         Debug.Log($"Model evaluated. Result: {res.Length} values.");
         string destination = Application.dataPath + "/LPNN/Results/model_evals.txt";
@@ -263,10 +264,15 @@ public class LPNN_script : MonoBehaviour
 
         List<Vector3> positions = new();
 
-        String[] predictions = File.ReadAllLines(Application.dataPath + "/LPNN/Results/model_evals.txt"); 
+        string[] predictions = File.ReadAllLines(Application.dataPath + "/LPNN/Results/model_evals.txt"); 
         List<float> pred = new();
+        float min = float.MaxValue;
+        float max = float.MinValue;
         foreach (var p in predictions.ToList()) {
-            pred.Add(float.Parse(p));
+            float val = float.Parse(p);
+            if (val < min) min = val;
+            if (val > max) max = val;
+            pred.Add(val);
         }
 
         for (int i = 0; i < pred.Count; i++){
@@ -276,6 +282,7 @@ public class LPNN_script : MonoBehaviour
         }
         gameObject.GetComponent<LightProbeGroup>().probePositions = positions.ToArray();
         Debug.Log($"Placed {positions.Count} predicted light probes.");
+        Debug.Log($"Min: {min}, Max: {max}");
         
     }
 
@@ -330,6 +337,8 @@ public class LPNN_Inspector: Editor {
             serializedObject.ApplyModifiedProperties();
             if (size > 0.1f) lpnn.PlaceEvalPoints();
         }
+
+        EditorGUILayout.LabelField($"Voxel Count: x: {lpnn.voxelAmountperDir.x}, y: {lpnn.voxelAmountperDir.y}, z: {lpnn.voxelAmountperDir.z}");
 
         if (GUILayout.Button("Place Evaluation Points")) {
             lpnn.PlaceEvalPoints();

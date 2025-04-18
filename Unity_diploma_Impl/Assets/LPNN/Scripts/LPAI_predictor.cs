@@ -11,15 +11,22 @@ public class LightProbeAI : MonoBehaviour
     private Worker worker;
 
     // Example voxel grid size. Adjust these to your scene's grid dimensions.
-    public int depth = 11;  // D
-    public int height = 3;  // H
-    public int width = 9;   // W
+    public int depth = 10;  // D
+    public int height = 5;  // H
+    public int width = 10;   // W
     public int channels = 24; // C
 
     void Start()
     {
         runtimeModel = ModelLoader.Load(modelAsset);
         worker = new Worker(runtimeModel, BackendType.GPUCompute);
+    }
+
+    public void SetDims(Vector3Int dims)
+    {
+        depth = dims.x;
+        height = dims.y;
+        width = dims.z;
     }
 
     public float[] Predict(float[,,,,] inputFeatures)

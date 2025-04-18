@@ -122,6 +122,9 @@ def main():
 
     with open(r"C:\Users\Andreas\Desktop\UniStuff\Diploma\project\LPNN\Unity_diploma_Impl\Assets\LPNN\Results\evals.txt", "r") as f:
         block = []
+        D, H ,W = f.readline().strip().split()
+        D, H, W = int(D), int(H), int(W)
+
         for line in f:
             stripped = line.strip()
             if stripped == "":
@@ -138,10 +141,8 @@ def main():
 
     features = np.array(features, dtype=np.float32)  # shape: [N, 24]
     print("Did features")
-
-    #ATTRIBUTES
-    # Determine voxel grid shape (manually for now)
-    D, H, W = 11, 3, 9  # Example shape — you should know your real grid size
+    print(features)
+    print(features.shape, labels.shape)
 
     # Make sure the number of samples matches D*H*W
     assert features.shape[0] == D * H * W
@@ -166,7 +167,7 @@ def main():
     #SAVE
 
     # Convert and save
-    spec = (tf.TensorSpec((None, D, H, W, 24), tf.float32, name="input"),)
+    spec = (tf.TensorSpec((None, None, None, None, 24), tf.float32, name="input"),)
     model_proto, _ = tf2onnx.convert.from_keras(
         model,
         input_signature=spec,
