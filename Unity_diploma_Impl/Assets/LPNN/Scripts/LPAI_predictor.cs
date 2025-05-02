@@ -3,6 +3,7 @@ using Unity.Sentis;
 using Unity.VisualScripting;
 using Unity.Mathematics;
 using System.Linq;
+using System.Collections.Generic;
 
 public class LightProbeAI : MonoBehaviour
 {
@@ -29,41 +30,26 @@ public class LightProbeAI : MonoBehaviour
         width = dims.z;
     }
 
-    public float[] Predict(float[,,,,] inputFeatures)
+    public float[] Predict(Dictionary<Vector3Int, float[]> inputFeatures) // [0, x, y, z, f]
     {
         Start();
 
-        float[] channels = new float[
-            inputFeatures.GetLength(0) * inputFeatures.GetLength(1) * inputFeatures.GetLength(2) * inputFeatures.GetLength(3) * inputFeatures.GetLength(4)
-        ];
-        
-        Debug.Log(
-            $"Features shape: {inputFeatures.GetLength(0)}, {inputFeatures.GetLength(1)}, {inputFeatures.GetLength(2)}, {inputFeatures.GetLength(3)}, {inputFeatures.GetLength(4)}"
-        );
-        for (int i = 0; i < inputFeatures.GetLength(0); i++)
+        int N = inputFeatures.Count; // Number of light probes
+        int F = inputFeatures.First().Value.Length; // Number of features per light probe
+        Tensor<float> input = new (new TensorShape(1, N, F));
+
+
+
+        inputFeatures.Keys.ToList().ForEach((key) =>
         {
-            for (int j = 0; j < inputFeatures.GetLength(1); j++)
+            // Convert the Vector3Int key to a 1D index for the tensor
+            int index = key.x * height * width + key.y * width + key.z;
+            // Fill the tensor with the features
+            for (int j = 0; j < F; j++)
             {
-                for (int k = 0; k < inputFeatures.GetLength(2); k++)
-                {
-                    for (int l = 0; l < inputFeatures.GetLength(3); l++)
-                    {
-                        for (int m = 0; m < inputFeatures.GetLength(4); m++)
-                        {
-                            channels.Append(inputFeatures[i, j, k, l, m]);
-                        }
-                    }
-                }
+                input[0, index, j] = inputFeatures[key][j];
             }
-        }
-
-        Debug.Log("Channels shape: " + channels.Length);
-
-        // Assume inputFeatures is [1, D, H, W, C]
-        Tensor<float> input = new (
-            new TensorShape(1, inputFeatures.GetLength(1), inputFeatures.GetLength(2), inputFeatures.GetLength(3), inputFeatures.GetLength(4)),
-            channels
-        );
+        });
 
         worker.Schedule(input);
         Tensor<float> output = worker.PeekOutput() as Tensor<float>;  // shape: [1, D, H, W, 1]

@@ -38,7 +38,7 @@ public class LPNN_script : MonoBehaviour
     private List<Vector3Int> epIndexes;
     [NonSerialized] public Vector3Int voxelAmountperDir;
 
-    private float[,,,,] features; // = new float[1, 11, 3, 9, 24]
+    private Dictionary<Vector3Int, float[]> features; // = {vec3i, float[f1, f2]}
 
 
     private void Awake()
@@ -134,7 +134,8 @@ public class LPNN_script : MonoBehaviour
             Mathf.RoundToInt((bounds.size.z+1) / voxelSize)
         );
 
-        features = new float[1, voxelAmount.x, voxelAmount.y, voxelAmount.z, 24]; // TODO make this dynamic
+        Debug.Log($"Voxel amount: {voxelAmount.x}, {voxelAmount.y}, {voxelAmount.z}");
+        features = new Dictionary<Vector3Int, float[]>();
         voxelAmountperDir = voxelAmount;
 
         int xi=0, yi=0, zi=0;
@@ -186,12 +187,15 @@ public class LPNN_script : MonoBehaviour
             sh.Evaluate(Utils.FixedDirections, c);
             results.Add(c);
 
+            // [x, y, z, [[rgb], f2, ...]]
+            float[] temp = new float[24];
             for(int i = 0; i < 6; i++){
-                features[0, epIndexes[j].x, epIndexes[j].y, epIndexes[j].z, i*4  ] = c[i].r;
-                features[0, epIndexes[j].x, epIndexes[j].y, epIndexes[j].z, i*4+1] = c[i].g;
-                features[0, epIndexes[j].x, epIndexes[j].y, epIndexes[j].z, i*4+2] = c[i].b;
-                features[0, epIndexes[j].x, epIndexes[j].y, epIndexes[j].z, i*4+3] = c[i].a;
+                temp[i*4] = c[i].r;
+                temp[i*4+1] = c[i].g;
+                temp[i*4+2] = c[i].b;
+                temp[i*4+3] = c[i].a;
             }
+            features.Add(new Vector3Int(epIndexes[j].x, epIndexes[j].y, epIndexes[j].z), temp);
             j++;
         }
 
@@ -338,7 +342,7 @@ public class LPNN_Inspector: Editor {
             if (size > 0.1f) lpnn.PlaceEvalPoints();
         }
 
-        EditorGUILayout.LabelField($"Voxel Count: x: {lpnn.voxelAmountperDir.x}, y: {lpnn.voxelAmountperDir.y}, z: {lpnn.voxelAmountperDir.z}");
+        EditorGUILayout.LabelField($"Voxel Count: x: {lpnn.voxelAmountperDir.x}, y: {lpnn.voxelAmountperDir.y}, z: {lpnn.voxelAmountperDir.z} Total: {lpnn.voxelAmountperDir.x * lpnn.voxelAmountperDir.y * lpnn.voxelAmountperDir.z}");
 
         if (GUILayout.Button("Place Evaluation Points")) {
             lpnn.PlaceEvalPoints();

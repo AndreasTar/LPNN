@@ -19,38 +19,7 @@ print("NumPy version:", np.__version__)
 
 
 
-def build_lightprobe_model(input_shape: tuple):
-    # inputs = layers.Input(shape=input_shape)  # (D, H, W, 24)
-
-    # # Encoder
-    # x1 = layers.Conv3D(32, 3, padding='same', activation='relu')(inputs)
-    # x1 = layers.BatchNormalization()(x1)
-
-    # x2 = layers.Conv3D(64, 3, strides=2, padding='same', activation='relu')(x1)
-    # x2 = layers.BatchNormalization()(x2)
-    # x2 = layers.Dropout(0.2)(x2)
-
-    # x3 = layers.Conv3D(128, 3, strides=2, padding='same', activation='relu')(x2)
-    # x3 = layers.BatchNormalization()(x3)
-    # x3 = layers.Dropout(0.3)(x3)
-
-    # # Bottleneck
-    # x = layers.Conv3D(256, 3, padding='same', activation='relu')(x3)
-
-    # # Decoder with skip connections
-    # x = layers.Conv3DTranspose(128, 3, strides=2, padding='same', activation='relu')(x)
-    # x_cropped = center_crop_to_match(x, x2)
-    # x = layers.Concatenate()([x_cropped, x2])
-    # x = layers.Conv3D(128, 3, padding='same', activation='relu')(x)
-
-    # x = layers.Conv3DTranspose(64, 3, strides=2, padding='same', activation='relu')(x)
-    # x_cropped = center_crop_to_match(x, x1)
-    # x = layers.Concatenate()([x_cropped, x1])
-    # x = layers.Conv3D(64, 3, padding='same', activation='relu')(x)
-
-    # # Final output layer
-    # x = layers.Conv3D(1, 1, activation='sigmoid')(x)  # Output: importance per voxel
-
+def make_model_3dcnn(input_shape: tuple):
     """
     Build a fully convolutional 3D CNN model that outputs a per-voxel importance score (0–1).
     - input_channels: Number of channels per voxel (e.g. 4 for RGBA).
@@ -79,6 +48,37 @@ def build_lightprobe_model(input_shape: tuple):
 
     return model
 
+def make_model_pointnet(feature_dim: int, count: int):
+    """
+    PointNet‑style network that predicts one importance score per point.
+      feature_dim: number of features per voxel (e.g. 24).
+    """
+
+    pts = layers.Input(shape=(None, feature_dim))  
+
+    # Shared MLP on each point
+    x = layers.Conv1D(64, 1, activation='relu')(pts)
+    x = layers.Conv1D(128, 1, activation='relu')(x)
+    x = layers.Conv1D(256, 1, activation='relu')(x)
+
+    # Global feature is max over all N points
+    global_feat = layers.GlobalMaxPooling1D()(x)        # (batch, 256)
+    # Broadcast global feature back to each point
+    global_feat = layers.RepeatVector(count)(global_feat)  # (batch, N, 256)
+
+    # Concatenate per point local and global context
+    x = layers.Concatenate()([x, global_feat])          # (batch, N, 512)
+
+    # Per point processing
+    x = layers.Conv1D(256, 1, activation='relu')(x)
+    x = layers.Conv1D(128, 1, activation='relu')(x)
+
+    # Final per point importance
+    out = layers.Conv1D(1, 1, activation='sigmoid')(x)  # (batch, N, 1)
+
+    model = models.Model(inputs=pts, outputs=out)
+    model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['mae'])
+    return model
 
 def center_crop_to_match(source, target):
     """
@@ -141,33 +141,25 @@ def main():
 
     features = np.array(features, dtype=np.float32)  # shape: [N, 24]
     print("Did features")
-    print(features)
     print(features.shape, labels.shape)
 
-    # Make sure the number of samples matches D*H*W
-    assert features.shape[0] == D * H * W
-    assert labels.shape[0] == D * H * W
-
     # Reshape
-    X = features.reshape(D, H, W, -1)  # shape: [D, H, W, 24]
-    y = labels.reshape(D, H, W)       # shape: [D, H, W]
+    X = features[None, :, :]  # shape: [1, N, 24]
+    y = labels[None, :, None] # shape: [1, N, 1]
     print("Did attributes")
 
     #MODEL
     input_shape = (D, H, W, 24)
-    model = build_lightprobe_model(input_shape)
+    model = make_model_pointnet(24, features.shape[0])
+    model.summary()
 
-    # Add batch dimension
-    X = np.expand_dims(X, axis=0)       # (1, D, H, W, 24)
-    y = np.expand_dims(y, axis=(0, -1)) # (1, D, H, W, 1)
-
-    model.fit(X, y, epochs=50)
+    model.fit(X, y, batch_size=1, epochs=50)
     print("Did model")
 
     #SAVE
 
     # Convert and save
-    spec = (tf.TensorSpec((None, None, None, None, 24), tf.float32, name="input"),)
+    spec = (tf.TensorSpec((None, None, 24), tf.float32, name="pts"),) # 24 if features dim
     model_proto, _ = tf2onnx.convert.from_keras(
         model,
         input_signature=spec,
