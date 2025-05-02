@@ -30,7 +30,7 @@ public class LightProbeAI : MonoBehaviour
         width = dims.z;
     }
 
-    public float[] Predict(Dictionary<Vector3Int, float[]> inputFeatures) // [0, x, y, z, f]
+    public float[] Predict(Dictionary<Vector3Int, float[]> inputFeatures) // {key: [features]}
     {
         Start();
 
@@ -52,7 +52,7 @@ public class LightProbeAI : MonoBehaviour
         });
 
         worker.Schedule(input);
-        Tensor<float> output = worker.PeekOutput() as Tensor<float>;  // shape: [1, D, H, W, 1]
+        Tensor<float> output = worker.PeekOutput() as Tensor<float>;  // shape: [1, N, 1]
 
         float[] importance = output.DownloadToArray();
 
