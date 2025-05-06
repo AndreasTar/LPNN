@@ -38,7 +38,7 @@ public class LPNN_script : MonoBehaviour
     private List<Vector3Int> epIndexes;
     [NonSerialized] public Vector3Int voxelAmountperDir;
 
-    private Dictionary<Vector3Int, float[]> features; // = {vec3i, float[f1, f2]}
+    private Dictionary<Vector3, float[][]> features; // = {vec3i, float[f1, f2]}
 
 
     private void Awake()
@@ -134,8 +134,6 @@ public class LPNN_script : MonoBehaviour
             Mathf.RoundToInt((bounds.size.z+1) / voxelSize)
         );
 
-        Debug.Log($"Voxel amount: {voxelAmount.x}, {voxelAmount.y}, {voxelAmount.z}");
-        features = new Dictionary<Vector3Int, float[]>();
         voxelAmountperDir = voxelAmount;
 
         int xi=0, yi=0, zi=0;
@@ -153,14 +151,6 @@ public class LPNN_script : MonoBehaviour
                     epIndexes.Add(new Vector3Int(xi, yi, zi));
 
                     zi ++;
-                    
-                    // TODO toggle to show voxels? is it needed?
-                    // GameObject voxel = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    // voxel.transform.position = point;
-                    // voxel.GetComponent<MeshRenderer>().enabled = false;
-                    // voxel.name = $"{x}_{y}_{z}";
-                    // voxel.transform.localScale = new Vector3(voxelSize, voxelSize, voxelSize);
-                    // voxel.transform.parent = voxelParent;
                 }
                 zi = 0;
                 yi ++;
@@ -170,52 +160,146 @@ public class LPNN_script : MonoBehaviour
         }
     }
 
-    public void EvaluateSH() {
-
-        List<Color[]> results = new();
+    public void CalculateFeatures() {
         if (evalPoints == null || evalPoints.Count == 0) {
             Debug.LogError("No evaluation points found! Please place them first.");
             return;
         }
 
-        int j = 0;
-        foreach (var p in evalPoints){
-            Color [] c = new Color[6];
-            SphericalHarmonicsL2 sh = new();
+        features ??= new Dictionary<Vector3, float[][]>();
+        features.Clear();
 
-            LightProbes.GetInterpolatedProbe(p, null, out sh);
-            sh.Evaluate(Utils.FixedDirections, c);
-            results.Add(c);
+        foreach (var p in evalPoints) {
+            features.Add(p, new float[4][]);
 
-            // [x, y, z, [[rgb], f2, ...]]
-            float[] temp = new float[24];
-            for(int i = 0; i < 6; i++){
-                temp[i*4] = c[i].r;
-                temp[i*4+1] = c[i].g;
-                temp[i*4+2] = c[i].b;
-                temp[i*4+3] = c[i].a;
-            }
-            features.Add(new Vector3Int(epIndexes[j].x, epIndexes[j].y, epIndexes[j].z), temp);
-            j++;
+            features[p][0] = EvaluateSH(p);
+            features[p][1] = CalcLightVar(p);
+            features[p][2] = CalcNormalVar(p);
+            features[p][3] = CalcOcclFactor(p);
+
         }
-
-
-        string destination = Application.dataPath + "/LPNN/Results/evals.txt";
-
-        string s = $"{voxelAmountperDir.x} {voxelAmountperDir.y} {voxelAmountperDir.z}\n";
-        foreach (var r in results){
-            foreach (var c in r) {
-                s += c.ToString("F4").Replace("RGBA(", "").Replace(")", "").Replace(",", " ");
-                s += "\n";
-            }
-            s += "\n";
-        }
-        File.WriteAllText(destination, s);
-
-        Debug.Log($"Results saved to {destination}. Total: {results.Count} points.");
-        
-
     }
+
+    public void SaveFeatures() {
+        if (features == null || features.Count == 0) {
+            Debug.LogError("No features found! Please calculate them first.");
+            return;
+        }
+
+        if (!Utils.WriteFeaturesToFile(features, voxelAmountperDir)) {
+            Debug.LogError("Failed to save features to file.");
+            return;
+        }
+        Debug.Log($"Results saved to {Utils.filepath+"features.txt"}. Total: {features.Count} points.");
+    }
+
+    float[] EvaluateSH(Vector3 point) {
+
+        Color [] c = new Color[6];
+        SphericalHarmonicsL2 sh = new();
+
+        LightProbes.GetInterpolatedProbe(point, null, out sh);
+        sh.Evaluate(Utils.FixedDirections, c);
+
+        float[] temp = new float[24];
+        for(int i = 0; i < 6; i++){
+            temp[i*4] = c[i].r;
+            temp[i*4+1] = c[i].g;
+            temp[i*4+2] = c[i].b;
+            temp[i*4+3] = c[i].a;
+        }
+        return temp;
+    }
+
+    float[] CalcLightVar(Vector3 point) {
+        // TODO implement this
+
+        float sampleRadius = 1f;
+        int sampleCount = 10;
+        List<float> luminances = new();
+
+        for (int i = 0; i < sampleCount; i++){
+
+            Vector3 offset = UnityEngine.Random.onUnitSphere * sampleRadius;
+            Vector3 samplePos = point + offset;
+
+            LightProbes.GetInterpolatedProbe(samplePos, null, out SphericalHarmonicsL2 sh);
+
+            Color[] col = new Color[1];
+            Vector3[] dirs = new Vector3[]{UnityEngine.Random.onUnitSphere};
+
+            sh.Evaluate(dirs.ToArray(), col); // sample in up direction or multiple if needed
+            float luminance = col[0].r * 0.2126f + col[0].g * 0.7152f + col[0].b * 0.0722f;
+            
+            luminances.Add(luminance);
+        }
+
+        float mean = 0f;
+        foreach (var lum in luminances) mean += lum;
+        mean /= sampleCount;
+
+        float variance = 0f;
+        foreach (var lum in luminances) variance += (lum - mean) * (lum - mean);
+        variance /= sampleCount;
+
+        return new float[]{variance};
+    }
+
+    float[] CalcNormalVar(Vector3 point) {
+        // TODO implement this
+
+        float sampleRadius = 1f;
+        int sampleCount = 10;
+        float rayDistance = 5f;
+
+        List<Vector3> normals = new();
+
+        for (int i = 0; i < sampleCount; i++)
+        {
+            Vector3 dir = UnityEngine.Random.onUnitSphere;
+            Ray ray = new(point + dir * sampleRadius, -dir);
+
+            if (Physics.Raycast(ray, out RaycastHit hit, rayDistance))
+            {
+                normals.Add(hit.normal);
+            }
+        }
+        
+        if (normals.Count == 0) return new float[]{0f};
+
+        Vector3 meanNormal = Vector3.zero;
+        foreach (var n in normals) meanNormal += n;
+        meanNormal.Normalize();
+
+        float variance = 0f;
+        foreach (var n in normals) variance += 1f - Vector3.Dot(n, meanNormal);
+        variance /= normals.Count;
+
+        return new float[]{variance};
+    }
+
+    float[] CalcOcclFactor(Vector3 point) {
+        // TODO implement this
+
+        int rayCount = 50;
+        float rayDistance = 10f;
+
+        int hitCount = 0;
+
+        for (int i = 0; i < rayCount; i++)
+        {
+            Vector3 dir = UnityEngine.Random.onUnitSphere;
+            if (Physics.Raycast(point, dir, rayDistance))
+            {
+                hitCount++;
+            }
+        }
+
+        float occlusionFactor = (float)hitCount / rayCount;
+
+        return new float[]{occlusionFactor};
+    }
+
 
     public void CompareLPGroup() {
         if (predef_lightProbes == null) {
@@ -255,7 +339,16 @@ public class LPNN_script : MonoBehaviour
         LightProbeAI modelScript = GetComponent<LightProbeAI>();
         
         modelScript.SetDims(voxelAmountperDir);
-        float[] res = modelScript.Predict(features);
+        float[] res;
+        try
+        {
+            res = modelScript.Predict(features);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Model evaluation failed: {e.Message}");
+            return;
+        }
         Debug.Log($"Model evaluated. Result: {res.Length} values.");
         string destination = Application.dataPath + "/LPNN/Results/model_evals.txt";
         File.WriteAllText(destination, res.ToLineSeparatedString());
@@ -279,6 +372,11 @@ public class LPNN_script : MonoBehaviour
             pred.Add(val);
         }
 
+        pred.ForEach(val => val = Utils.map(val, min, max, 0, 1));
+        for (int i = 0; i < pred.Count; i++){
+            pred[i] = Utils.map(pred[i], min, max, 0, 1);
+        }
+        
         for (int i = 0; i < pred.Count; i++){
             if (pred[i] > threshold) {
                 positions.Add(evalPoints[i]);
@@ -286,8 +384,7 @@ public class LPNN_script : MonoBehaviour
         }
         gameObject.GetComponent<LightProbeGroup>().probePositions = positions.ToArray();
         Debug.Log($"Placed {positions.Count} predicted light probes.");
-        Debug.Log($"Min: {min}, Max: {max}");
-        
+        Debug.Log($"Min: {min}, Max: {max}, Average: {pred.Average()}");
     }
 
 }
@@ -353,9 +450,14 @@ public class LPNN_Inspector: Editor {
         EditorGUILayout.Separator();
         EditorGUILayout.Space();
 
-        if (GUILayout.Button("Evaluate Spherical Harmonics")) {
-            lpnn.EvaluateSH();
+        if (GUILayout.Button("Get Features")) {
+            lpnn.CalculateFeatures();
             Debug.Log("Evaluated");
+        }
+
+        if (GUILayout.Button("Save Features to File")) {
+            lpnn.SaveFeatures();
+            Debug.Log("Saved");
         }
 
         EditorGUILayout.Space();

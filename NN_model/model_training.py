@@ -1,7 +1,7 @@
 import numpy as np
 import tensorflow as tf
-from tensorflow.keras import layers, models # type: ignore
-#from tensorflow.python.keras import layers, models
+#from tensorflow.keras import layers, models, backend as K # type: ignore
+from tensorflow.python.keras import layers, models
 import tf2onnx
 import onnx
 import onnxruntime as ort
@@ -15,7 +15,7 @@ print("NumPy version:", np.__version__)
 def make_model_pointnet(feature_dim: int, count):
     """
     PointNet‑style network that predicts one importance score per point.
-      feature_dim: number of features per voxel (e.g. 24).
+      feature_dim: number of features per point (e.g. 4).
     """
 
     pts = layers.Input(shape=(None, feature_dim))  
@@ -28,10 +28,24 @@ def make_model_pointnet(feature_dim: int, count):
     # Global feature is max over all N points
     global_feat = layers.GlobalMaxPooling1D()(x)        # (batch, 256)
     # Broadcast global feature back to each point
-    global_feat = layers.RepeatVector(count)(global_feat)
+    #global_feat = layers.RepeatVector(count)(global_feat)
+
+
+  # dynamic tile → (batch, N, 256)
+    def tile_fn(inputs):
+        gf, points = inputs
+        N = K.shape(points)[1]
+        gf = K.expand_dims(gf, 1)        # (batch, 1, 256)
+        return K.tile(gf, [1, N, 1])     # (batch, N, 256)
+
+    # here’s the key: tell Keras the output shape is (batch, N, 256)
+    global_tiled = layers.Lambda(
+        tile_fn,
+        output_shape=lambda input_shapes: (input_shapes[1][0], input_shapes[1][1], 256)
+    )([global_feat, pts])
 
     # Concatenate per point local and global context
-    x = layers.Concatenate()([x, global_feat])          # (batch, N, 512)
+    x = layers.Concatenate()([x, global_tiled])          # (batch, N, 512)
 
     # Per point processing
     x = layers.Conv1D(256, 1, activation='relu')(x)
@@ -58,36 +72,45 @@ def main():
     #FEATURES
     features = []
 
-    with open(r"C:\Users\Andreas\Desktop\UniStuff\Diploma\project\LPNN\Unity_diploma_Impl\Assets\LPNN\Results\evals.txt", "r") as f:
+    with open(r"C:\Users\Andreas\Desktop\UniStuff\Diploma\project\LPNN\Unity_diploma_Impl\Assets\LPNN\Results\features.txt", "r") as f:
         block = []
-        D, H ,W = f.readline().strip().split()
-        D, H, W = int(D), int(H), int(W)
+        D, H, W, F = f.readline().strip().split()
+        D, H, W, F = int(D), int(H), int(W), int(F)
 
+        at_rgba = True
         for line in f:
             stripped = line.strip()
-            if stripped == "":
-                if block:
-                    features.append(np.array(block, dtype=np.float32).flatten())  # 6 x 4 = 24 features
+            if stripped == "": # if empty line
+                at_rgba = True
+                if block: # if block is not empty
+                    features.append(np.array(block, dtype=np.float32).flatten())
                     block = []
             else:
-                rgba = list(map(float, stripped.split()))
-                block.append(rgba)
+                if at_rgba:
+                    rgbas = np.split(list(map(float, stripped.split())), 6) # split into 6 arrays
+                    for rgba in rgbas:
+                        block.append(rgba)
+                    at_rgba = False
+                else:
+                    block.append(map(float, stripped.split()))
+
 
     # handle last block if no newline at end
     if block:
         features.append(np.array(block, dtype=np.float32).flatten())
 
-    features = np.array(features, dtype=np.float32)  # shape: [N, 24]
+    features = np.array(features, dtype=np.float32)  # shape: [N, 27]
     print("Did features")
     print(features.shape, labels.shape)
 
     # Reshape
-    X = features[None, :, :]  # shape: [1, N, 24]
+    X = features[None, :, :]  # shape: [1, N, 27]
     y = labels[None, :, None] # shape: [1, N, 1]
     print("Did attributes")
+    # print(X.shape, y.shape) # TODO need to add debug prints
 
     #MODEL
-    model = make_model_pointnet(24, features.shape[0])
+    model = make_model_pointnet(F, features.shape[0])
     model.summary()
 
     model.fit(X, y, batch_size=1, epochs=50)

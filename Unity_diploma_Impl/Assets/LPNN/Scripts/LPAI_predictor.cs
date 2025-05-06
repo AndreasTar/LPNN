@@ -30,25 +30,26 @@ public class LightProbeAI : MonoBehaviour
         width = dims.z;
     }
 
-    public float[] Predict(Dictionary<Vector3Int, float[]> inputFeatures) // {key: [features]}
+    public float[] Predict(Dictionary<Vector3, float[][]> inputFeatures) // {key: [features]}
     {
         Start();
 
         int N = inputFeatures.Count; // Number of light probes
-        int F = inputFeatures.First().Value.Length; // Number of features per light probe
+        float[] flattenedInput = inputFeatures.First().Value.SelectMany(x => x).ToArray(); // Flatten the first feature set to get the number of features per node
+        int F = flattenedInput.Length; // Number of total values of the features per node
         Tensor<float> input = new (new TensorShape(1, N, F));
+        print("Input shape: " + input.shape.ToString());
 
-
-
+        int i = 0;
         inputFeatures.Keys.ToList().ForEach((key) =>
         {
-            // Convert the Vector3Int key to a 1D index for the tensor
-            int index = key.x * height * width + key.y * width + key.z;
             // Fill the tensor with the features
             for (int j = 0; j < F; j++)
             {
-                input[0, index, j] = inputFeatures[key][j];
+                input[0,i,j] = flattenedInput[j];
             }
+
+            i++;
         });
 
         worker.Schedule(input);
