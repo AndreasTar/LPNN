@@ -1,7 +1,7 @@
 import numpy as np
 import tensorflow as tf
-#from tensorflow.keras import layers, models, backend as K # type: ignore
-from tensorflow.python.keras import layers, models
+from tensorflow.keras import layers, models, backend as K # type: ignore
+#from tensorflow.python.keras import layers, models
 import tf2onnx
 import onnx
 import onnxruntime as ort
@@ -87,12 +87,14 @@ def main():
                     block = []
             else:
                 if at_rgba:
-                    rgbas = np.split(list(map(float, stripped.split())), 6) # split into 6 arrays
-                    for rgba in rgbas:
+                    stripped = stripped.replace(",", ".").split()
+                    stripped = [float(s) for s in stripped]
+                    for rgba in stripped:
                         block.append(rgba)
                     at_rgba = False
                 else:
-                    block.append(map(float, stripped.split()))
+                    stripped = stripped.replace(",", ".").split()
+                    block.append([float(s) for s in stripped][0]) # since its just a single value, just do it like that
 
 
     # handle last block if no newline at end
@@ -119,7 +121,7 @@ def main():
     #SAVE
 
     # Convert and save
-    spec = (tf.TensorSpec((None, None, 24), tf.float32, name="pts"),) # 24 if features dim
+    spec = (tf.TensorSpec((None, None, F), tf.float32, name="pts"),) # 24 if features dim
     model_proto, _ = tf2onnx.convert.from_keras(
         model,
         input_signature=spec,

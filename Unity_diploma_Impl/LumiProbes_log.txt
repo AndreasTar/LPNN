@@ -92,3 +92,21 @@
 5/5/2025 4:26:56 μ.μ. [01]: Log [INFO]: Decimated 211 light probes, 189 left
 5/5/2025 4:26:56 μ.μ. [01]: Log [INFO]: Done (DecimateLightProbes: 1627s)
 5/5/2025 6:29:55 μ.μ. [01]: Log [INFO]: Done (ShowRemovedLightProbes: 0s)
+6/5/2025 1:51:12 μ.μ. [01]: Log [INFO]: Bake started
+6/5/2025 1:51:12 μ.μ. [01]: Log [INFO]: Done (Bake: 0,032s)
+6/5/2025 1:51:44 μ.μ. [01]: Log [INFO]: Done (PlaceLightProbes: 0,003s)
+6/5/2025 1:51:55 μ.μ. [01]: Log [INFO]: Done (PlaceEvaluationPoints: 0,247s)
+6/5/2025 1:52:09 μ.μ. [01]: Log [INFO]: Done (ShowRemovedLightProbes: 0s)
+6/5/2025 1:52:17 μ.μ. [01]: Log [INFO]: Mapped 400 LPs to 1458 tetrahedrals. Mapped 256 EPs: 256 (100,00%) to tetrahedrons and 0 (0,00%) to triangles, 0 unmapped
+6/5/2025 1:56:59 μ.μ. [01]: Log [INFO]: Bake started
+6/5/2025 1:56:59 μ.μ. [01]: Log [INFO]: Done (Bake: 0,019s)
+6/5/2025 1:57:08 μ.μ. [01]: Log [INFO]: Done (PlaceEvaluationPoints: 0,282s)
+6/5/2025 1:57:50 μ.μ. [01]: Log [INFO]: Done (PlaceLightProbes: 0,001s)
+6/5/2025 1:57:52 μ.μ. [01]: Log [INFO]: Done (PlaceEvaluationPoints: 0,186s)
+6/5/2025 1:58:01 μ.μ. [01]: Log [INFO]: Mapped 400 LPs to 1458 tetrahedrals. Mapped 256 EPs: 256 (100,00%) to tetrahedrons and 0 (0,00%) to triangles, 0 unmapped
+6/5/2025 1:58:01 μ.μ. [01]: Log [INFO]: Starting Decimation. Settings: LPs: 400, EPs: 256, LP Evaluation method: FixedLow (6), Averaging EP directions: True, Solver: AveragePercentageError, Metric: Luminance, Minimum Error: 3, Minimum LP Set: Disabled
+6/5/2025 2:44:00 μ.μ. [01]: Log [INFO]: Iteration: 177. Error: 3,01536742141054. Stopping using max error criteria
+6/5/2025 2:44:00 μ.μ. [01]: Log [INFO]: Finished after 177 iterations. Final error: 2,95%., Stages Time: 1. Remove LP: 0,004s, 2. Remap EPs: 2692,947s, 2.1 Tetrahed: 236,847s, 2.2 Mappings: 2428,569s, 3. Eval  EPs: 7,419s, 4. Calc Cost: 0,196s, 5. Find Min : 0s, 6. Insert LP: 0,001s, Total: 2700,567s
+6/5/2025 2:44:00 μ.μ. [01]: Log [INFO]: Decimated 177 light probes, 223 left
+6/5/2025 2:44:00 μ.μ. [01]: Log [INFO]: Done (DecimateLightProbes: 2766,668s)
+6/5/2025 2:45:26 μ.μ. [01]: Log [INFO]: Done (ShowRemovedLightProbes: 0s)

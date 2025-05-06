@@ -301,7 +301,15 @@ public class LPNN_script : MonoBehaviour
     }
 
 
-    public void CompareLPGroup() {
+    public void CalculateLabels() {
+        if (predef_lightProbes == null) {
+            Debug.LogError("No LightProbeGroup found! Please assign one.");
+            return;
+        }
+
+        CompareLPGroup();
+    }
+    void CompareLPGroup() {
         if (predef_lightProbes == null) {
             Debug.LogError("No LightProbeGroup found! Please assign one.");
             return;
@@ -464,8 +472,8 @@ public class LPNN_Inspector: Editor {
         EditorGUILayout.Separator();
         EditorGUILayout.Space();
 
-        if (GUILayout.Button("Compare to Predefined LPGroup")) {
-            lpnn.CompareLPGroup();
+        if (GUILayout.Button("Get Labels")) {
+            lpnn.CalculateLabels();
             Debug.Log("Compared");
         }
 

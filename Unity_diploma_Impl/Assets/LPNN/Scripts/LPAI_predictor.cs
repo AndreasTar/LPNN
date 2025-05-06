@@ -43,10 +43,11 @@ public class LightProbeAI : MonoBehaviour
         int i = 0;
         inputFeatures.Keys.ToList().ForEach((key) =>
         {
+            float[] flat = inputFeatures[key].SelectMany(x => x).ToArray();
             // Fill the tensor with the features
             for (int j = 0; j < F; j++)
             {
-                input[0,i,j] = flattenedInput[j];
+                input[0,i,j] = flat[j];
             }
 
             i++;
