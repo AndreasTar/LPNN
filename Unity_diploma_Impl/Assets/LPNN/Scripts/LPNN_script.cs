@@ -436,7 +436,7 @@ public class LPNN_script : MonoBehaviour
         }
         gameObject.GetComponent<LightProbeGroup>().probePositions = positions.ToArray();
         Debug.Log($"Placed {positions.Count} predicted light probes.");
-        Debug.Log($"Min: {min}, Max: {max}, Average: {pred.Average()}");
+        Debug.Log($"Min: {min}, Max: {max}, Average: {min+pred.Average()}");
     }
 
 }
