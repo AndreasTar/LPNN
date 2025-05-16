@@ -53,9 +53,11 @@ public class Utils {
     }
 
     public static readonly string filepath = Application.dataPath + "/LPNN/Results/";
-    public static bool WriteFeaturesToFile(Dictionary<Vector3, float[][]> features, Vector3Int dims) {
+    public static bool WriteFeaturesToFile(Dictionary<Vector3, float[][]> features, bool append = false) {
 
-        File.WriteAllText(filepath+"features.txt", $"{dims.x} {dims.y} {dims.z} {features.First().Value.SelectMany(x => x).ToArray().Length}\n"); // Clear the file
+        if (!append){
+            File.WriteAllText(filepath+"features.txt", $"{features.First().Value.SelectMany(x => x).ToArray().Length}\n"); // Clear the file
+        }
 
         foreach (var kvp in features)
         {

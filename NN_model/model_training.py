@@ -74,42 +74,31 @@ def main():
 
     with open(r"C:\Users\Andreas\Desktop\UniStuff\Diploma\project\LPNN\Unity_diploma_Impl\Assets\LPNN\Results\features.txt", "r") as f:
         block = []
-        D, H, W, F = f.readline().strip().split()
-        D, H, W, F = int(D), int(H), int(W), int(F)
+        F = int(f.readline().strip().split()[0]) # read first line and get number of features
 
-        at_rgba = True
         for line in f:
-            stripped = line.strip()
-            if stripped == "": # if empty line
-                at_rgba = True
-                if block: # if block is not empty
-                    features.append(np.array(block, dtype=np.float32).flatten())
-                    block = []
+            if not line.isspace():
+                for val in line.split():
+                    if val == "": continue
+                    val = val.replace(",", ".")
+                    block.append(float(val))
             else:
-                if at_rgba:
-                    stripped = stripped.replace(",", ".").split()
-                    stripped = [float(s) for s in stripped]
-                    for rgba in stripped:
-                        block.append(rgba)
-                    at_rgba = False
-                else:
-                    stripped = stripped.replace(",", ".").split()
-                    block.append([float(s) for s in stripped][0]) # since its just a single value, just do it like that
-
+                features.append(np.array(block, dtype=np.float32).flatten())
+                block = []
 
     # handle last block if no newline at end
     if block:
         features.append(np.array(block, dtype=np.float32).flatten())
 
-    features = np.array(features, dtype=np.float32)  # shape: [N, 27]
+    features = np.array(features, dtype=np.float32)  # shape: [N, F]
     print("Did features")
     print(features.shape, labels.shape)
 
     # Reshape
-    X = features[None, :, :]  # shape: [1, N, 27]
+    X = features[None, :, :]  # shape: [1, N, F]
     y = labels[None, :, None] # shape: [1, N, 1]
     print("Did attributes")
-    # print(X.shape, y.shape) # TODO need to add debug prints
+    # print(X.shape, y.shape, F) # TODO need to add debug prints
 
     #MODEL
     model = make_model_pointnet(F, features.shape[0])

@@ -170,23 +170,24 @@ public class LPNN_script : MonoBehaviour
         features.Clear();
 
         foreach (var p in evalPoints) {
-            features.Add(p, new float[4][]);
+            features.Add(p, new float[5][]);
 
             features[p][0] = EvaluateSH(p);
             features[p][1] = CalcLightVar(p);
             features[p][2] = CalcNormalVar(p);
             features[p][3] = CalcOcclFactor(p);
+            features[p][4] = CalcRGBVar(p);
 
         }
     }
 
-    public void SaveFeatures() {
+    public void SaveFeatures(bool append = false) {
         if (features == null || features.Count == 0) {
             Debug.LogError("No features found! Please calculate them first.");
             return;
         }
 
-        if (!Utils.WriteFeaturesToFile(features, voxelAmountperDir)) {
+        if (!Utils.WriteFeaturesToFile(features, append)) {
             Debug.LogError("Failed to save features to file.");
             return;
         }
@@ -212,7 +213,6 @@ public class LPNN_script : MonoBehaviour
     }
 
     float[] CalcLightVar(Vector3 point) {
-        // TODO implement this
 
         float sampleRadius = 1f;
         int sampleCount = 10;
@@ -246,7 +246,6 @@ public class LPNN_script : MonoBehaviour
     }
 
     float[] CalcNormalVar(Vector3 point) {
-        // TODO implement this
 
         float sampleRadius = 1f;
         int sampleCount = 10;
@@ -275,11 +274,10 @@ public class LPNN_script : MonoBehaviour
         foreach (var n in normals) variance += 1f - Vector3.Dot(n, meanNormal);
         variance /= normals.Count;
 
-        return new float[]{variance};
+        return new float[]{variance}; // Higher value -> more complex local geometry
     }
 
     float[] CalcOcclFactor(Vector3 point) {
-        // TODO implement this
 
         int rayCount = 50;
         float rayDistance = 10f;
@@ -300,16 +298,58 @@ public class LPNN_script : MonoBehaviour
         return new float[]{occlusionFactor};
     }
 
+    float[] CalcRGBVar(Vector3 point) {
 
-    public void CalculateLabels() {
+        float sampleRadius = 1f;
+        int sampleCount = 10;
+        List<Color> colors = new();
+
+        for (int i = 0; i < sampleCount; i++)
+        {
+            Vector3 offset = UnityEngine.Random.onUnitSphere * sampleRadius;
+            Vector3 samplePos = point + offset;
+
+            LightProbes.GetInterpolatedProbe(samplePos, null, out SphericalHarmonicsL2 sh);
+
+            Color[] col = new Color[1];
+            Vector3[] dirs = new Vector3[]{UnityEngine.Random.onUnitSphere};
+
+            sh.Evaluate(dirs.ToArray(), col); // sample in up direction or multiple if needed
+            colors.Add(col[0]);
+        }
+
+        float meanR = 0f, meanG = 0f, meanB = 0f;
+        foreach (var c in colors) {
+            meanR += c.r;
+            meanG += c.g;
+            meanB += c.b;
+        }
+        meanR /= sampleCount;
+        meanG /= sampleCount;
+        meanB /= sampleCount;
+
+        float varianceR = 0f, varianceG = 0f, varianceB = 0f;
+        foreach (var c in colors) {
+            varianceR += (c.r - meanR) * (c.r - meanR);
+            varianceG += (c.g - meanG) * (c.g - meanG);
+            varianceB += (c.b - meanB) * (c.b - meanB);
+        }
+        varianceR /= sampleCount;
+        varianceG /= sampleCount;
+        varianceB /= sampleCount;
+
+        return new float[]{varianceR, varianceG, varianceB};
+    }
+
+    public void CalculateLabels(bool append = false) {
         if (predef_lightProbes == null) {
             Debug.LogError("No LightProbeGroup found! Please assign one.");
             return;
         }
 
-        CompareLPGroup();
+        CompareLPGroup(append);
     }
-    void CompareLPGroup() {
+    void CompareLPGroup(bool append = false) {
         if (predef_lightProbes == null) {
             Debug.LogError("No LightProbeGroup found! Please assign one.");
             return;
@@ -339,7 +379,11 @@ public class LPNN_script : MonoBehaviour
             flag = false;
         }
 
-        File.WriteAllText(destination, s);
+        if (append) {
+            File.AppendAllText(destination, s);
+        } else {
+            File.WriteAllText(destination, s);
+        }
         Debug.Log($"Results saved to {destination}. Total: {evalPoints.Count} lines. {count} Trues, {evalPoints.Count - count} Falses.");
     }
 
@@ -411,6 +455,8 @@ public class LPNN_Inspector: Editor {
         // TODO add all the tooltips
         // TODO maybe make enum choice between box voxels and arbitrary voxels so we can have equal size vs equal amount per axis
         // TODO bounds is square, what if we want arbitrary size? like a Π shape or something?
+        // TODO add chrominance too with luminance
+        // TODO rework the tooltip layout
 
         base.OnInspectorGUI();
         LPNN_script lpnn = (LPNN_script)target;
@@ -468,14 +514,24 @@ public class LPNN_Inspector: Editor {
             Debug.Log("Saved");
         }
 
+        if (GUILayout.Button("Append Features to File")) {
+            lpnn.SaveFeatures(true);
+            Debug.Log("Appended");
+        }
+
         EditorGUILayout.Space();
         EditorGUILayout.Separator();
         EditorGUILayout.Space();
 
-        if (GUILayout.Button("Get Labels")) {
+        if (GUILayout.Button("Get Labels & Save")) {
             lpnn.CalculateLabels();
             Debug.Log("Compared");
         }
+        if (GUILayout.Button("Get Labels & Append")) {
+            lpnn.CalculateLabels(true);
+            Debug.Log("Compared");
+        }
+
 
         EditorGUILayout.Space();
         EditorGUILayout.Separator();

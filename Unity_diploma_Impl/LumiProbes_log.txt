@@ -110,3 +110,6 @@
 6/5/2025 2:44:00 μ.μ. [01]: Log [INFO]: Decimated 177 light probes, 223 left
 6/5/2025 2:44:00 μ.μ. [01]: Log [INFO]: Done (DecimateLightProbes: 2766,668s)
 6/5/2025 2:45:26 μ.μ. [01]: Log [INFO]: Done (ShowRemovedLightProbes: 0s)
+9/5/2025 1:18:05 μ.μ. [01]: Log [INFO]: Done (PlaceLightProbes: 0,007s)
+9/5/2025 9:09:11 μ.μ. [01]: Log [INFO]: Bake started
+9/5/2025 9:09:11 μ.μ. [01]: Log [INFO]: Done (Bake: 0,023s)
