@@ -23,13 +23,6 @@ public class LightProbeAI : MonoBehaviour
         worker = new Worker(runtimeModel, BackendType.GPUCompute);
     }
 
-    public void SetDims(Vector3Int dims)
-    {
-        depth = dims.x;
-        height = dims.y;
-        width = dims.z;
-    }
-
     public float[] Predict(Dictionary<Vector3, float[][]> inputFeatures) // {key: [features]}
     {
         Start();

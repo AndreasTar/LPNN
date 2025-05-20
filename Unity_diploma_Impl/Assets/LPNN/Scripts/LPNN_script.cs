@@ -389,8 +389,7 @@ public class LPNN_script : MonoBehaviour
 
     public void EvaluateModel() {
         LightProbeAI modelScript = GetComponent<LightProbeAI>();
-        
-        modelScript.SetDims(voxelAmountperDir);
+
         float[] res;
         try
         {
