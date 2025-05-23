@@ -206,3 +206,28 @@
 20/5/2025 1:54:35 μ.μ. [01]: Log [INFO]: Finished after 236 iterations. Final error: 2,98%., Stages Time: 1. Remove LP: 0,006s, 2. Remap EPs: 1655,617s, 2.1 Tetrahed: 273,511s, 2.2 Mappings: 1347,86s, 3. Eval  EPs: 5,062s, 4. Calc Cost: 0,102s, 5. Find Min : 0s, 6. Insert LP: 0s, Total: 1660,787s
 20/5/2025 1:54:35 μ.μ. [01]: Log [INFO]: Decimated 236 light probes, 164 left
 20/5/2025 1:54:35 μ.μ. [01]: Log [INFO]: Done (DecimateLightProbes: 1723,029s)
+23/5/2025 12:55:13 μ.μ. [01]: Log [INFO]: LumiProbes Reset
+23/5/2025 12:58:00 μ.μ. [01]: Log [ERRO]: No renderer found for GameObject: Bounds
+23/5/2025 12:58:00 μ.μ. [01]: Log [INFO]: Done (PlaceLightProbes: 0,006s)
+23/5/2025 12:58:05 μ.μ. [01]: Log [INFO]: Bake started
+23/5/2025 12:58:05 μ.μ. [01]: Log [INFO]: Done (Bake: 0,045s)
+23/5/2025 12:58:10 μ.μ. [01]: Log [ERRO]: No renderer found for GameObject: Bounds
+23/5/2025 12:58:10 μ.μ. [01]: Log [INFO]: Done (PlaceLightProbes: 0,001s)
+23/5/2025 12:58:14 μ.μ. [01]: Log [ERRO]: No renderer found for GameObject: Bounds
+23/5/2025 12:58:14 μ.μ. [01]: Log [INFO]: Done (PlaceLightProbes: 0,001s)
+23/5/2025 1:09:16 μ.μ. [01]: Log [INFO]: Bake started
+23/5/2025 1:09:16 μ.μ. [01]: Log [INFO]: Done (Bake: 0,042s)
+23/5/2025 1:10:00 μ.μ. [01]: Log [ERRO]: No renderer found for GameObject: BoundingVolumes
+23/5/2025 1:10:00 μ.μ. [01]: Log [INFO]: Done (PlaceLightProbes: 0,004s)
+23/5/2025 1:13:30 μ.μ. [01]: Log [INFO]: Bake started
+23/5/2025 1:13:30 μ.μ. [01]: Log [INFO]: Done (Bake: 0,003s)
+23/5/2025 1:14:00 μ.μ. [01]: Log [INFO]: Done (PlaceLightProbes: 0,093s)
+23/5/2025 1:14:35 μ.μ. [01]: Log [INFO]: Done (PlaceLightProbes: 0s)
+23/5/2025 1:15:30 μ.μ. [01]: Log [INFO]: Done (PlaceLightProbes: 0s)
+23/5/2025 1:16:08 μ.μ. [01]: Log [INFO]: Done (PlaceEvaluationPoints: 0,899s)
+23/5/2025 1:16:40 μ.μ. [01]: Log [INFO]: Mapped 512 LPs to 2058 tetrahedrals. Mapped 512 EPs: 512 (100,00%) to tetrahedrons and 0 (0,00%) to triangles, 0 unmapped
+23/5/2025 1:16:40 μ.μ. [01]: Log [INFO]: Starting Decimation. Settings: LPs: 512, EPs: 512, LP Evaluation method: FixedMedium (14), Averaging EP directions: True, Solver: AveragePercentageError, Metric: Chrominance, Minimum Error: 3, Minimum LP Set: Disabled
+23/5/2025 6:31:52 μ.μ. [01]: Log [INFO]: Finished after 508 iterations. Final error: 0,13%., Stages Time: 1. Remove LP: 0,012s, 2. Remap EPs: 18633,581s, 2.1 Tetrahed: 705,393s, 2.2 Mappings: 17861,58s, 3. Eval  EPs: 94,446s, 4. Calc Cost: 1,761s, 5. Find Min : 0s, 6. Insert LP: 0,008s, Total: 18729,808s
+23/5/2025 6:31:52 μ.μ. [01]: Log [INFO]: Decimated 508 light probes, 4 left
+23/5/2025 6:31:53 μ.μ. [01]: Log [INFO]: Done (DecimateLightProbes: 18938,085s)
+23/5/2025 6:32:50 μ.μ. [01]: Log [INFO]: Done (ShowRemovedLightProbes: 0s)

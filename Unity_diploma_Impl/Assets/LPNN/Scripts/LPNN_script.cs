@@ -459,8 +459,6 @@ public class LPNN_Inspector: Editor {
 
         base.OnInspectorGUI();
         LPNN_script lpnn = (LPNN_script)target;
-        EditorGUILayout.LabelField("This is a custom inspector");
-
 
         GUIContent content = new("Bounds", "The Bounds that will be used to place the evaluation volumes.");
         EditorGUILayout.BoundsField(content, lpnn.bounds); // HACK this may need to be stored

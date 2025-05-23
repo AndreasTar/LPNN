@@ -245,3 +245,5 @@ crashlytics-build.properties
 /Unity_diploma_Impl/[Aa]ssets/Scenes/**/Lightmap*
 /Unity_diploma_Impl/[Aa]ssets/**/*.png*
 /Unity_diploma_Impl/[Aa]ssets/**/*.exr*
+/New folder
+/Unity_diploma_Impl/Assets/Models
