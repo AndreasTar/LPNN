@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: df0e0d92646662449bab6a4c613edf98
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 229289
+  packageName: Sponza
+  packageVersion: 1.0
+  assetPath: Assets/Sponza/Materials/stone_trims_02.mat
+  uploadId: 517443

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1ff3483da34a6f644bfbb10e4bfbba93
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 229289
+  packageName: Sponza
+  packageVersion: 1.0
+  assetPath: Assets/Sponza/Materials/door_stoneframe_02.mat
+  uploadId: 517443

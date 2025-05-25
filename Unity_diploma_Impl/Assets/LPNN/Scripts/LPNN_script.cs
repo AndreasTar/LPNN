@@ -160,6 +160,10 @@ public class LPNN_script : MonoBehaviour
         }
     }
 
+    public void BakeGI() {
+        Lightmapping.BakeAsync();
+    }
+
     public void CalculateFeatures() {
         if (evalPoints == null || evalPoints.Count == 0) {
             Debug.LogError("No evaluation points found! Please place them first.");
@@ -423,7 +427,6 @@ public class LPNN_script : MonoBehaviour
             pred.Add(val);
         }
 
-        pred.ForEach(val => val = Utils.map(val, min, max, 0, 1));
         for (int i = 0; i < pred.Count; i++){
             pred[i] = Utils.map(pred[i], min, max, 0, 1);
         }
@@ -495,6 +498,15 @@ public class LPNN_Inspector: Editor {
         if (GUILayout.Button("Place Evaluation Points")) {
             lpnn.PlaceEvalPoints();
             Debug.Log("EVs placed");
+        }
+
+        EditorGUILayout.Space();
+        EditorGUILayout.Separator();
+        EditorGUILayout.Space();
+
+        if (GUILayout.Button("Bake Global Illumination")) {
+            lpnn.BakeGI();
+            Debug.Log("Baked");
         }
 
         EditorGUILayout.Space();

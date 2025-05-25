@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f87f62dada3b8064aa62fe08f7cdbbb6
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 229289
+  packageName: Sponza
+  packageVersion: 1.0
+  assetPath: Assets/Sponza/Materials/brickwall_02.mat
+  uploadId: 517443
