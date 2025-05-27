@@ -27,8 +27,6 @@ def make_model_pointnet(feature_dim: int, count):
 
     # Global feature is max over all N points
     global_feat = layers.GlobalMaxPooling1D()(x)        # (batch, 256)
-    # Broadcast global feature back to each point
-    #global_feat = layers.RepeatVector(count)(global_feat)
 
 
   # dynamic tile → (batch, N, 256)
