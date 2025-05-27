@@ -22,11 +22,16 @@ def make_model_pointnet(feature_dim: int, count):
 
     # Shared MLP on each point
     x = layers.Conv1D(64, 1, activation='relu')(pts)
+    x = layers.BatchNormalization()(x)
     x = layers.Conv1D(128, 1, activation='relu')(x)
+    x = layers.BatchNormalization()(x)
     x = layers.Conv1D(256, 1, activation='relu')(x)
+    x = layers.BatchNormalization()(x)
 
     # Global feature is max over all N points
-    global_feat = layers.GlobalMaxPooling1D()(x)        # (batch, 256)
+    global_max = layers.GlobalMaxPooling1D()(x)
+    global_avg = layers.GlobalAveragePooling1D()(x)
+    global_feat = layers.Concatenate()([global_max, global_avg])  # (batch, 512)
 
 
   # dynamic tile → (batch, N, 256)
@@ -39,7 +44,7 @@ def make_model_pointnet(feature_dim: int, count):
     # here’s the key: tell Keras the output shape is (batch, N, 256)
     global_tiled = layers.Lambda(
         tile_fn,
-        output_shape=lambda input_shapes: (input_shapes[1][0], input_shapes[1][1], 256)
+        output_shape=lambda input_shapes: (input_shapes[1][0], input_shapes[1][1], 512)
     )([global_feat, pts])
 
     # Concatenate per point local and global context
@@ -47,12 +52,15 @@ def make_model_pointnet(feature_dim: int, count):
 
     # Per point processing
     x = layers.Conv1D(256, 1, activation='relu')(x)
+    x = layers.Dropout(0.3)(x)
     x = layers.Conv1D(128, 1, activation='relu')(x)
+    x = layers.Dropout(0.3)(x)
+    x = layers.Conv1D(64, 1, activation='relu')(x)
 
     # Final per point importance
     out = layers.Conv1D(1, 1, activation='sigmoid')(x)  # (batch, N, 1)
 
-    model = models.Model(inputs=pts, outputs=out)
+    model = models.Model(inputs=pts, outputs=out, name="LPNN_plus_plus")
     model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['mae'])
     return model
 

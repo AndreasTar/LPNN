@@ -1298,6 +1298,37 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!1 &817897027
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 817897028}
+  m_Layer: 0
+  m_Name: VoxelsParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &817897028
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817897027}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1112549850}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &930764434
 GameObject:
   m_ObjectHideFlags: 0
@@ -1814,7 +1845,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 760663663}
-  - {fileID: 2110156966}
+  - {fileID: 817897028}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!220 &1112549851
@@ -1824,26 +1855,11 @@ LightProbeGroup:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1112549848}
-  m_Enabled: 0
+  m_Enabled: 1
   m_SourcePositions:
   - {x: -6.55, y: 0.23000002, z: -6.6899996}
-  - {x: -6.55, y: 0.23000002, z: 1.3100004}
-  - {x: -6.55, y: 0.23000002, z: 6.3100004}
-  - {x: -5.55, y: 0.23000002, z: 6.3100004}
-  - {x: -3.5500002, y: 0.23000002, z: 6.3100004}
-  - {x: -2.5500002, y: 0.23000002, z: 6.3100004}
-  - {x: -1.5500002, y: 0.23000002, z: 6.3100004}
-  - {x: -0.5500002, y: 0.23000002, z: 6.3100004}
-  - {x: 1.4499998, y: 0.23000002, z: 6.3100004}
-  - {x: 3.4499998, y: 0.23000002, z: 6.3100004}
-  - {x: 3.4499998, y: 3.23, z: 6.3100004}
-  - {x: 4.45, y: 0.23000002, z: 6.3100004}
-  - {x: 5.45, y: 0.23000002, z: 6.3100004}
-  - {x: 7.45, y: 0.23000002, z: 6.3100004}
-  - {x: 8.45, y: 0.23000002, z: 6.3100004}
-  - {x: 10.45, y: 0.23000002, z: -6.6899996}
-  - {x: 10.45, y: 0.23000002, z: 6.3100004}
-  - {x: 10.45, y: 3.23, z: 6.3100004}
+  - {x: -6.55, y: 0.23000002, z: -5.1899996}
+  - {x: -6.55, y: 0.23000002, z: -3.6899996}
   m_Dering: 1
 --- !u!114 &1112549852
 MonoBehaviour:
@@ -1857,7 +1873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7962a9be6e025894884e1de7cb0f61aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modelAsset: {fileID: 5022602860645237092, guid: c2e3a31d8a6539a4bb76e7c1c5b592ce, type: 3}
+  modelAsset: {fileID: 5022602860645237092, guid: ea326c7af0615e74ea3fa4d5687e634b, type: 3}
   depth: 18
   height: 4
   width: 14
@@ -2491,7 +2507,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1638936817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2511,7 +2527,7 @@ LightProbeGroup:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1638936816}
-  m_Enabled: 1
+  m_Enabled: 0
   m_SourcePositions:
   - {x: -6.55, y: 0.23000002, z: -6.69}
   - {x: -6.55, y: 0.23000002, z: -4.832857}
@@ -3378,37 +3394,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
---- !u!1 &2110156965
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2110156966}
-  m_Layer: 0
-  m_Name: VoxelsParent
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2110156966
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2110156965}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1112549850}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2116083667
 GameObject:
   m_ObjectHideFlags: 0
