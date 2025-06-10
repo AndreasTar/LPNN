@@ -1,0 +1,84 @@
+\documentclass[twoside,11pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage[style=authoryear,sorting=nyt]{biblatex}
+\addbibresource{references.bib}
+\usepackage{textgreek}
+\usepackage[greek,english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath,bm}
+\usetikzlibrary{arrows.meta,decorations,patterns,decorations.markings,arrows,positioning,shapes,shapes.geometric}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage{svg}
+\usepackage{indentfirst}
+\usepackage{chngcntr}
+% \counterwithout{figure}{chapter}
+\setlength{\headheight}{13.59999pt}
+\usepackage[colorlinks,linkcolor=black,citecolor=cyan,urlcolor=cyan,bookmarks=false,hypertexnames=true]{hyperref} 
+\usepackage{titlesec}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage[space]{grffile}
+\addto\captionsenglish{\renewcommand*\contentsname{Table of Contents}}
+\babeltags{gr = Greek, en = English}
+
+\begin{document}
+	
+	\begin{titlepage}
+		\begin{center}
+			\vspace*{0.8cm}
+			
+			\Huge
+			\textbf{no \\clue}
+			\vspace{0.5cm}
+			
+			\LARGE
+			\vspace{4.0cm}
+			\textbf{Andreas Tarasidis}
+			
+			\vspace{1.5cm}
+			\textbf{Diploma Thesis}
+			
+			\vspace{1.5cm}
+			{Supervisor: Ioannis Fountos} % check again
+			
+			\vspace{1.0cm}
+			
+			{Ioannina, July 2025}
+			
+			\begin{tikzpicture}[remember picture, overlay]
+				\node[xshift=10mm,yshift=-0mm,anchor=west] at (current page.west){%
+					\includegraphics[scale=1]{Graphics/title/blueBorder.png}};
+			\end{tikzpicture}
+			
+			\begin{tikzpicture}[remember picture, overlay]
+				\node[xshift=10mm,yshift=-75mm,anchor=west] at (current page.west){%
+					\includegraphics[scale=1]{Graphics/title/logo.png}};
+			\end{tikzpicture}
+			
+			\begin{tikzpicture}[overlay, remember picture]
+				\node[xshift=65mm,yshift=-75mm,anchor=west] at (current page.west){%
+					\includegraphics[scale=1]{Graphics/title/text.png}};
+			\end{tikzpicture}
+			
+			\begin{tikzpicture}[remember picture, overlay]
+				\node[xshift=65mm,yshift=-75mm,anchor=west] at (current page.west){%
+					\includegraphics[width=115mm, height=1mm]{Graphics/title/line.png}};
+			\end{tikzpicture}
+			
+		\end{center}
+	\end{titlepage}
+	\shipout\null %adds a blank page without header/footer/page numbers
+	
+	\chapter*{Dedication}
+	\setcounter{page}{1}
+	To my family.
+	
+\end{document}
