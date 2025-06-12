@@ -74,7 +74,7 @@
 			
 		\end{center}
 	\end{titlepage}
-	\shipout\null %adds a blank page without header/footer/page numbers
+	\shipout\null % adds a blank page without header/footer/page numbers
 	
 	\chapter*{Dedication}
 	\setcounter{page}{1}
@@ -91,10 +91,22 @@
 	
 	\listoffigures
 	\tableofcontents
+	% list of algorithms? if yes, prolly manual
 	
 	\chapter{Introduction}
 	\input{Chapters/introduction}
 	
+	\chapter{Review of the Literature}
+	\input{Chapters/literature_review}
+	
+	\chapter{Our Approach}
+	\input{Chapters/our_approach}
+	
+	\chapter{Experiments}
+	\input{Chapters/experiments}
+	
+	\chapter{Conclusions and Future Work}
+	\input{Chapters/conclusions}
 	
 	% at the end
 	\printbibliography
