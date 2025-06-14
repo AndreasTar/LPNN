@@ -4,8 +4,7 @@
 \usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-\usepackage[style=authoryear,sorting=nyt]{biblatex}
-\addbibresource{references.bib}
+
 \usepackage{textgreek}
 \usepackage[greek,english]{babel}
 \usepackage{csquotes}
@@ -27,6 +26,9 @@
 \usepackage[space]{grffile}
 \addto\captionsenglish{\renewcommand*\contentsname{Table of Contents}}
 \babeltags{gr = Greek, en = English}
+\usepackage[style=authoryear,sorting=nyt,backend=bibtex]{biblatex}
+\addglobalbib{bibliography.bib}
+
 
 \begin{document}
 	
@@ -109,6 +111,10 @@
 	\input{Chapters/conclusions}
 	
 	% at the end
+	\setlength\bibitemsep{2\itemsep}
 	\printbibliography
+
+	
+
 	
 \end{document}

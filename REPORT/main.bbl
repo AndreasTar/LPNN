@@ -1,0 +1,205 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\datalist[entry]{nyt/global//global/global/global}
+  \entry{Kajiya1986}{article}{}{}
+    \name{author}{1}{}{%
+      {{hash=KJT}{%
+         family={Kajiya},
+         familyi={K\bibinitperiod},
+         given={James\bibnamedelima T.},
+         giveni={J\bibinitperiod\bibinitdelim T\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Association for Computing Machinery}%
+    }
+    \strng{namehash}{KJT1}
+    \strng{fullhash}{KJT1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{1986}
+    \field{labeldatesource}{}
+    \field{sortinit}{K}
+    \field{sortinithash}{K}
+    \field{abstract}{%
+    We present an integral equation which generalizes a variety of known
+  rendering algorithms. In the course of discussing a monte carlo solution we
+  also present a new form of variance reduction, called Hierarchical sampling
+  and give a number of elaborations shows that it may be an efficient new
+  technique for a wide variety of monte carlo procedures. The resulting
+  rendering algorithm extends the range of optical phenomena which can be
+  effectively simulated.%
+    }
+    \verb{doi}
+    \verb 10.1145/15886.15902
+    \endverb
+    \field{issn}{0097-8930}
+    \field{number}{4}
+    \field{pages}{143–150}
+    \field{title}{The rendering equation}
+    \verb{url}
+    \verb https://doi.org/10.1145/15886.15902
+    \endverb
+    \field{volume}{20}
+    \list{location}{1}{%
+      {New York, NY, USA}%
+    }
+    \field{journaltitle}{SIGGRAPH Comput. Graph.}
+    \field{month}{08}
+    \field{year}{1986}
+  \endentry
+
+  \entry{Lafortune1996}{thesis}{}{}
+    \name{author}{1}{}{%
+      {{hash=LE}{%
+         family={Lafortune},
+         familyi={L\bibinitperiod},
+         given={E},
+         giveni={E},
+      }}%
+    }
+    \strng{namehash}{LE1}
+    \strng{fullhash}{LE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{1996}
+    \field{labeldatesource}{}
+    \field{sortinit}{L}
+    \field{sortinithash}{L}
+    \field{title}{Mathematical Models and Monte Carlo Algorithms for Physically
+  Based Rendering}
+    \verb{url}
+    \verb https://web.archive.org/web/20160617231944/http://www.graphics.cornel
+    \verb l.edu/~eric/thesis/index.html
+    \endverb
+    \field{year}{1996}
+  \endentry
+
+  \entry{Lafortune1993}{inproceedings}{}{}
+    \name{author}{2}{}{%
+      {{hash=LEP}{%
+         family={Lafortune},
+         familyi={L\bibinitperiod},
+         given={Eric\bibnamedelima P.},
+         giveni={E\bibinitperiod\bibinitdelim P\bibinitperiod},
+      }}%
+      {{hash=WYD}{%
+         family={Willems},
+         familyi={W\bibinitperiod},
+         given={Yves\bibnamedelima D.},
+         giveni={Y\bibinitperiod\bibinitdelim D\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LEPWYD1}
+    \strng{fullhash}{LEPWYD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{1993}
+    \field{labeldatesource}{}
+    \field{sortinit}{L}
+    \field{sortinithash}{L}
+    \field{booktitle}{Proceedings of Third International Conference on
+  Computational Graphics and Visualization Techniques (Compugraphics '93)}
+    \field{pages}{145\bibrangedash 153}
+    \field{title}{Bi-directional path tracing}
+    \verb{url}
+    \verb https://graphics.cs.kuleuven.be/publications/BDPT/
+    \endverb
+    \list{location}{1}{%
+      {Alvor, Portugal}%
+    }
+    \field{year}{1993}
+    \warn{\item Invalid format of field 'month'}
+  \endentry
+
+  \entry{Veach1997}{inproceedings}{}{}
+    \name{author}{2}{}{%
+      {{hash=VE}{%
+         family={Veach},
+         familyi={V\bibinitperiod},
+         given={Eric},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=GLJ}{%
+         family={Guibas},
+         familyi={G\bibinitperiod},
+         given={Leonidas\bibnamedelima J.},
+         giveni={L\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {ACM Press/Addison-Wesley Publishing Co.}%
+    }
+    \keyw{Markov Chain Monte Carlo methods, Metropolis-Hastings algorithm,
+  Monte Carlo integration, global illumination, lighting simulation,
+  physically-based rendering, radiative heat transfer, variance reduction}
+    \strng{namehash}{VEGLJ1}
+    \strng{fullhash}{VEGLJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{1997}
+    \field{labeldatesource}{}
+    \field{sortinit}{V}
+    \field{sortinithash}{V}
+    \field{abstract}{%
+    We present a new Monte Carlo method for solving the light transport
+  problem, inspired by the Metropolis sampling method in computational physics.
+  To render an image, we generate a sequence of light transport paths by
+  randomly mutating a single current path (e.g. adding a new vertex to the
+  path). Each mutation is accepted or rejected with a carefully chosen
+  probability, to ensure that paths are sampled according to the contribution
+  they make to the ideal image. We then estimate this image by sampling many
+  paths, and recording their locations on the image plane.Our algorithm is
+  unbiased, handles general geometric and scattering models, uses little
+  storage, and can be orders of magnitude more efficient than previous unbiased
+  approaches. It performs especially well on problems that are usually
+  considered difficult, e.g. those involving bright indirect light, small
+  geometric holes, or glossy surfaces. Furthermore, it is competitive with
+  previous unbiased algorithms even for relatively simple scenes.The key
+  advantage of the Metropolis approach is that the path space is explored
+  locally, by favoring mutations that make small changes to the current path.
+  This has several consequences. First, the average cost per sample is small
+  (typically only one or two rays). Second, once an important path is found,
+  the nearby paths are explored as well, thus amortizing the expense of finding
+  such paths over many samples. Third, the mutation set is easily extended. By
+  constructing mutations that preserve certain properties of the path (e.g.
+  which light source is used) while changing others, we can exploit various
+  kinds of coherence in the scene. It is often possible to handle difficult
+  lighting problems efficiently by designing a specialized mutation in this
+  way.%
+    }
+    \field{booktitle}{Proceedings of the 24th Annual Conference on Computer
+  Graphics and Interactive Techniques}
+    \verb{doi}
+    \verb 10.1145/258734.258775
+    \endverb
+    \field{isbn}{0897918967}
+    \field{pages}{65–76}
+    \field{series}{SIGGRAPH '97}
+    \field{title}{Metropolis light transport}
+    \verb{url}
+    \verb https://doi.org/10.1145/258734.258775
+    \endverb
+    \list{location}{1}{%
+      {USA}%
+    }
+    \field{year}{1997}
+  \endentry
+\enddatalist
+\endinput

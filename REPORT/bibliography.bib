@@ -1,0 +1,55 @@
+@article{Kajiya1986,
+	author = {Kajiya, James T.},
+	title = {The rendering equation},
+	year = {1986},
+	issue_date = {Aug. 1986},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	volume = {20},
+	number = {4},
+	issn = {0097-8930},
+	url = {https://doi.org/10.1145/15886.15902},
+	doi = {10.1145/15886.15902},
+	abstract = {We present an integral equation which generalizes a variety of known rendering algorithms. In the course of discussing a monte carlo solution we also present a new form of variance reduction, called Hierarchical sampling and give a number of elaborations shows that it may be an efficient new technique for a wide variety of monte carlo procedures. The resulting rendering algorithm extends the range of optical phenomena which can be effectively simulated.},
+	journal = {SIGGRAPH Comput. Graph.},
+	month = aug,
+	pages = {143–150},
+	numpages = {8}
+}
+
+@thesis{Lafortune1996,
+	title={Mathematical Models and Monte Carlo Algorithms for Physically Based Rendering},
+	author={Lafortune, E},
+	year={1996},
+	url={https://web.archive.org/web/20160617231944/http://www.graphics.cornell.edu/~eric/thesis/index.html}
+}
+
+@inproceedings{Veach1997,
+	author = {Veach, Eric and Guibas, Leonidas J.},
+	title = {Metropolis light transport},
+	year = {1997},
+	isbn = {0897918967},
+	publisher = {ACM Press/Addison-Wesley Publishing Co.},
+	address = {USA},
+	url = {https://doi.org/10.1145/258734.258775},
+	doi = {10.1145/258734.258775},
+	abstract = {We present a new Monte Carlo method for solving the light transport problem, inspired by the Metropolis sampling method in computational physics. To render an image, we generate a sequence of light transport paths by randomly mutating a single current path (e.g. adding a new vertex to the path). Each mutation is accepted or rejected with a carefully chosen probability, to ensure that paths are sampled according to the contribution they make to the ideal image. We then estimate this image by sampling many paths, and recording their locations on the image plane.Our algorithm is unbiased, handles general geometric and scattering models, uses little storage, and can be orders of magnitude more efficient than previous unbiased approaches. It performs especially well on problems that are usually considered difficult, e.g. those involving bright indirect light, small geometric holes, or glossy surfaces. Furthermore, it is competitive with previous unbiased algorithms even for relatively simple scenes.The key advantage of the Metropolis approach is that the path space is explored locally, by favoring mutations that make small changes to the current path. This has several consequences. First, the average cost per sample is small (typically only one or two rays). Second, once an important path is found, the nearby paths are explored as well, thus amortizing the expense of finding such paths over many samples. Third, the mutation set is easily extended. By constructing mutations that preserve certain properties of the path (e.g. which light source is used) while changing others, we can exploit various kinds of coherence in the scene. It is often possible to handle difficult lighting problems efficiently by designing a specialized mutation in this way.},
+	booktitle = {Proceedings of the 24th Annual Conference on Computer Graphics and Interactive Techniques},
+	pages = {65–76},
+	numpages = {12},
+	keywords = {Markov Chain Monte Carlo methods, Metropolis-Hastings algorithm, Monte Carlo integration, global illumination, lighting simulation, physically-based rendering, radiative heat transfer, variance reduction},
+	series = {SIGGRAPH '97}
+}
+
+@inproceedings{Lafortune1993,
+	author    = { Lafortune, Eric P. and Willems, Yves D. },
+	title     = { Bi-directional path tracing },
+	booktitle = { Proceedings of Third International Conference on Computational Graphics and Visualization Techniques (Compugraphics '93)},
+	year      = { 1993 },
+	pages     = { 145--153 },
+	address   = { Alvor, Portugal },
+	month     = { December },
+	lirias    = { https://lirias.kuleuven.be/handle/123456789/132773 },
+	url		  = { https://graphics.cs.kuleuven.be/publications/BDPT/ }
+}
+
