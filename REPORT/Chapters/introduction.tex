@@ -17,14 +17,22 @@ Light probes, in particular, represent a compelling middle-ground, flexible enou
 \pagebreak % temporary potentially	
 
 \section{Related Works}
-There is an abundance of work in the literature addressing the problem of Global Illumination. These studies aim to achieve realistic lighting in 3D scenes by employing various approaches and techniques, each offering unique advantages and disadvantages, but they share a common goal: to minimize computational cost while maximizing visual fidelity.
+There is an abundance of work in the literature addressing the problem of Global Illumination. These studies aim to achieve realistic lighting in 3D scenes by employing various approaches and techniques, each offering unique advantages and disadvantages, but they share a common goal: to maximize visual fidelity while minimizing computational costs.
 
 \subsection{Offline Methods}
 Offline Illumination methods refer to techniques that are not viable for real-time applications and are therefore used only in situations where the importance of high visual fidelity far outweighs the need for computational speed, typically in non-interactive 3D renders, most commonly in movies or pre-rendered scenes. Classic Path-Tracing, first introduced in 1986 \parencite{Kajiya1986}, tracks the movement of a photon ray emitted from a source, typically the camera, and simulates physics interactions to calculate the color of each screen pixel accurately. The immense computational cost of path-tracing led to the development of performance improvements, such as the Metropolis Light Transport (MLT) method introduced in 1997 \parencite{Veach1997}, and variants like bi-directional Path-Trace \parencite{Lafortune1993}, which build on Monte-Carlo algorithms \parencite{Lafortune1996}.
 
 \subsection{Online Methods} % maybe section these?
+In contrast, online methods aim to calculate GI interactions in real-time, most commonly used in interactive applications like video games or simulations. They try to balance performance and accuracy, a task that is often difficult due to the processing cost of the calculations for a realistic result. Therefore, these methods take shortcuts, either approximating the GI interactions to a certain degree to maintain framerate budgets, or by precomputing some of the data, wherever possible.
 
-\subsection*{non-AI based methods}
+\subsection*{non-AI based methods} % rename this to something better
+Techniques that precompute the illumination of a scene only do so for static geometry; objects in the scene that will never change their position, rotation or scale. The algorithms "bake" the required information onto texture maps, which are rendered as such when needed. Light-mapping is one such technique. It precomputes surface brightness and has a low runtime cost. The game Quake was the first interactive application that used lightmaps for rendering GI \parencite{WikiLightmaps}.
+
+Another early technique is the Irradiance Volumes algorithm  \parencite{Greger1998}, which scatters spherical-harmonic (SH) irradiance samples on a 3D grid on the scene. At runtime, lighting is interpolated from the nearest SH cells; this underlies many probe systems, like Unity's light-probe system that implicitly implements a sparse irradiance volume.
+
+More recent static-GI algorithms include Light Field Probes \parencite{McGuire2017}. Light Field Probes extend standard irradiance probes by additionally storing per-texel visibility for each probe. Furthermore, \cite{Xu2022} introduce Discrete Visibility Fields for static ray-traced lighting. The method precomputes occlusion masks stored in a uniform voxel grid, and at runtime, rays that hit a cell use the stored precomputed masks to quickly cull visibility, skipping geometry already known to be occluded.
+
+Finally, Unity's new Adaptive Probe Volumes (APV) build on irradiance volumes by automatically populating a grid, with density matched to local geometry. APV then performs per-pixel probe sampling; each pixel blends from the eight nearest probes \parencite{Unity2025}.
 
 \subsection*{AI based methods}
 

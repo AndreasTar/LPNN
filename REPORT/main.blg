@@ -19,47 +19,50 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: main-blx.bib
 Database file #2: bibliography.bib
+Warning--entry type for "Unity2025" isn't style-file defined
+--line 209 of file bibliography.bib
 Biblatex version: 3.20
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-You've used 5 entries,
+You've used 10 entries,
             6402 wiz_defined-function locations,
-            1247 strings with 12433 characters,
-and the built_in function-call counts, 31064 in all, are:
-= -- 2359
-> -- 567
-< -- 218
-+ -- 708
-- -- 179
-* -- 2145
-:= -- 3124
+            1292 strings with 14486 characters,
+and the built_in function-call counts, 72375 in all, are:
+= -- 5698
+> -- 1106
+< -- 400
++ -- 2037
+- -- 368
+* -- 4960
+:= -- 7827
 add.period$ -- 0
-call.type$ -- 5
-change.case$ -- 150
+call.type$ -- 10
+change.case$ -- 262
 chr.to.int$ -- 49
-cite$ -- 8
-duplicate$ -- 2904
-empty$ -- 2827
-format.name$ -- 233
-if$ -- 6639
+cite$ -- 18
+duplicate$ -- 7781
+empty$ -- 6328
+format.name$ -- 589
+if$ -- 14821
 int.to.chr$ -- 0
-int.to.str$ -- 13
+int.to.str$ -- 25
 missing$ -- 0
-newline$ -- 170
-num.names$ -- 283
-pop$ -- 1401
+newline$ -- 380
+num.names$ -- 553
+pop$ -- 3280
 preamble$ -- 1
-purify$ -- 164
+purify$ -- 308
 quote$ -- 0
-skip$ -- 1072
+skip$ -- 2054
 stack$ -- 0
-substring$ -- 4248
-swap$ -- 769
-text.length$ -- 133
-text.prefix$ -- 5
+substring$ -- 9857
+swap$ -- 1690
+text.length$ -- 267
+text.prefix$ -- 10
 top$ -- 1
-type$ -- 158
+type$ -- 327
 warning$ -- 0
-while$ -- 365
+while$ -- 997
 width$ -- 0
-write$ -- 166
+write$ -- 371
+(There was 1 warning)

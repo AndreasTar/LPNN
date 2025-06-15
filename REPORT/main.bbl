@@ -17,6 +17,53 @@
 \endgroup
 
 \datalist[entry]{nyt/global//global/global/global}
+  \entry{Greger1998}{article}{}{}
+    \name{author}{4}{}{%
+      {{hash=GG}{%
+         family={Greger},
+         familyi={G\bibinitperiod},
+         given={G.},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=SP}{%
+         family={Shirley},
+         familyi={S\bibinitperiod},
+         given={P.},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=HP}{%
+         family={Hubbard},
+         familyi={H\bibinitperiod},
+         given={P.M.},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=GD}{%
+         family={Greenberg},
+         familyi={G\bibinitperiod},
+         given={D.P.},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \keyw{Lighting}
+    \strng{namehash}{GG+1}
+    \strng{fullhash}{GGSPHPGD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{1998}
+    \field{labeldatesource}{}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \verb{doi}
+    \verb 10.1109/38.656788
+    \endverb
+    \field{number}{2}
+    \field{pages}{32\bibrangedash 43}
+    \field{title}{The irradiance volume}
+    \field{volume}{18}
+    \field{journaltitle}{IEEE Computer Graphics and Applications}
+    \field{year}{1998}
+  \endentry
+
   \entry{Kajiya1986}{article}{}{}
     \name{author}{1}{}{%
       {{hash=KJT}{%
@@ -128,6 +175,101 @@
     \warn{\item Invalid format of field 'month'}
   \endentry
 
+  \entry{McGuire2017}{inproceedings}{}{}
+    \name{author}{4}{}{%
+      {{hash=MM}{%
+         family={McGuire},
+         familyi={M\bibinitperiod},
+         given={Morgan},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=MM}{%
+         family={Mara},
+         familyi={M\bibinitperiod},
+         given={Mike},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=ND}{%
+         family={Nowrouzezahrai},
+         familyi={N\bibinitperiod},
+         given={Derek},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=LD}{%
+         family={Luebke},
+         familyi={L\bibinitperiod},
+         given={David},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Association for Computing Machinery}%
+    }
+    \keyw{light field, irradiance, global illumination}
+    \strng{namehash}{MM+1}
+    \strng{fullhash}{MMMMNDLD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2017}
+    \field{labeldatesource}{}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{abstract}{%
+    We introduce a new data structure and algorithms that employ it to compute
+  real-time global illumination from static environments. Light field probes
+  encode a scene's full light field and internal visibility. They extend
+  current radiance and irradiance probe structures with per-texel visibility
+  information similar to a G-buffer and variance shadow map. We apply ideas
+  from screen-space and voxel cone tracing techniques to this data structure to
+  efficiently sample radiance on world space rays, with correct visibility
+  information, directly within pixel and compute shaders. From these
+  primitives, we then design two GPU algorithms to efficiently gather
+  real-time, viewer-dependent global illumination onto both static and dynamic
+  objects. These algorithms make different tradeoffs between performance and
+  accuracy. Supplemental GLSL source code is included.%
+    }
+    \field{booktitle}{Proceedings of the 21st ACM SIGGRAPH Symposium on
+  Interactive 3D Graphics and Games}
+    \verb{doi}
+    \verb 10.1145/3023368.3023378
+    \endverb
+    \field{isbn}{9781450348867}
+    \field{series}{I3D '17}
+    \field{title}{Real-time global illumination using precomputed light field
+  probes}
+    \verb{url}
+    \verb https://doi.org/10.1145/3023368.3023378
+    \endverb
+    \list{location}{1}{%
+      {San Francisco, California}%
+    }
+    \field{year}{2017}
+    \warn{\item Can't use 'location' + 'address'}
+  \endentry
+
+  \entry{Unity2025}{misc}{}{}
+    \name{author}{1}{}{%
+      {{hash=U}{%
+         family={Unity},
+         familyi={U\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{U1}
+    \strng{fullhash}{U1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2025}
+    \field{labeldatesource}{}
+    \field{sortinit}{U}
+    \field{sortinithash}{U}
+    \field{title}{Adaptive Probe Volumes}
+    \verb{url}
+    \verb https://docs.unity3d.com/Packages/com.unity.render-pipelines.high-def
+    \verb inition@17.0/manual/probevolumes-concept.html
+    \endverb
+    \field{year}{2025}
+  \endentry
+
   \entry{Veach1997}{inproceedings}{}{}
     \name{author}{2}{}{%
       {{hash=VE}{%
@@ -200,6 +342,88 @@
       {USA}%
     }
     \field{year}{1997}
+  \endentry
+
+  \entry{WikiLightmaps}{misc}{}{}
+    \name{author}{1}{}{%
+      {{hash=W}{%
+         family={{Wikipedia contributors}},
+         familyi={W\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{W1}
+    \strng{fullhash}{W1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2025}
+    \field{labeldatesource}{}
+    \field{sortinit}{W}
+    \field{sortinithash}{W}
+    \field{note}{[Online; accessed 15-June-2025]}
+    \field{title}{Lightmap --- {Wikipedia}{,} The Free Encyclopedia}
+    \verb{url}
+    \verb https://en.wikipedia.org/w/index.php?title=Lightmap&oldid=1285782125
+    \endverb
+    \field{year}{2025}
+  \endentry
+
+  \entry{Xu2022}{inproceedings}{}{}
+    \name{author}{6}{}{%
+      {{hash=XY}{%
+         family={Xu},
+         familyi={X\bibinitperiod},
+         given={Yang},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=JY}{%
+         family={Jiang},
+         familyi={J\bibinitperiod},
+         given={Yuanfa},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=WC}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={Chenhao},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=LK}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={Kang},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=ZP}{%
+         family={Zhou},
+         familyi={Z\bibinitperiod},
+         given={Pengbo},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=GG}{%
+         family={Geng},
+         familyi={G\bibinitperiod},
+         given={Guohua},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{XY+1}
+    \strng{fullhash}{XYJYWCLKZPGG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2022}
+    \field{labeldatesource}{}
+    \field{sortinit}{X}
+    \field{sortinithash}{X}
+    \field{booktitle}{EGSR (ST)}
+    \verb{doi}
+    \verb 10.2312/sr.20221158
+    \endverb
+    \field{isbn}{978-3-03868-187-8}
+    \field{issn}{1727-3463}
+    \field{pages}{81\bibrangedash 92}
+    \field{title}{Precomputed Discrete Visibility Fields for Real-Time
+  Ray-Traced Environment Lighting.}
+    \field{year}{2022}
   \endentry
 \enddatalist
 \endinput

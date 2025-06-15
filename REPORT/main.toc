@@ -3,9 +3,9 @@
 \contentsline {section}{\numberline {1.1}Related Works}{8}{section.1.1}%
 \contentsline {subsection}{\numberline {1.1.1}Offline Methods}{8}{subsection.1.1.1}%
 \contentsline {subsection}{\numberline {1.1.2}Online Methods}{8}{subsection.1.1.2}%
-\contentsline {section}{\numberline {1.2}Thesis Structure}{8}{section.1.2}%
-\contentsline {chapter}{\numberline {2}Review of the Literature}{9}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Light Probes}{9}{section.2.1}%
-\contentsline {chapter}{\numberline {3}Our Approach}{10}{chapter.3}%
-\contentsline {chapter}{\numberline {4}Experiments}{11}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{12}{chapter.5}%
+\contentsline {section}{\numberline {1.2}Thesis Structure}{9}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Review of the Literature}{10}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Light Probes}{10}{section.2.1}%
+\contentsline {chapter}{\numberline {3}Our Approach}{11}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Experiments}{12}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{13}{chapter.5}%
