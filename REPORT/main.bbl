@@ -17,6 +17,109 @@
 \endgroup
 
 \datalist[entry]{nyt/global//global/global/global}
+  \entry{Crassin2011}{inproceedings}{}{}
+    \name{author}{5}{}{%
+      {{hash=CC}{%
+         family={Crassin},
+         familyi={C\bibinitperiod},
+         given={Cyril},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=NF}{%
+         family={Neyret},
+         familyi={N\bibinitperiod},
+         given={Fabrice},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=SM}{%
+         family={Sainz},
+         familyi={S\bibinitperiod},
+         given={Miguel},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=GS}{%
+         family={Green},
+         familyi={G\bibinitperiod},
+         given={Simon},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=EE}{%
+         family={Eisemann},
+         familyi={E\bibinitperiod},
+         given={Elmar},
+         giveni={E\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Association for Computing Machinery}%
+    }
+    \strng{namehash}{CC+1}
+    \strng{fullhash}{CCNFSMGSEE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2011}
+    \field{labeldatesource}{}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \field{abstract}{%
+    Indirect illumination is an important element for realistic image
+  synthesis, but its computation is expensive and highly dependent on the
+  complexity of the scene and of the BRDF of the surfaces involved. While
+  off-line computation and pre-baking can be acceptable for some cases, many
+  applications (games, simulators, etc.) require real-time or interactive
+  approaches to evaluate indirect illumination. We present a novel algorithm to
+  compute indirect lighting in real-time that avoids costly precomputation
+  steps and is not restricted to low frequency illumination. It is based on a
+  hierarchical voxel octree representation generated and updated on-the-fly
+  from a regular scene mesh coupled with an approximate voxel cone tracing that
+  allows a fast estimation of the visibility and incoming energy. Our approach
+  can manage two light bounces for both Lambertian and Glossy materials at
+  interactive framerates (25-70FPS). It exhibits an almost scene-independent
+  performance and allows for fully dynamic content thanks to an interactive
+  octree voxelization scheme. In addition, we demonstrate that our voxel cone
+  tracing can be used to efficiently estimate Ambient Occlusion.%
+    }
+    \field{booktitle}{ACM SIGGRAPH 2011 Talks}
+    \verb{doi}
+    \verb 10.1145/2037826.2037853
+    \endverb
+    \field{isbn}{9781450309745}
+    \field{series}{SIGGRAPH '11}
+    \field{title}{Interactive indirect illumination using voxel-based cone
+  tracing: an insight}
+    \verb{url}
+    \verb https://doi.org/10.1145/2037826.2037853
+    \endverb
+    \list{location}{1}{%
+      {Vancouver, British Columbia, Canada}%
+    }
+    \field{year}{2011}
+    \warn{\item Can't use 'location' + 'address'}
+  \endentry
+
+  \entry{Unreal2025}{misc}{}{}
+    \name{author}{1}{}{%
+      {{hash=E}{%
+         family={EpicGames},
+         familyi={E\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{E1}
+    \strng{fullhash}{E1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2025}
+    \field{labeldatesource}{}
+    \field{sortinit}{E}
+    \field{sortinithash}{E}
+    \field{title}{Lumen GI}
+    \verb{url}
+    \verb https://dev.epicgames.com/documentation/en-us/unreal-engine/lumen-glo
+    \verb bal-illumination-and-reflections-in-unreal-engine
+    \endverb
+    \field{year}{2025}
+  \endentry
+
   \entry{Greger1998}{article}{}{}
     \name{author}{4}{}{%
       {{hash=GG}{%
@@ -247,6 +350,77 @@
     \warn{\item Can't use 'location' + 'address'}
   \endentry
 
+  \entry{Nvidia2024}{misc}{}{}
+    \name{author}{1}{}{%
+      {{hash=N}{%
+         family={Nvidia},
+         familyi={N\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{N1}
+    \strng{fullhash}{N1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2024}
+    \field{labeldatesource}{}
+    \field{sortinit}{N}
+    \field{sortinithash}{N}
+    \field{title}{RTXGI Dynamic Diffuse GI}
+    \verb{url}
+    \verb https://github.com/NVIDIAGameWorks/RTXGI-DDGI
+    \endverb
+    \field{year}{2024}
+  \endentry
+
+  \entry{Teuber2024}{inproceedings}{}{}
+    \name{author}{4}{}{%
+      {{hash=TM}{%
+         family={Teuber},
+         familyi={T\bibinitperiod},
+         given={Maurice},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=ST}{%
+         family={Schwandt},
+         familyi={S\bibinitperiod},
+         given={Tobias},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=KC}{%
+         family={Kunert},
+         familyi={K\bibinitperiod},
+         given={Christian},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=BW}{%
+         family={Broll},
+         familyi={B\bibinitperiod},
+         given={Wolfgang},
+         giveni={W\bibinitperiod},
+      }}%
+    }
+    \keyw{Runtime;Lighting;Virtual environments;Mixed
+  reality;Production;Games;Real-time systems;Probes;Optimization;Augmented
+  reality;Light probes;Light probe placement;Lighting;Geometry-based
+  optimization;Virtual environments;Mixed reality}
+    \strng{namehash}{TM+1}
+    \strng{fullhash}{TMSTKCBW1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2024}
+    \field{labeldatesource}{}
+    \field{sortinit}{T}
+    \field{sortinithash}{T}
+    \field{booktitle}{2024 International Conference on Cyberworlds (CW)}
+    \verb{doi}
+    \verb 10.1109/CW64301.2024.00011
+    \endverb
+    \field{pages}{9\bibrangedash 16}
+    \field{title}{Geometry-Based Optimization of Light Probe Placement in
+  Virtual Environments}
+    \field{year}{2024}
+  \endentry
+
   \entry{Unity2025}{misc}{}{}
     \name{author}{1}{}{%
       {{hash=U}{%
@@ -268,6 +442,43 @@
     \verb inition@17.0/manual/probevolumes-concept.html
     \endverb
     \field{year}{2025}
+  \endentry
+
+  \entry{Vardis2021}{article}{}{}
+    \name{author}{3}{}{%
+      {{hash=VK}{%
+         family={Vardis},
+         familyi={V\bibinitperiod},
+         given={Konstantinos},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=VA}{%
+         family={Vasilakis},
+         familyi={V\bibinitperiod},
+         given={Andreas},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=PG}{%
+         family={Papaioannou},
+         familyi={P\bibinitperiod},
+         given={Georgios},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{VKVAPG1}
+    \strng{fullhash}{VKVAPG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2021}
+    \field{labeldatesource}{}
+    \field{sortinit}{V}
+    \field{sortinithash}{V}
+    \verb{doi}
+    \verb 10.2312/egp.20211026
+    \endverb
+    \field{title}{Illumination-driven Light Probe Placement}
+    \field{month}{05}
+    \field{year}{2021}
   \endentry
 
   \entry{Veach1997}{inproceedings}{}{}
@@ -342,6 +553,51 @@
       {USA}%
     }
     \field{year}{1997}
+  \endentry
+
+  \entry{Wang2019}{inproceedings}{}{}
+    \name{author}{4}{}{%
+      {{hash=WY}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={Yue},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=KS}{%
+         family={Khiat},
+         familyi={K\bibinitperiod},
+         given={Soufiane},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=KPG}{%
+         family={Kry},
+         familyi={K\bibinitperiod},
+         given={Paul\bibnamedelima G},
+         giveni={P\bibinitperiod\bibinitdelim G\bibinitperiod},
+      }}%
+      {{hash=ND}{%
+         family={Nowrouzezahrai},
+         familyi={N\bibinitperiod},
+         given={Derek},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {ACM}%
+    }
+    \strng{namehash}{WY+1}
+    \strng{fullhash}{WYKSKPGND1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2019}
+    \field{labeldatesource}{}
+    \field{sortinit}{W}
+    \field{sortinithash}{W}
+    \field{booktitle}{Proceedings of the ACM SIGGRAPH Symposium on Interactive
+  3D Graphics and Games}
+    \field{pages}{5}
+    \field{title}{Fast non-uniform radiance probe placement and tracing}
+    \field{year}{2019}
   \endentry
 
   \entry{WikiLightmaps}{misc}{}{}

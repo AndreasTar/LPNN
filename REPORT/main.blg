@@ -21,48 +21,52 @@ Database file #1: main-blx.bib
 Database file #2: bibliography.bib
 Warning--entry type for "Unity2025" isn't style-file defined
 --line 209 of file bibliography.bib
+Warning--entry type for "Unreal2025" isn't style-file defined
+--line 223 of file bibliography.bib
+Warning--entry type for "Nvidia2024" isn't style-file defined
+--line 239 of file bibliography.bib
 Biblatex version: 3.20
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-You've used 10 entries,
+You've used 16 entries,
             6402 wiz_defined-function locations,
-            1292 strings with 14486 characters,
-and the built_in function-call counts, 72375 in all, are:
-= -- 5698
-> -- 1106
-< -- 400
-+ -- 2037
-- -- 368
-* -- 4960
-:= -- 7827
+            1336 strings with 17108 characters,
+and the built_in function-call counts, 122232 in all, are:
+= -- 9721
+> -- 1801
+< -- 629
++ -- 3574
+- -- 616
+* -- 8425
+:= -- 13444
 add.period$ -- 0
-call.type$ -- 10
-change.case$ -- 262
-chr.to.int$ -- 49
-cite$ -- 18
-duplicate$ -- 7781
-empty$ -- 6328
-format.name$ -- 589
-if$ -- 14821
+call.type$ -- 16
+change.case$ -- 396
+chr.to.int$ -- 55
+cite$ -- 30
+duplicate$ -- 13416
+empty$ -- 10584
+format.name$ -- 1022
+if$ -- 24812
 int.to.chr$ -- 0
-int.to.str$ -- 25
+int.to.str$ -- 40
 missing$ -- 0
-newline$ -- 380
-num.names$ -- 553
-pop$ -- 3280
+newline$ -- 615
+num.names$ -- 879
+pop$ -- 5534
 preamble$ -- 1
-purify$ -- 308
+purify$ -- 480
 quote$ -- 0
-skip$ -- 2054
+skip$ -- 3262
 stack$ -- 0
-substring$ -- 9857
-swap$ -- 1690
-text.length$ -- 267
-text.prefix$ -- 10
+substring$ -- 16833
+swap$ -- 2744
+text.length$ -- 435
+text.prefix$ -- 16
 top$ -- 1
-type$ -- 327
+type$ -- 529
 warning$ -- 0
-while$ -- 997
+while$ -- 1722
 width$ -- 0
-write$ -- 371
-(There was 1 warning)
+write$ -- 600
+(There were 3 warnings)

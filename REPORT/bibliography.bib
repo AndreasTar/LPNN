@@ -109,4 +109,65 @@
 	url={https://docs.unity3d.com/Packages/com.unity.render-pipelines.high-definition@17.0/manual/probevolumes-concept.html}
 }
 
+@blog{Unreal2025,
+	title={Lumen GI},
+	author={EpicGames},
+	year={2025},
+	url={https://dev.epicgames.com/documentation/en-us/unreal-engine/lumen-global-illumination-and-reflections-in-unreal-engine}
+}
+
+
+@blog{Nvidia2024,
+	title={RTXGI Dynamic Diffuse GI},
+	author={Nvidia},
+	year={2024},
+	url={https://github.com/NVIDIAGameWorks/RTXGI-DDGI}
+}
+
+@inproceedings{Crassin2011,
+	author = {Crassin, Cyril and Neyret, Fabrice and Sainz, Miguel and Green, Simon and Eisemann, Elmar},
+	title = {Interactive indirect illumination using voxel-based cone tracing: an insight},
+	year = {2011},
+	isbn = {9781450309745},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	url = {https://doi.org/10.1145/2037826.2037853},
+	doi = {10.1145/2037826.2037853},
+	abstract = {Indirect illumination is an important element for realistic image synthesis, but its computation is expensive and highly dependent on the complexity of the scene and of the BRDF of the surfaces involved. While off-line computation and pre-baking can be acceptable for some cases, many applications (games, simulators, etc.) require real-time or interactive approaches to evaluate indirect illumination. We present a novel algorithm to compute indirect lighting in real-time that avoids costly precomputation steps and is not restricted to low frequency illumination. It is based on a hierarchical voxel octree representation generated and updated on-the-fly from a regular scene mesh coupled with an approximate voxel cone tracing that allows a fast estimation of the visibility and incoming energy. Our approach can manage two light bounces for both Lambertian and Glossy materials at interactive framerates (25-70FPS). It exhibits an almost scene-independent performance and allows for fully dynamic content thanks to an interactive octree voxelization scheme. In addition, we demonstrate that our voxel cone tracing can be used to efficiently estimate Ambient Occlusion.},
+	booktitle = {ACM SIGGRAPH 2011 Talks},
+	articleno = {20},
+	numpages = {1},
+	location = {Vancouver, British Columbia, Canada},
+	series = {SIGGRAPH '11}
+}
+
+@inproceedings{Wang2019,
+	title={Fast non-uniform radiance probe placement and tracing},  
+	author={Yue Wang and Soufiane Khiat and Paul G Kry and Derek Nowrouzezahrai},
+	booktitle={Proceedings of the ACM SIGGRAPH Symposium on Interactive 3D Graphics and Games},
+	pages={5},
+	year={2019},
+	organization={ACM}
+}
+
+@INPROCEEDINGS{Teuber2024,
+	author={Teuber, Maurice and Schwandt, Tobias and Kunert, Christian and Broll, Wolfgang},
+	booktitle={2024 International Conference on Cyberworlds (CW)}, 
+	title={Geometry-Based Optimization of Light Probe Placement in Virtual Environments}, 
+	year={2024},
+	volume={},
+	number={},
+	pages={9-16},
+	keywords={Runtime;Lighting;Virtual environments;Mixed reality;Production;Games;Real-time systems;Probes;Optimization;Augmented reality;Light probes;Light probe placement;Lighting;Geometry-based optimization;Virtual environments;Mixed reality},
+	doi={10.1109/CW64301.2024.00011}
+}
+
+@article{Vardis2021,
+	author = {Vardis, Konstantinos and Vasilakis, Andreas and Papaioannou, Georgios},
+	year = {2021},
+	month = {05},
+	pages = {},
+	title = {Illumination-driven Light Probe Placement},
+	doi = {10.2312/egp.20211026}
+}
 

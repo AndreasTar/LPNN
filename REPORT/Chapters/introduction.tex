@@ -32,7 +32,19 @@ Another early technique is the Irradiance Volumes algorithm  \parencite{Greger19
 
 More recent static-GI algorithms include Light Field Probes \parencite{McGuire2017}. Light Field Probes extend standard irradiance probes by additionally storing per-texel visibility for each probe. Furthermore, \cite{Xu2022} introduce Discrete Visibility Fields for static ray-traced lighting. The method precomputes occlusion masks stored in a uniform voxel grid, and at runtime, rays that hit a cell use the stored precomputed masks to quickly cull visibility, skipping geometry already known to be occluded.
 
-Finally, Unity's new Adaptive Probe Volumes (APV) build on irradiance volumes by automatically populating a grid, with density matched to local geometry. APV then performs per-pixel probe sampling; each pixel blends from the eight nearest probes \parencite{Unity2025}.
+Unity's new Adaptive Probe Volumes (APV) build on irradiance volumes by automatically populating a grid, with density matched to local geometry. APV then performs per-pixel probe sampling; each pixel blends from the eight nearest probes \parencite{Unity2025}.
+
+Additionally, there are methods that don't focus on Probes for GI. A prevalent example is Unreal Engine's Lumen, a dynamic GI and reflections system that uses a hybrid tracing approach; It starts with a cheap screen-space or signed-distance-field ray cast, and then falls back to more expensive methods like hardware ray tracing \parencite{Unreal2025}.
+
+NVIDIA has also developed RTXGI, a GPU-accelerated library implementing Dynamic Diffuse GI, using a volumetric grid of irradiance probes, which update every frame using hardware-accelerated ray tracing, creating accurate results at the cost of hardware-restricted algorithms and a relatively escalated cost of calculation \parencite{Nvidia2024}.
+
+\cite{Crassin2011} introduced Voxel Cone Tracing (VCT) to approximate real-time GI. In VCT, the scene's static geometry and lighting are "voxelized" into a 3D texture with multiple levels of mipmapping, containing radiance and opacity. At runtime, indirect illumination is approximated by tracing a few low-resolution "cones" from each surface sample into the aforementioned voxel grid, summing the values from regions of voxels.\newline
+
+Even though there are numerous methods trying to solve real-time GI issues, a big percentage of them tend to revolve around probes of various types; typically calculating irradiance values among other high-importance metrics. Therefore, it is vital for a 3D scene to have proper probe placement for best results. There are a few methods that try to automate that process, often by placing the probes in a regular grid and only removing the probes that are inside objects, but that can lead to over-sampling, leading to performance costs, mainly in memory usage budgets. Furthermore, some techniques try to remove additional probes using heuristic methods, therefore approaching optimal placement, but with a significant precomputational cost.
+
+\cite{Wang2019} introduce an automatic non-uniform placing scheme using 3D scene skeletons and gradient-descent refinement to cover important locations without redundant probes. A very recent work by \cite{Teuber2024} formulates geometry-based optimization of probe placement using various mesh features, to further improve the lighting in VR/AR scenarios.
+
+Similarly, \cite{Vardis2021} approach the problem by starting with a probe set on a dense grid and iteratively remove the leas-important probes using radiance error tests, preserving the global light field while minimizing probe count.
 
 \subsection*{AI based methods}
 
