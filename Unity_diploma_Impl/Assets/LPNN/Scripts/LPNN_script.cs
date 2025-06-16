@@ -40,20 +40,12 @@ public class LPNN_script : MonoBehaviour
 
     private Dictionary<Vector3, float[][]> features; // = {vec3i, float[f1, f2]}
 
+    System.Diagnostics.Stopwatch stopwatch = new();
+
 
     private void Awake()
     {
-        // on awake, we need to remove the object itself and only keep the light probes
-
-        // if list not empty
-        //     get its bounding box
-        //     return
-        // if child exists
-        //     get its bounding box
-        //     return
-        // error
-
-        
+        // on awake, we need to remove the object itself and only keep the light probes        
     }
 
     void OnDrawGizmos()
@@ -96,7 +88,7 @@ public class LPNN_script : MonoBehaviour
         }
         catch
         {
-            Debug.LogError("No bounding volumes found");
+            Debug.LogError("No bounding volumes found. Make sure to add them.");
         }
 
         bounds = boundingVolumes[0]; 
@@ -112,7 +104,7 @@ public class LPNN_script : MonoBehaviour
     public void PlaceEvalPoints() {
 
         if (bounds.size == Vector3.zero) {
-            Debug.LogError("Bounding volume is zero!"); // TODO info message on inspector instead?
+            Debug.LogError("Bounding volume is zero! Did you set the shape properly?"); // TODO info message on inspector instead?
             return;
         }
         evalPoints ??= new List<Vector3>();
@@ -121,6 +113,7 @@ public class LPNN_script : MonoBehaviour
         epIndexes ??= new List<Vector3Int>();
         epIndexes.Clear();
 
+        stopwatch.Restart();
         Transform voxelParent = transform.Find("VoxelsParent");
         if ( voxelParent != null) DestroyImmediate(voxelParent.gameObject);
 
@@ -158,6 +151,8 @@ public class LPNN_script : MonoBehaviour
             yi = 0;
             xi ++;
         }
+        stopwatch.Stop();
+        Debug.Log($"Finished in {stopwatch.ElapsedMilliseconds} ms.");
     }
 
     public void BakeGI() {
@@ -166,13 +161,14 @@ public class LPNN_script : MonoBehaviour
 
     public void CalculateFeatures() {
         if (evalPoints == null || evalPoints.Count == 0) {
-            Debug.LogError("No evaluation points found! Please place them first.");
+            Debug.LogError("No evaluation points found! Please place them first!");
             return;
         }
 
         features ??= new Dictionary<Vector3, float[][]>();
         features.Clear();
 
+        stopwatch.Restart();
         foreach (var p in evalPoints) {
             features.Add(p, new float[5][]);
 
@@ -183,18 +179,24 @@ public class LPNN_script : MonoBehaviour
             features[p][4] = CalcRGBVar(p);
 
         }
+
+        stopwatch.Stop();
+        Debug.Log($"Finished in {stopwatch.ElapsedMilliseconds} ms.");
     }
 
     public void SaveFeatures(bool append = false) {
+        stopwatch.Restart();
         if (features == null || features.Count == 0) {
-            Debug.LogError("No features found! Please calculate them first.");
+            Debug.LogError("No features found! Please calculate them first!");
             return;
         }
 
         if (!Utils.WriteFeaturesToFile(features, append)) {
-            Debug.LogError("Failed to save features to file.");
+            Debug.LogError("Failed to save features to file!");
             return;
         }
+        stopwatch.Stop();
+        Debug.Log($"Finished in {stopwatch.ElapsedMilliseconds} ms.");
         Debug.Log($"Results saved to {Utils.filepath+"features.txt"}. Total: {features.Count} points.");
     }
 
@@ -347,7 +349,7 @@ public class LPNN_script : MonoBehaviour
 
     public void CalculateLabels(bool append = false) {
         if (predef_lightProbes == null) {
-            Debug.LogError("No LightProbeGroup found! Please assign one.");
+            Debug.LogError("No LightProbeGroup found! Please assign one!");
             return;
         }
 
@@ -355,7 +357,7 @@ public class LPNN_script : MonoBehaviour
     }
     void CompareLPGroup(bool append = false) {
         if (predef_lightProbes == null) {
-            Debug.LogError("No LightProbeGroup found! Please assign one.");
+            Debug.LogError("No LightProbeGroup found! Please assign one!");
             return;
         }
 
@@ -364,6 +366,8 @@ public class LPNN_script : MonoBehaviour
         string destination = Application.dataPath + "/LPNN/Results/comparisons.txt";
 
         Debug.Log($"{evalPoints.Count} {pLP_positions.Length}");
+
+        stopwatch.Restart();
 
         bool flag = false;
         int count = 0;
@@ -388,12 +392,15 @@ public class LPNN_script : MonoBehaviour
         } else {
             File.WriteAllText(destination, s);
         }
+        stopwatch.Stop();
+        Debug.Log($"Finished in {stopwatch.ElapsedMilliseconds} ms.");
         Debug.Log($"Results saved to {destination}. Total: {evalPoints.Count} lines. {count} Trues, {evalPoints.Count - count} Falses.");
     }
 
     public void EvaluateModel() {
         LightProbeAI modelScript = GetComponent<LightProbeAI>();
 
+        stopwatch.Restart();
         float[] res;
         try
         {
@@ -404,6 +411,8 @@ public class LPNN_script : MonoBehaviour
             Debug.LogError($"Model evaluation failed: {e.Message}");
             return;
         }
+        stopwatch.Stop();
+        Debug.Log($"Finished in {stopwatch.ElapsedMilliseconds} ms.");
         Debug.Log($"Model evaluated. Result: {res.Length} values.");
         string destination = Application.dataPath + "/LPNN/Results/model_evals.txt";
         File.WriteAllText(destination, res.ToLineSeparatedString());
@@ -415,6 +424,8 @@ public class LPNN_script : MonoBehaviour
         gameObject.GetOrAddComponent<LightProbeGroup>();
 
         List<Vector3> positions = new();
+
+        stopwatch.Restart();
 
         string[] predictions = File.ReadAllLines(Application.dataPath + "/LPNN/Results/model_evals.txt"); 
         List<float> pred = new();
@@ -437,6 +448,8 @@ public class LPNN_script : MonoBehaviour
             }
         }
         gameObject.GetComponent<LightProbeGroup>().probePositions = positions.ToArray();
+        stopwatch.Stop();
+        Debug.Log($"Finished in {stopwatch.ElapsedMilliseconds} ms.");
         Debug.Log($"Placed {positions.Count} predicted light probes.");
         Debug.Log($"Min: {min}, Max: {max}, Average: {min+pred.Average()}");
     }
@@ -497,7 +510,6 @@ public class LPNN_Inspector: Editor {
 
         if (GUILayout.Button("Place Evaluation Points")) {
             lpnn.PlaceEvalPoints();
-            Debug.Log("EVs placed");
         }
 
         EditorGUILayout.Space();
@@ -506,7 +518,6 @@ public class LPNN_Inspector: Editor {
 
         if (GUILayout.Button("Bake Global Illumination")) {
             lpnn.BakeGI();
-            Debug.Log("Baked");
         }
 
         EditorGUILayout.Space();
@@ -534,11 +545,9 @@ public class LPNN_Inspector: Editor {
 
         if (GUILayout.Button("Get Labels & Save")) {
             lpnn.CalculateLabels();
-            Debug.Log("Compared");
         }
         if (GUILayout.Button("Get Labels & Append")) {
             lpnn.CalculateLabels(true);
-            Debug.Log("Compared");
         }
 
 
@@ -548,7 +557,6 @@ public class LPNN_Inspector: Editor {
 
         if (GUILayout.Button("Evaluate with model")) {
             lpnn.EvaluateModel();
-            Debug.Log("evaluated with model");
         }
 
         EditorGUILayout.Space();
@@ -559,7 +567,6 @@ public class LPNN_Inspector: Editor {
 
         if (GUILayout.Button("Place Predicted LP")) {
             lpnn.PlacePredictions(threshold);
-            Debug.Log("placed lp");
         }
     }
 }
