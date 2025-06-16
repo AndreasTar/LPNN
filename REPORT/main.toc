@@ -1,11 +1,11 @@
 \babel@toc {english}{}\relax 
-\contentsline {chapter}{\numberline {1}Introduction}{9}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Related Work}{10}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1}Offline Methods}{10}{subsection.1.1.1}%
-\contentsline {subsection}{\numberline {1.1.2}Online Methods}{10}{subsection.1.1.2}%
-\contentsline {section}{\numberline {1.2}Thesis Structure}{12}{section.1.2}%
-\contentsline {chapter}{\numberline {2}Review of the Literature}{13}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Light Probes}{13}{section.2.1}%
-\contentsline {chapter}{\numberline {3}Our Approach}{14}{chapter.3}%
-\contentsline {chapter}{\numberline {4}Experiments}{15}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{16}{chapter.5}%
+\contentsline {chapter}{\numberline {1}Introduction}{8}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Related Work}{9}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Offline Methods}{9}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Online Methods}{9}{subsection.1.1.2}%
+\contentsline {section}{\numberline {1.2}Thesis Structure}{11}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Review of the Literature}{12}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Light Probes}{12}{section.2.1}%
+\contentsline {chapter}{\numberline {3}Our Approach}{13}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Experiments}{14}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{15}{chapter.5}%
