@@ -28,45 +28,45 @@ Warning--entry type for "Nvidia2024" isn't style-file defined
 Biblatex version: 3.20
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-You've used 16 entries,
+You've used 18 entries,
             6402 wiz_defined-function locations,
-            1336 strings with 17108 characters,
-and the built_in function-call counts, 122232 in all, are:
-= -- 9721
-> -- 1801
-< -- 629
-+ -- 3574
-- -- 616
-* -- 8425
-:= -- 13444
+            1352 strings with 17523 characters,
+and the built_in function-call counts, 145421 in all, are:
+= -- 11698
+> -- 2079
+< -- 689
++ -- 4428
+- -- 741
+* -- 10104
+:= -- 16410
 add.period$ -- 0
-call.type$ -- 16
-change.case$ -- 396
-chr.to.int$ -- 55
-cite$ -- 30
-duplicate$ -- 13416
-empty$ -- 10584
-format.name$ -- 1022
-if$ -- 24812
+call.type$ -- 18
+change.case$ -- 417
+chr.to.int$ -- 61
+cite$ -- 34
+duplicate$ -- 16129
+empty$ -- 12421
+format.name$ -- 1222
+if$ -- 29227
 int.to.chr$ -- 0
-int.to.str$ -- 40
+int.to.str$ -- 44
 missing$ -- 0
-newline$ -- 615
-num.names$ -- 879
-pop$ -- 5534
+newline$ -- 720
+num.names$ -- 961
+pop$ -- 6367
 preamble$ -- 1
-purify$ -- 480
+purify$ -- 523
 quote$ -- 0
-skip$ -- 3262
+skip$ -- 3632
 stack$ -- 0
-substring$ -- 16833
-swap$ -- 2744
-text.length$ -- 435
-text.prefix$ -- 16
+substring$ -- 20399
+swap$ -- 3152
+text.length$ -- 501
+text.prefix$ -- 18
 top$ -- 1
-type$ -- 529
+type$ -- 597
 warning$ -- 0
-while$ -- 1722
+while$ -- 2124
 width$ -- 0
-write$ -- 600
+write$ -- 703
 (There were 3 warnings)

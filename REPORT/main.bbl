@@ -167,6 +167,70 @@
     \field{year}{1998}
   \endentry
 
+  \entry{Guo2022}{article}{}{}
+    \name{author}{7}{}{%
+      {{hash=GJ}{%
+         family={Guo},
+         familyi={G\bibinitperiod},
+         given={Jie},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=ZZ}{%
+         family={Zong},
+         familyi={Z\bibinitperiod},
+         given={Zijing},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=SY}{%
+         family={Song},
+         familyi={S\bibinitperiod},
+         given={Yadong},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=FX}{%
+         family={Fu},
+         familyi={F\bibinitperiod},
+         given={Xihao},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=TC}{%
+         family={Tao},
+         familyi={T\bibinitperiod},
+         given={Chengzhi},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=GY}{%
+         family={Guo},
+         familyi={G\bibinitperiod},
+         given={Yanwen},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=YLQ}{%
+         family={Yan},
+         familyi={Y\bibinitperiod},
+         given={Ling-Qi},
+         giveni={L\bibinithyphendelim Q\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{GJ+1}
+    \strng{fullhash}{GJZZSYFXTCGYYLQ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2022}
+    \field{labeldatesource}{}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \verb{doi}
+    \verb 10.1145/3550454.3555452
+    \endverb
+    \field{pages}{1\bibrangedash 14}
+    \field{title}{Efficient Light Probes for Real-Time Global Illumination}
+    \field{volume}{41}
+    \field{journaltitle}{ACM Transactions on Graphics}
+    \field{month}{11}
+    \field{year}{2022}
+  \endentry
+
   \entry{Kajiya1986}{article}{}{}
     \name{author}{1}{}{%
       {{hash=KJT}{%
@@ -680,6 +744,48 @@
     \field{title}{Precomputed Discrete Visibility Fields for Real-Time
   Ray-Traced Environment Lighting.}
     \field{year}{2022}
+  \endentry
+
+  \entry{You2024}{misc}{}{}
+    \name{author}{3}{}{%
+      {{hash=YZ}{%
+         family={You},
+         familyi={Y\bibinitperiod},
+         given={Zinuo},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=GA}{%
+         family={Geiger},
+         familyi={G\bibinitperiod},
+         given={Andreas},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=CA}{%
+         family={Chen},
+         familyi={C\bibinitperiod},
+         given={Anpei},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{YZGACA1}
+    \strng{fullhash}{YZGACA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2024}
+    \field{labeldatesource}{}
+    \field{sortinit}{Y}
+    \field{sortinithash}{Y}
+    \verb{eprint}
+    \verb 2312.13328
+    \endverb
+    \field{title}{NeLF-Pro: Neural Light Field Probes for Multi-Scale Novel
+  View Synthesis}
+    \verb{url}
+    \verb https://arxiv.org/abs/2312.13328
+    \endverb
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.CV}
+    \field{year}{2024}
   \endentry
 \enddatalist
 \endinput

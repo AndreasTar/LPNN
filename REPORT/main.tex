@@ -4,7 +4,6 @@
 \usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-
 \usepackage{textgreek}
 \usepackage[greek,english]{babel}
 \usepackage{csquotes}
@@ -24,6 +23,8 @@
 \usepackage{graphicx}
 \usepackage{epstopdf}
 \usepackage[space]{grffile}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 \addto\captionsenglish{\renewcommand*\contentsname{Table of Contents}}
 \babeltags{gr = Greek, en = English}
 \usepackage[style=authoryear,sorting=nyt,backend=bibtex]{biblatex}
@@ -92,6 +93,8 @@
 	\input{Chapters/greek_abstract}
 	
 	\listoffigures
+	\listoftables
+	\listofalgorithms
 	\tableofcontents
 	% list of algorithms? if yes, prolly manual
 	

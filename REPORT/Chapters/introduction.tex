@@ -2,6 +2,23 @@ Modern interactive 3D applications, like video games, VR/AR apps, simulators etc
 
 The illumination of any scene can be split into two very simple categories. Direct Illumination, the light that travels unoccluded from a light source to a surface of an object, is typically handled with techniques like shadow-mapping or screen-space shadows, yielding crisp, high-framerate-capable shadows, but lack in inter-surface light transport situations. In contrast, Indirect Illumination, or Global Illumination (GI), captures light that has bounced or refracted off one or more surfaces, producing soft shadows, color bleeding, and contextually rich shading. 
 
+\begin{figure}[!htb]
+	\begin{minipage}{0.48\textwidth}
+		\centering
+		\includegraphics[scale=0.22]{Graphics/Direct_lighting.png}
+		\caption{Scene lighting with direct illumination only. By Barahag - Own work, CC BY-SA 4.0}
+		\url{https://commons.wikimedia.org/w/index.php?curid=88541991}
+		\label{Direct Illumination}
+	\end{minipage}\hfill
+	\begin{minipage}{0.48\textwidth}
+		\centering
+		\includegraphics[scale=0.22]{Graphics/Global_illumination.png}
+		\caption{Scene lighting with Global illumination. By Barahag - Own work, CC BY-SA 4.0}
+		\url{https://commons.wikimedia.org/w/index.php?curid=88540888}
+		\label{Global Illumination}
+	\end{minipage}
+\end{figure}
+
 The field-standard for accurate lighting and shadows in a scene is Path-Tracing, a method that tracks every light ray and any interactions it has with the objects of a 3D scene and calculates the resulting color for each pixel of the screen. Such approach remains prohibitively expensive for most interactive applications, so real-time systems employ precomputation and approximation of the illumination of the scene; static geometry is baked into lightmaps that store per-texel irradiance, while dynamic elements sample from irradiance volumes or light probes, sparse 3D points whose spherical-harmonic coefficients are interpolated at runtime. 
 
 Screen-space GI methods typically approximate a limited number of light-ray bounces directly from the camera's depth buffer, but suffer from missing contextual information outside the camera's view frustum and temporal instability. Voxel-based approaches (e.g., cone-tracing through a low resolution 3D grid) % citation?
@@ -14,9 +31,9 @@ Light probes, in particular, represent a compelling middle-ground, flexible enou
 % citations where needed?
 % fix typos if any, better wording at 1 and 2 paragraph?
 
-\pagebreak % temporary potentially	
+%\pagebreak % temporary potentially	
 
-\section{Related Works}
+\section{Related Work}
 There is an abundance of work in the literature addressing the problem of Global Illumination. These studies aim to achieve realistic lighting in 3D scenes by employing various approaches and techniques, each offering unique advantages and disadvantages, but they share a common goal: to maximize visual fidelity while minimizing computational costs.
 
 \subsection{Offline Methods}
@@ -25,7 +42,7 @@ Offline Illumination methods refer to techniques that are not viable for real-ti
 \subsection{Online Methods} % maybe section these?
 In contrast, online methods aim to calculate GI interactions in real-time, most commonly used in interactive applications like video games or simulations. They try to balance performance and accuracy, a task that is often difficult due to the processing cost of the calculations for a realistic result. Therefore, these methods take shortcuts, either approximating the GI interactions to a certain degree to maintain framerate budgets, or by precomputing some of the data, wherever possible.
 
-\subsection*{non-AI based methods} % rename this to something better
+\subsection*{Traditional Methods} % rename this to something better
 Techniques that precompute the illumination of a scene only do so for static geometry; objects in the scene that will never change their position, rotation or scale. The algorithms "bake" the required information onto texture maps, which are rendered as such when needed. Light-mapping is one such technique. It precomputes surface brightness and has a low runtime cost. The game Quake was the first interactive application that used lightmaps for rendering GI \parencite{WikiLightmaps}.
 
 Another early technique is the Irradiance Volumes algorithm  \parencite{Greger1998}, which scatters spherical-harmonic (SH) irradiance samples on a 3D grid on the scene. At runtime, lighting is interpolated from the nearest SH cells; this underlies many probe systems, like Unity's light-probe system that implicitly implements a sparse irradiance volume.
@@ -40,14 +57,26 @@ NVIDIA has also developed RTXGI, a GPU-accelerated library implementing Dynamic 
 
 \cite{Crassin2011} introduced Voxel Cone Tracing (VCT) to approximate real-time GI. In VCT, the scene's static geometry and lighting are "voxelized" into a 3D texture with multiple levels of mipmapping, containing radiance and opacity. At runtime, indirect illumination is approximated by tracing a few low-resolution "cones" from each surface sample into the aforementioned voxel grid, summing the values from regions of voxels.\newline
 
-Even though there are numerous methods trying to solve real-time GI issues, a big percentage of them tend to revolve around probes of various types; typically calculating irradiance values among other high-importance metrics. Therefore, it is vital for a 3D scene to have proper probe placement for best results. There are a few methods that try to automate that process, often by placing the probes in a regular grid and only removing the probes that are inside objects, but that can lead to over-sampling, leading to performance costs, mainly in memory usage budgets. Furthermore, some techniques try to remove additional probes using heuristic methods, therefore approaching optimal placement, but with a significant precomputational cost.
+Even though there are numerous methods trying to solve real-time GI issues, a big percentage of them tend to revolve around probes of various types; most commonly calculating irradiance values among other high-importance metrics. Therefore, it is vital for a 3D scene to have proper probe placement for best results. There are a few methods that try to automate that process, often by placing the probes in a regular grid and only removing the probes that are inside objects, but that can lead to over-sampling, leading to performance costs, mainly in memory usage budgets. Furthermore, some techniques try to remove additional probes using heuristic methods, therefore approaching optimal placement, but with a significant precomputational cost.
 
 \cite{Wang2019} introduce an automatic non-uniform placing scheme using 3D scene skeletons and gradient-descent refinement to cover important locations without redundant probes. A very recent work by \cite{Teuber2024} formulates geometry-based optimization of probe placement using various mesh features, to further improve the lighting in VR/AR scenarios.
 
-Similarly, \cite{Vardis2021} approach the problem by starting with a probe set on a dense grid and iteratively remove the leas-important probes using radiance error tests, preserving the global light field while minimizing probe count.
+Similarly, \cite{Vardis2021} approach the problem by starting with a probe set on a dense grid and iteratively removing the least-important probes using radiance error tests, preserving the global light field while minimizing probe count.
 
-\subsection*{AI based methods}
+\subsection*{AI-based Methods}
+Recently, AI-assisted methods have started to be developed in order to improve GI in 3D applications, specifically in probe-based solutions. \cite{Guo2022} propose a hybrid neural probe GI. They use a gradient-based search to re-project stored probe radiance for any view, therefore eliminating parallax, and then apply a small neural network to reconstruct high-quality images from low-resolution probe data. Related, \cite{You2024} created Neural Light Field Probes, which works by decomposing a scene into a grid of trainable light field probes. Each of these probes encodes local radiance and visibility in a compact feature map. Finally, a neural network optimizes these probes so that the summation of their contributions reproduces the full scene lighting. 
+
+\section{Thesis Structure} % redo parts of this, fix stuff
+The structure of the remainder of this thesis will be described shortly. Chapter 2, titled IDK YET, FIX IT, covers important information about light probes and their implementation, describes the AI model basis that was used for our implementation, and introduces the tools and technologies that were used in this thesis. Chapter 3, titled Our Approach (?), presents our method, describes the implementation of the algorithms used, and explains how each part is combined to create the Light-Probe Neural Network (LPNN), our neural network system that attempts to speed up light probe placement in Unity 3D scenes by predicting importance values for the given grid set and placing only the most vital light probes, affected by a user-controlled threshold value. Each grid position gathers samples of a few metrics, which are then used by the neural network to decide whether or not it is vital to place a light probe in each individual cell of the 3D grid. A step-by-step process of creating the grid, getting the features out of the grid cells, and placing the probes and baking the global illumination inside Unity. Additionally, the feature set can be used to retrain the AI model, we explain how to create the labels needed for the process, and how to import the new model to Unity using Sentis for usage. Chapter 4, titled Experiments, presents an experimental comparative and qualitative evaluation between the proposed method and some of the already introduced algorithms. Finally, Chapter 5, titled Conclusions and Future Works, concludes the thesis and proposes directions for future work based on this thesis.
 
 
-\section{Thesis Structure}
-TODO
+
+
+
+
+
+
+
+
+
+
