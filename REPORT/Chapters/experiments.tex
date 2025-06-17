@@ -15,6 +15,7 @@ The LPNN approach speeds up light probe placement by orders of magnitude faster 
 	LumiProbes & Sponza   &          &     &      &      \\
 	\cline{2-6}
 	           & Office   & 51.059s  & 144 & 84 (60)  & (12,3,4), 128\\
+	           &          & 919.134s  & 288 & 182 (106)  & (12,3,8), 256\\
 	\cline{2-6}
 	           & Corridor & 161.151s & 180 & 120 (60) & (20,3,3), 256\\
 	           &          & 477.648s & 243 & 147 (96) & (27,3,3), 256\\
@@ -22,11 +23,11 @@ The LPNN approach speeds up light probe placement by orders of magnitude faster 
 	\hline
 	Ours       & Sponza    &       &     &           &             \\
 	\cline{2-6}
-			   & Office   & \textbf{7.8}ms  & 140 & 34 (106)  &  0.758, 1.87 \\
-               &          & \textbf{25.2}ms & 832 & 117 (715) &  0.859, 1.10 \\
+			   & Office   & \textbf{7.8ms}  & 140 & 34 (106)  &  0.758, 1.87 \\
+               &          & \textbf{25.2ms} & 832 & 117 (715) &  0.859, 1.10 \\
     \cline{2-6}
-    		   & Corridor & \textbf{10.9}ms & 186 & 84 (102)  & 0.549, 1.94 \\
-               &          & \textbf{15.7}ms & 246 & 95 (151)  & 0.615, 1.50 \\
+    		   & Corridor & \textbf{10.9ms} & 186 & 84 (102)  & 0.549, 1.94 \\
+               &          & \textbf{15.7ms} & 246 & 95 (151)  & 0.615, 1.50 \\
                
 	\hline
 \end{tabular}
@@ -36,4 +37,5 @@ The LPNN approach speeds up light probe placement by orders of magnitude faster 
 
 \section{Quality}
 \label{sec:4_quality}
+The tools were tested on the aforementioned edited Sponza scene \parencite{Sponza2017}, Corridor scene \parencite{Corridor2021} and Office scene \parencite{Office2021}. We will present the qualitative results. As seen in figure \ref{}, LPNN correctly places light probes in areas of high variance.
 

@@ -1,15 +1,23 @@
 In this chapter we introduce some basic, required background for this thesis. First, we introduce light probes and the mathematical equations that define them. Then, we present the AI architecture that was the basis of our AI model. Finally, the tools and technologies used for this thesis are presented.
 
 \section{Light Probes}
-As mentioned previously, the idea of using discrete probes to capture scene lighting data traces back to early GI research. \cite{Greger1998} introduced the irradiance volume, a 3D grid of sample points storing the irradiance field to approximate GI in complex scenes. A light probe samples the incident radiance at a point in empty space from all directions. Often just the diffuse component of the radiance is captured, since it most commonly varies smoothly, so it can be compactly represented by projecting the lighting onto a truncated spherical harmonic (SH) basis. Third-order SH is most commonly used, storing 9 coefficients per color channel, abbreviated to L2-SH.
+As mentioned previously, the idea of using discrete probes to capture scene lighting data traces back to early GI research. In the paper \parencite{Greger1998} introduced the irradiance volume, a 3D grid of sample points storing the irradiance field to approximate GI in complex scenes. A light probe samples the incident radiance at a point in empty space from all directions. Often just the diffuse component of the radiance is captured, since it most commonly varies smoothly, so it can be compactly represented by projecting the lighting onto a truncated spherical harmonic (SH) basis. Third-order SH is most commonly used, storing 9 coefficients per color channel, abbreviated to L2-SH.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{Graphics/light_probes.jpg}
+	\caption{A 3D Scene showing a few light probes placed in importance locations \parencite{Unity2016}.}
+	\label{fig:Light_probes}
+\end{figure}
+
 
 \section{Spherical Harmonics}
-Spherical Harmonics (SH), first introduced by Pierre Simon de Laplace, are a method of storing information on a point in space. They are categorized in orders, starting from first order. We are interested in third-order SH, since they represent a good middle ground between storage size, computational cost and accuracy. SH are often described as the Fourier Series of functions on the surface of a sphere, breaking down any pattern of light on a sphere into a set of basis frequencies. The order of SH depicts the amount of data we capture, third-order SH, noted as L2 SH, store the first three bands of data, resulting in 9 coefficients per color channel. Bands represent the individual frequencies; the Zeroth band captures the overall average lighting present in that position in space, the First band captures simple directional gradients, and the Second band captures quadratic variations, e.g. gentle light gradients and their shadows.
+Spherical Harmonics (SH), first introduced by Pierre Simon de Laplace, are a method of storing information on a point in space. They are categorized in structures called orders. We are interested in third-order SH, since they represent a good middle ground between storage size, computational cost and accuracy. SH are often described as the Fourier Series of functions on the surface of a sphere, breaking down any pattern of light on a sphere into a set of basis frequencies. The order of SH depicts the amount of data we capture, third-order SH, noted as L2 SH, store the first three bands of data, resulting in 9 coefficients per color channel. Bands represent the individual frequencies; the Zeroth band captures the overall average lighting present in that position in space, the First band captures simple directional gradients, and the Second band captures quadratic variations, e.g. gentle light gradients and their shadows.
 
 \section{PointNet}
 PointNet is a neural-network architecture designed to work directly on unordered 3D point-clouds; a collection of points without any required grid connectivity. Each point passes through a small MultiLayer Perceptron (MLP), extracting a feature vector that describes its local attributes, e.g. color and normal. After per-point features are computed, PointNet aggregates them into a global descriptor by applying a symmetric operation, usually max-pooling across all points, capturing the strongest signal from the features. Then, the global descriptor is concatenated back to the per-point features, resulting in every point having knowledge about both its characteristics and the broader context. Finally, a per-point MLP refines these combined values into task-specific outputs, commonly classification scores or per-point importance metrics.
 
-Since there is no fixed grid, meaning the points are assumed to be unordered and irregular, traditional CNNs can't be applied directly. Additionally, since PointNet predicts values per-point, it can be used to handle point clouds of any shape and point amount without retraining, limited only by the systems memory
+Since there is no fixed grid, meaning the points are assumed to be unordered and irregular, traditional CNNs can't be applied directly. Additionally, since PointNet predicts values per-point, it can be used to handle point clouds of any shape and point amount without retraining, limited only by the system's memory. This makes PointNet a fitting candidate to base our model on, with the implementation being the only varying factor.
 
 \section{Tools}
-TODO
+TODO % mention the edits on sponza and corridor and office, if any

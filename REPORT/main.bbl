@@ -17,6 +17,30 @@
 \endgroup
 
 \datalist[entry]{nyt/global//global/global/global}
+  \entry{Office2021}{misc}{}{}
+    \name{author}{1}{}{%
+      {{hash=CAG}{%
+         family={CG\bibnamedelima AUEB},
+         familyi={C\bibinitperiod\bibinitdelim A\bibinitperiod},
+         given={Group},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CAG1}
+    \strng{fullhash}{CAG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2021}
+    \field{labeldatesource}{}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \field{title}{Office Unity Scene}
+    \verb{url}
+    \verb http://graphics.cs.aueb.gr/graphics/index.html
+    \endverb
+    \field{year}{2021}
+  \endentry
+
   \entry{Crassin2011}{inproceedings}{}{}
     \name{author}{5}{}{%
       {{hash=CC}{%
@@ -342,6 +366,32 @@
     \warn{\item Invalid format of field 'month'}
   \endentry
 
+  \entry{Sponza2017}{misc}{}{}
+    \name{author}{1}{}{%
+      {{hash=MM}{%
+         family={McGuire},
+         familyi={M\bibinitperiod},
+         given={Morgan},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MM1}
+    \strng{fullhash}{MM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2017}
+    \field{labeldatesource}{}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{note}{\small \texttt{https://casual-effects.com/data}}
+    \field{title}{Computer Graphics Archive}
+    \verb{url}
+    \verb https://casual-effects.com/data
+    \endverb
+    \field{year}{2017}
+    \warn{\item Invalid format of field 'month'}
+  \endentry
+
   \entry{McGuire2017}{inproceedings}{}{}
     \name{author}{4}{}{%
       {{hash=MM}{%
@@ -485,6 +535,29 @@
     \field{year}{2024}
   \endentry
 
+  \entry{Unity2016}{misc}{}{}
+    \name{author}{1}{}{%
+      {{hash=U}{%
+         family={Unity},
+         familyi={U\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{U1}
+    \strng{fullhash}{U1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2016}
+    \field{labeldatesource}{}
+    \field{sortinit}{U}
+    \field{sortinithash}{U}
+    \field{title}{Light Probes Example}
+    \verb{url}
+    \verb https://docs.unity3d.com/530/Documentation/Manual/class-LightProbeGro
+    \verb up.html
+    \endverb
+    \field{year}{2016}
+  \endentry
+
   \entry{Unity2025}{misc}{}{}
     \name{author}{1}{}{%
       {{hash=U}{%
@@ -506,6 +579,44 @@
     \verb inition@17.0/manual/probevolumes-concept.html
     \endverb
     \field{year}{2025}
+  \endentry
+
+  \entry{Corridor2021}{misc}{}{}
+    \name{author}{3}{}{%
+      {{hash=VK}{%
+         family={Vardis},
+         familyi={V\bibinitperiod},
+         given={Konstantinos},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=VA}{%
+         family={Vasilakis},
+         familyi={V\bibinitperiod},
+         given={Andreas},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=PG}{%
+         family={Papaioannou},
+         familyi={P\bibinitperiod},
+         given={Georgios},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{VKVAPG1}
+    \strng{fullhash}{VKVAPG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2021}
+    \field{extradate}{1}
+    \field{labeldatesource}{}
+    \field{sortinit}{V}
+    \field{sortinithash}{V}
+    \field{title}{Corridor Unity Scene}
+    \verb{url}
+    \verb https://github.com/cgaueb/light_probe_placement/tree/main/Light%20Pro
+    \verb bes/Assets/Scenes/TestProbesScene
+    \endverb
+    \field{year}{2021}
   \endentry
 
   \entry{Vardis2021}{article}{}{}
@@ -534,6 +645,7 @@
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
     \field{labelyear}{2021}
+    \field{extradate}{2}
     \field{labeldatesource}{}
     \field{sortinit}{V}
     \field{sortinithash}{V}
