@@ -1,5 +1,27 @@
 In this chapter, we present experimental results of the LPNN approach. The evaluation is qualitative, since the nature of light probes and their optimal placement is subjective to the user and the needs of the application. We focus mainly on speed in relation to light probe layout given by the tool. We compare performance results to LumiProbes \parencite{Vardis2021}. All experiments were conducted in Unity on a system comprising of an NVIDIA RTX2060M GPU, 16GB DDR4 RAM and an Intel i7-9750H CPU, on a Windows 10 Operating System.
 
 \section{Performance}
-The LPNN approach speeds up light probe placement by orders of magnitude faster than other approaches, but it may suffer from occasional misplacement; probes that were placed in positions that are not vital, leading to oversampling. In experiments where LumiProbes and LPNN were requested to place the same amount of light probes in the same scene, LPNN time stayed close to constant, typically a few seconds, regardless of the scenario or the amount requested. Results for various amounts of light probes and scenes are presented in table \ref{}. Where applicable, we also append the settings used for each tool respectively.
+\label{sec:4_performance}
+The LPNN approach speeds up light probe placement by orders of magnitude faster than other approaches, but it may suffer from occasional misplacement; probes that were placed in positions that are not vital, leading to oversampling. In experiments where LumiProbes and LPNN were requested to place the same amount of light probes in the same scene, LPNN time stayed close to constant, typically a few seconds, regardless of the scenario or the amount requested. Results for various amounts of light probes and scenes are presented in table \ref{table:times}. Where applicable, we also append the settings used for each tool respectively.
+
+\begin{table}
+	\centering
+\begin{tabular}{ |c||c|c|c|c|  }
+	\hline
+	\multicolumn{5}{|c|}{Execution time} \\
+	\hline
+	Method & Scene & Time & Probe Count & Settings (?)\\
+	\hline
+	LumiProbes & Sponza    & AFG   & 004 & TODO \\
+	           & Office    & ALA   & 248 &      \\
+	           & Test      & ALA   & 248 &      \\
+	\hline
+	Ours       & Sponza    & ALB   & 008 & TODO \\
+               & Office    & DZA   & 012 &      \\
+               & Test      & ALA   & 248 &      \\
+	\hline
+\end{tabular}
+\caption{Execution time for LPNN and LumiProbes on a select number of scenes and probe counts}
+\label{table:times}
+\end{table}
 
