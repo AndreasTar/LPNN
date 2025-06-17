@@ -8,9 +8,9 @@
 \contentsline {section}{\numberline {2.1}Light Probes}{12}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Spherical Harmonics}{12}{section.2.2}%
 \contentsline {section}{\numberline {2.3}PointNet}{12}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Tools}{12}{section.2.4}%
-\contentsline {chapter}{\numberline {3}Our Approach}{13}{chapter.3}%
-\contentsline {chapter}{\numberline {4}Experiments}{14}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Performance}{14}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Quality}{14}{section.4.2}%
-\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{16}{chapter.5}%
+\contentsline {section}{\numberline {2.4}Tools}{13}{section.2.4}%
+\contentsline {chapter}{\numberline {3}Our Approach}{14}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Experiments}{15}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Performance}{15}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Quality}{15}{section.4.2}%
+\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{17}{chapter.5}%

@@ -13,23 +13,24 @@ The LPNN approach speeds up light probe placement by orders of magnitude faster 
 	Method & Scene & Time & P. Count & P. Present (\& Removed) & Settings\\
 	\hline
 	LumiProbes & Sponza   &          &     &      &      \\
-	\cline{2-5}
-	           & Office   &          &     &      &      \\
-	\cline{2-5}
+	\cline{2-6}
+	           & Office   & 51.059s  & 144 & 84 (60)  & (12,3,4), 128\\
+	\cline{2-6}
 	           & Corridor & 161.151s & 180 & 120 (60) & (20,3,3), 256\\
 	           &          & 477.648s & 243 & 147 (96) & (27,3,3), 256\\
 	\hline
 	\hline
 	Ours       & Sponza    &       &     &           &             \\
-	\cline{2-5}
-               & Office    &       &     &           &             \\
-    \cline{2-5}
-    		   & Corridor & 10.9ms & 186 & 84 (102)  & 0.549, 1.94 \\
-               &          & 15.7ms & 246 & 95 (151)  & 0.615, 1.5  \\
+	\cline{2-6}
+			   & Office   & \textbf{7.8}ms  & 140 & 34 (106)  &  0.758, 1.87 \\
+               &          & \textbf{25.2}ms & 832 & 117 (715) &  0.859, 1.10 \\
+    \cline{2-6}
+    		   & Corridor & \textbf{10.9}ms & 186 & 84 (102)  & 0.549, 1.94 \\
+               &          & \textbf{15.7}ms & 246 & 95 (151)  & 0.615, 1.50 \\
                
 	\hline
 \end{tabular}
-\caption{Execution time for LPNN and LumiProbes on a select number of scenes and probe counts. \textit{P. count} represents the total amount of probes in the scene, before simplification.\textit{P. Present} depict the final amount of probes after running the tools. The number in parenthesis is the amount of probes removed by the tool, in respect to the settings. Fastest times are shown in \textbf{bold}.}
+\caption{Execution time for LPNN and LumiProbes on a select number of scenes and probe counts. \textit{P. count} represents the total amount of probes in the scene, before simplification. \textit{P. Present} depict the final amount of probes after running the tools. The number in parenthesis is the amount of probes removed by the tool, in respect to the settings. Fastest times are shown in \textbf{bold}.}
 \label{table:times}
 \end{table}
 
