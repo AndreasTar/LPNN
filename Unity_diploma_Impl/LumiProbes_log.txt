@@ -428,3 +428,29 @@
 17/6/2025 9:46:23 π.μ. [01]: Log [INFO]: Finished after 101 iterations. Final error: 2,99%., Stages Time: 1. Remove LP: 0s, 2. Remap EPs: 456,9s, 2.1 Tetrahed: 35,378s, 2.2 Mappings: 411,483s, 3. Eval  EPs: 2,072s, 4. Calc Cost: 0,041s, 5. Find Min : 0s, 6. Insert LP: 0s, Total: 459,013s
 17/6/2025 9:46:23 π.μ. [01]: Log [INFO]: Decimated 101 light probes, 139 left
 17/6/2025 9:46:23 π.μ. [01]: Log [INFO]: Done (DecimateLightProbes: 478,711s)
+17/6/2025 3:31:30 μ.μ. [01]: Log [INFO]: Done (PlaceLightProbes: 0,013s)
+17/6/2025 3:31:41 μ.μ. [01]: Log [INFO]: Done (PlaceEvaluationPoints: 0,079s)
+17/6/2025 3:31:44 μ.μ. [01]: Log [INFO]: Done (PlaceEvaluationPoints: 0,202s)
+17/6/2025 3:31:52 μ.μ. [01]: Log [INFO]: Bake started
+17/6/2025 3:31:52 μ.μ. [01]: Log [INFO]: Done (Bake: 0,044s)
+17/6/2025 3:32:56 μ.μ. [01]: Log [INFO]: Mapped 180 LPs to 456 tetrahedrals. Mapped 256 EPs: 256 (100,00%) to tetrahedrons and 0 (0,00%) to triangles, 0 unmapped
+17/6/2025 3:32:56 μ.μ. [01]: Log [INFO]: Starting Decimation. Settings: LPs: 180, EPs: 256, LP Evaluation method: FixedMedium (14), Averaging EP directions: True, Solver: AveragePercentageError, Metric: Chrominance, Minimum Error: 3, Minimum LP Set: Disabled
+17/6/2025 3:35:37 μ.μ. [01]: Log [INFO]: Iteration: 60. Error: 3,09241439524595. Stopping using max error criteria
+17/6/2025 3:35:37 μ.μ. [01]: Log [INFO]: Finished after 60 iterations. Final error: 2,90%., Stages Time: 1. Remove LP: 0s, 2. Remap EPs: 150,103s, 2.1 Tetrahed: 9,778s, 2.2 Mappings: 136,39s, 3. Eval  EPs: 1,396s, 4. Calc Cost: 0,041s, 5. Find Min : 0s, 6. Insert LP: 0s, Total: 151,54s
+17/6/2025 3:35:37 μ.μ. [01]: Log [INFO]: Decimated 60 light probes, 120 left
+17/6/2025 3:35:37 μ.μ. [01]: Log [INFO]: Done (DecimateLightProbes: 161,151s)
+17/6/2025 3:37:58 μ.μ. [01]: Log [INFO]: Done (PlaceLightProbes: 0s)
+17/6/2025 3:37:59 μ.μ. [01]: Log [INFO]: Done (ShowRemovedLightProbes: 0s)
+17/6/2025 3:38:07 μ.μ. [01]: Log [INFO]: Done (PlaceLightProbes: 0s)
+17/6/2025 3:38:12 μ.μ. [01]: Log [INFO]: Done (PlaceLightProbes: 0s)
+17/6/2025 3:38:17 μ.μ. [01]: Log [INFO]: Done (PlaceLightProbes: 0s)
+17/6/2025 3:38:25 μ.μ. [01]: Log [INFO]: Done (PlaceLightProbes: 0s)
+17/6/2025 3:38:27 μ.μ. [01]: Log [INFO]: Done (PlaceEvaluationPoints: 0,194s)
+17/6/2025 3:39:10 μ.μ. [01]: Log [INFO]: Mapped 243 LPs to 624 tetrahedrals. Mapped 256 EPs: 256 (100,00%) to tetrahedrons and 0 (0,00%) to triangles, 0 unmapped
+17/6/2025 3:39:10 μ.μ. [01]: Log [INFO]: Starting Decimation. Settings: LPs: 243, EPs: 256, LP Evaluation method: FixedMedium (14), Averaging EP directions: True, Solver: AveragePercentageError, Metric: Chrominance, Minimum Error: 3, Minimum LP Set: Disabled
+17/6/2025 3:46:30 μ.μ. [01]: Log [INFO]: Iteration: 96. Error: 3,0589118540223. Stopping using max error criteria
+17/6/2025 3:46:30 μ.μ. [01]: Log [INFO]: Finished after 96 iterations. Final error: 2,96%., Stages Time: 1. Remove LP: 0,001s, 2. Remap EPs: 418,123s, 2.1 Tetrahed: 28,02s, 2.2 Mappings: 380,677s, 3. Eval  EPs: 2,562s, 4. Calc Cost: 0,061s, 5. Find Min : 0s, 6. Insert LP: 0s, Total: 420,747s
+17/6/2025 3:46:30 μ.μ. [01]: Log [INFO]: Decimated 96 light probes, 147 left
+17/6/2025 3:46:30 μ.μ. [01]: Log [INFO]: Done (DecimateLightProbes: 477,648s)
+17/6/2025 3:48:29 μ.μ. [01]: Log [INFO]: Done (ShowRemovedLightProbes: 0s)
+17/6/2025 3:48:30 μ.μ. [01]: Log [INFO]: Done (ShowRemovedLightProbes: 0s)

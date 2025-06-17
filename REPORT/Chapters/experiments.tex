@@ -2,26 +2,37 @@ In this chapter, we present experimental results of the LPNN approach. The evalu
 
 \section{Performance}
 \label{sec:4_performance}
-The LPNN approach speeds up light probe placement by orders of magnitude faster than other approaches, but it may suffer from occasional misplacement; probes that were placed in positions that are not vital, leading to oversampling. In experiments where LumiProbes and LPNN were requested to place the same amount of light probes in the same scene, LPNN time stayed close to constant, typically a few seconds, regardless of the scenario or the amount requested. Results for various amounts of light probes and scenes are presented in table \ref{table:times}. Where applicable, we also append the settings used for each tool respectively.
+The LPNN approach speeds up light probe placement by orders of magnitude faster than other approaches, but it may suffer from occasional misplacement; probes that were placed in positions that are not vital, leading to oversampling. In experiments where LumiProbes and LPNN were requested to place close to the same amount of light probes in the same scene, LPNN time stayed close to constant, typically up to a few seconds, regardless of the scenario or the amount requested. Results for various amounts of light probes and scenes are presented in table \ref{table:times}. Times are averaged over multiple runs. Units are represented in minutes (m), seconds (s), or milliseconds (ms). Where applicable, we also append the settings used for each tool. For LumiProbes, settings include the grid parameters and the evaluation-point count. All other settings are as follows: Evaluation point placement type is set to Poisson, Decimation type is set to Medium, Decimation directions are averaged, Decimation metric is set to  Chrominance, Minimum LP set is disabled, and Maximum Error is set to 3. For LPNN, settings include the threshold value used for the specific result and the cell size of the 3D grid, in order. Figures for the results are shown in section \ref{sec:4_quality}.
 
 \begin{table}
 	\centering
-\begin{tabular}{ |c||c|c|c|c|  }
+\begin{tabular}{ |c||c|c|c|c|c|  }
 	\hline
-	\multicolumn{5}{|c|}{Execution time} \\
+	\multicolumn{6}{|c|}{Execution time} \\
 	\hline
-	Method & Scene & Time & Probe Count & Settings (?)\\
+	Method & Scene & Time & P. Count & P. Present (\& Removed) & Settings\\
 	\hline
-	LumiProbes & Sponza    & AFG   & 004 & TODO \\
-	           & Office    & ALA   & 248 &      \\
-	           & Test      & ALA   & 248 &      \\
+	LumiProbes & Sponza   &          &     &      &      \\
+	\cline{2-5}
+	           & Office   &          &     &      &      \\
+	\cline{2-5}
+	           & Corridor & 161.151s & 180 & 120 (60) & (20,3,3), 256\\
+	           &          & 477.648s & 243 & 147 (96) & (27,3,3), 256\\
 	\hline
-	Ours       & Sponza    & ALB   & 008 & TODO \\
-               & Office    & DZA   & 012 &      \\
-               & Test      & ALA   & 248 &      \\
+	\hline
+	Ours       & Sponza    &       &     &           &             \\
+	\cline{2-5}
+               & Office    &       &     &           &             \\
+    \cline{2-5}
+    		   & Corridor & 10.9ms & 186 & 84 (102)  & 0.549, 1.94 \\
+               &          & 15.7ms & 246 & 95 (151)  & 0.615, 1.5  \\
+               
 	\hline
 \end{tabular}
-\caption{Execution time for LPNN and LumiProbes on a select number of scenes and probe counts}
+\caption{Execution time for LPNN and LumiProbes on a select number of scenes and probe counts. \textit{P. count} represents the total amount of probes in the scene, before simplification.\textit{P. Present} depict the final amount of probes after running the tools. The number in parenthesis is the amount of probes removed by the tool, in respect to the settings. Fastest times are shown in \textbf{bold}.}
 \label{table:times}
 \end{table}
+
+\section{Quality}
+\label{sec:4_quality}
 
