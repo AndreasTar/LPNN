@@ -422,12 +422,10 @@ public class LPNN_script : MonoBehaviour
     public void PlacePredictions(float threshold){
         
         gameObject.GetOrAddComponent<LightProbeGroup>();
-
         List<Vector3> positions = new();
-
         stopwatch.Restart();
-
-        string[] predictions = File.ReadAllLines(Application.dataPath + "/LPNN/Results/model_evals.txt"); 
+        string[] predictions = File.ReadAllLines(Application.dataPath + "/LPNN/Results/model_evals.txt");
+        
         List<float> pred = new();
         float min = float.MaxValue;
         float max = float.MinValue;
@@ -442,16 +440,16 @@ public class LPNN_script : MonoBehaviour
             pred[i] = Utils.map(pred[i], min, max, 0, 1);
         }
         
-        for (int i = 0; i < pred.Count; i++){
-            if (pred[i] > threshold) {
-                positions.Add(evalPoints[i]);
-            }
+        int percentage = (int)MathF.Round((1-threshold) * pred.Count);
+        var top_lp = pred.OrderByDescending(x => x).Take(percentage);
+        foreach (var t in top_lp) {
+            positions.Add(evalPoints[pred.IndexOf(t)]);
         }
+        
         gameObject.GetComponent<LightProbeGroup>().probePositions = positions.ToArray();
         stopwatch.Stop();
         Debug.Log($"Finished in {stopwatch.ElapsedMilliseconds} ms.");
         Debug.Log($"Placed {positions.Count} predicted light probes.");
-        Debug.Log($"Min: {min}, Max: {max}, Average: {min+pred.Average()}");
     }
 
 }
