@@ -38,14 +38,14 @@ public class LPNN_script : MonoBehaviour
     private List<Vector3Int> epIndexes;
     [NonSerialized] public Vector3Int voxelAmountperDir;
 
-    private Dictionary<Vector3, float[][]> features; // = {vec3i, float[f1, f2]}
+    private Dictionary<Vector3, float[][]> features; // = {vec3, float[f1, f2]}
 
     System.Diagnostics.Stopwatch stopwatch = new();
 
 
     private void Awake()
     {
-        // on awake, we need to remove the object itself and only keep the light probes        
+        // on awake, we need to remove the object itself and only keep the light probes potentially       
     }
 
     void OnDrawGizmos()
