@@ -255,6 +255,31 @@
     \field{year}{2022}
   \endentry
 
+  \entry{Luminance2015}{misc}{}{}
+    \name{author}{1}{}{%
+      {{hash=IR}{%
+         family={ITU-R},
+         familyi={I\bibinithyphendelim R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{IR1}
+    \strng{fullhash}{IR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2015}
+    \field{labeldatesource}{}
+    \field{sortinit}{I}
+    \field{sortinithash}{I}
+    \field{title}{Parameter values for the HDTV standards for production and
+  international programme exchange.}
+    \verb{url}
+    \verb https://www.itu.int/dms_pubrec/itu-r/rec/bt/R-REC-BT.709-6-201506-I!!
+    \verb PDF-E.pdf
+    \endverb
+    \field{month}{06}
+    \field{year}{2015}
+  \endentry
+
   \entry{Kajiya1986}{article}{}{}
     \name{author}{1}{}{%
       {{hash=KJT}{%

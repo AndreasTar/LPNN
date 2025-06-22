@@ -40,7 +40,7 @@ public class LPNN_script : MonoBehaviour
 
     private Dictionary<Vector3, float[][]> features; // = {vec3, float[f1, f2]}
 
-    System.Diagnostics.Stopwatch stopwatch = new();
+    readonly System.Diagnostics.Stopwatch stopwatch = new();
 
 
     private void Awake()

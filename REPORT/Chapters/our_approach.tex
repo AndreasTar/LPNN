@@ -1,1 +1,151 @@
-what we did and how why etc
+In this chapter, we will present the pipeline of the tool and its implementation. The chapter will be split into five parts, describing the process of collecting the features, how labels are created, LPNN training in python, and predicting light probe positions using the trained model accordingly. Lastly, we will present the tool inside the Unity Editor.
+
+\section{Feature Collection}
+A necessary step before collecting scene and lighting features is to first place points in the scene to collect data per-point. We decided to create an algorithm that places those points, called Evaluation Points (EP) henceforth, inside a collection of user-defined potentially concave scene bounds of arbitrary shape. As shown in algorithm \ref{alg:grid_place}, we begin by placing the Evaluation Points on a volume that surrounds the collection of bounds the user defined, then we remove the points that are not within the bounds, as seen in figure \ref{fig:grid}.
+
+
+\begin{algorithm}
+	\caption{Placement of Evaluation Points on a grid-like layout}
+	\label{alg:grid_place}
+	\begin{algorithmic}[1]
+		\Require $cellsize > 0$
+		\State $EP = \emptyset$
+		\ForAll{$points \in volume$}
+			\If{$point \in bounds$}
+				\State $EP \gets EP + point$ \Comment add point to the set
+			\EndIf
+		\EndFor
+		\State \Return $EP$
+	\end{algorithmic}
+\end{algorithm}
+
+In algorithm \ref{alg:grid_place}, \textit{cellsize} is the distance between each EP, and a value of 0 or negative values do not apply, therefore it is vital to require a \textit{cellsize} bigger than 0. \textit{Cellsize} is not directly shown inside the algorithm, but for the C\# implementation it is necessary and the value is used often, therefore we show the requirement here. \textit{Bounds} is the collection of 3D areas defined by the user, and \textit{volume} are the bounds of that collection. As seen in figure \ref{fig:grid}, the rectangles shown in pink are three distinct areas defined by the user, defining where they want EP placed. Seen in red is the surrounding volumes of those bounds. We clearly see the EP, shown as yellow dots. They are present only inside the areas of the user defined bounds, but in a grid layout, regardless of the position of those bounds. The EP intentionally "overshoot" the bounds for completeness when calculating the feature data for each point, making sure we cover the entirety of the bounds given by the user.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.43]{Graphics/Grid_Example.jpg}
+	\caption{A 3D Scene showing the placement of Evaluation Points (shown in yellow) inside the user defined bounds (shown in pink), contained within the calculated volume (shown in red).}
+	\label{fig:grid}
+\end{figure}
+
+After placing the EP, we use each point to calculate the data needed for the feature vectors. The aim of the LPNN model is to give an importance value to each of those EP that it is given. Therefore, it is vital that it understands what defines a significant point via the features that it is trained on. Our knowledge dictates that an important location for a light probe is one that has great variance in illumination. Therefore, we include light-, RGB- and normal-variance as features for each point. Light-Variance dictates how much the light intensity changes around a point. RGB-Variance is similar, since it shows the change in Red, Green, and Blue light around each point, each channel being independent from the others. Normal-Variance is a value that makes locations like corners distinct from empty areas or from locations near a wall. Similarly, we also calculate Occlusion-Factor, a feature that gives each point a value depending on how empty or cluttered the area around it is. Normal-Variance together with Occlusion-Factor inform the model of areas that are enclosed or close to complex geometry. This makes the model able to distinguish these locations, even when all other values are identical, making it able to give different importance values to those distinct locations.
+
+Along with the features mentioned above, we additionally include a vector that contains the spherical-harmonic values for a small amount of distinct directions around each point. The implementations of each feature collection method are shown in \ref{alg:feat_sh}, \ref{alg:feat_lv}, \ref{alg:feat_rgbv}, \ref{alg:feat_nv}, and \ref{alg:feat_of}.
+
+
+\begin{algorithm}
+	\caption{Feature Extraction: Spherical Harmonics around a point}
+	\label{alg:feat_sh}
+	\begin{algorithmic}[1]
+		\Require $EP \neq \emptyset$
+		\State $values = \emptyset$
+		\ForAll{$points \in EP$}
+			\State $value \gets evaluateSH(point)$
+			\State $values \gets values + value$ \Comment add SH to the list
+		\EndFor
+		\State \Return $values$
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+	\caption{Feature Extraction: Light Variance around a point}
+	\label{alg:feat_lv}
+	\begin{algorithmic}[1]
+		\Require $EP \neq \emptyset$
+		\Require $samples \geq 1$ \Comment The amount of directions
+		\State $radius \gets 1$ \Comment How far around the point to check
+		\ForAll{$points \in EP$}
+			\State $luminances = \emptyset$
+			\For{$n = 1,\dots,samples$}
+				\State $direction \gets$ random point on sphere with $radius$
+				\State $sh \gets evaluateSH(direction)$
+				\State $luminance \gets sh.R * 0.2126 + sh.G * 0.7152 + sh.B * 0.0722$ \Comment From RGB to luminance value
+				\label{alg:feat_lv:7}
+				\State $luminances \gets luminances + luminance$ \Comment Add luminance to the list
+			\EndFor
+			\State $mean \gets mean(luminances)$ \Comment Get the mean value of the luminances
+			\State $variance \gets (luminances - mean)^2 \div samples$ \Comment Get the total variance of luminances
+		\EndFor
+		\State \Return $variance$ per point
+	\end{algorithmic}
+\end{algorithm}
+
+In line \algref{alg:feat_lv}{alg:feat_lv:7}, to convert from RGB channel values to perceived light intensity of the pixel, also known as luminance, we use the formula shown in \cite{Luminance2015}, under section 3 item 3.2. This formula is used to calculate how bright a pixel in regards to the RGB channel values it currently shows.
+
+\begin{algorithm}
+	\caption{Feature Extraction: Occlusion Factor around a point}
+	\label{alg:feat_rgbv}
+	\begin{algorithmic}[1]
+		\Require $EP \neq \emptyset$
+		\Require $samples \geq 1$ \Comment The amount of directions
+		\State $radius \gets 10$ \Comment How far around the point to check
+		\ForAll{$points \in EP$}
+		\State $count \gets 0$
+		\For{$n = 1,\dots,samples$}
+		\State $direction \gets$ random point on sphere with $radius$
+		\State $sh \gets evaluateSH(direction)$
+		\EndFor
+		\State $meanRGB \gets mean(sh.RGB)$
+		\State $RGBvariance \gets (sh.RGB - meanRGB)^2 \div samples$
+		\EndFor
+		\State \Return ${RGBvariance.R, RGBvariance.G, RGBvariance.B}$ per point
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+	\caption{Feature Extraction: Normal Variance around a point}
+	\label{alg:feat_nv}
+	\begin{algorithmic}[1]
+		\Require $EP \neq \emptyset$
+		\Require $samples \geq 1$ \Comment The amount of directions
+		\State $radius \gets 1$ \Comment How far around the point to check
+		\ForAll{$points \in EP$}
+			\State $normals = \emptyset$
+			\For{$n = 1,\dots,samples$}
+				\State $direction \gets$ random point on sphere with $radius$
+				\State $hit \gets castRay(direction)$
+				\If{$hit == True$}
+					\State $normals \gets normals + hit.normal$
+				\EndIf
+			\EndFor
+			\State $mean \gets mean(normals)$ \Comment Get the mean direction of the normals
+			\State $variance \gets (1- dot(normals, mean)) \div samples$
+			\label{alg:feat_nv:12}
+			\Comment Get the total variance of normals
+		\EndFor
+		\State \Return $variance$ per point
+	\end{algorithmic}
+\end{algorithm}
+
+In line \algref{alg:feat_nv}{alg:feat_nv:12}, we want the higher values to define the areas with more complex geometry. The dot product of vectors is a value between 0 and 1, therefore we subtract the dot product from 1, to invert the range of the variance.
+
+\begin{algorithm}
+	\caption{Feature Extraction: Occlusion Factor around a point}
+	\label{alg:feat_of}
+	\begin{algorithmic}[1]
+		\Require $EP \neq \emptyset$
+		\Require $samples \geq 1$ \Comment The amount of directions
+		\State $radius \gets 10$ \Comment How far around the point to check
+		\ForAll{$points \in EP$}
+			\State $count \gets 0$
+			\For{$n = 1,\dots,samples$}
+				\State $direction \gets$ random point on sphere with $radius$
+				\State $hit \gets castRay(direction)$
+				\If{$hit == True$}
+					\State $count \gets count + 1$
+				\EndIf
+			\EndFor
+			\State $factor \gets count \div samples$
+			\Comment Percentage of hits versus misses.
+		\EndFor
+		\State \Return $factor$ per point
+	\end{algorithmic}
+\end{algorithm}
+
+\section{Label Collection}
+
+\section{Model Training}
+
+\section{Light Probe Prediction}
+
+\section{LPNN inside Unity Editor}
