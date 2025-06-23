@@ -73,7 +73,7 @@ Along with the features mentioned above, we additionally include a vector that c
 In line \algref{alg:feat_lv}{alg:feat_lv:7}, to convert from RGB channel values to perceived light intensity of the pixel, also known as luminance, we use the formula shown in \cite{Luminance2015}, under section 3 item 3.2. This formula is used to calculate how bright a pixel in regards to the RGB channel values it currently shows.
 
 \begin{algorithm}
-	\caption{Feature Extraction: Occlusion Factor around a point}
+	\caption{Feature Extraction: RGB Variance around a point}
 	\label{alg:feat_rgbv}
 	\begin{algorithmic}[1]
 		\Require $EP \neq \emptyset$
@@ -142,10 +142,41 @@ In line \algref{alg:feat_nv}{alg:feat_nv:12}, we want the higher values to defin
 	\end{algorithmic}
 \end{algorithm}
 
+After collecting all the features, we compact them into a feature vector per-EP, and save them into a file for later use. As shown in \ref{sec:LPNN_UI}, it is also possible to collect feature vectors from multiple scenes at different times, as well as labels, to make the model more accurate by providing more input data. 
+
 \section{Label Collection}
 
+The supervised-learning approach we decided on for this thesis requires that the model also receives labels as an input. Labels are values for each of the input feature vectors that describe the correct output for that feature vector. It is therefore vital to collect labels for each EP that we have also collected features for. For this purpose, we use LumiProbes \parencite{Vardis2021} to collect labels by returning a True or False value, depending on if the cell of each Evaluation Point contains a probe placed by LumiProbes. The use of LumiProbes as the ground-truth was arbitrary. The system is constructed in a way that allows any method of ground-truth light probe placement to be used for label extraction, even manual placement. In algorithm \ref{alg:labels} we check every EP with every light probe in the ground-truth list and set the label to True if there exists a light probe around a \textit{cellsize} radius of that Evaluation Point.
+
+\begin{algorithm}
+	\caption{Label Extraction per-EP}
+	\label{alg:labels}
+	\begin{algorithmic}[1]
+		\Require $EP \neq \emptyset$
+		\Require $cellsize > 0$
+		\ForAll{$points \in EP$}
+			\ForAll{$probes \in groundTruth$}
+				\If{$probe \in cellsize$ around $point$}
+					\State $label \gets True$
+				\Else
+					\State $label \gets False$
+				\EndIf
+			\EndFor
+		\EndFor
+		\State \Return $labels$ per point
+	\end{algorithmic}
+\end{algorithm}
+
+The nature of this label extraction method beckons for the ground-truth light probe placement to be close to the optimal placement, determined by the user's intuition, experience, and demands for the specific scene.
+
+After collecting the labels into a list, they are saved into a file on the hard disk for use in training of the model, as seen in section \ref{sec:model_training}. As mentioned previously, it is possible to collect labels from multiple scenes, creating a bigger dataset for the model to train on.
+
 \section{Model Training}
+\label{sec:model_training}
+
+The model basis for LPNN, as mentioned previously, was a PointNet architecture \parencite{PointNet2017} as described in \ref{sec:background:pointnet}.
 
 \section{Light Probe Prediction}
 
 \section{LPNN inside Unity Editor}
+\label{sec:LPNN_UI}

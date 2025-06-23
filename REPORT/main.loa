@@ -1,6 +1,7 @@
-\contentsline {algorithm}{\numberline {1}{\ignorespaces Placement of Evaluation Points on a grid-like layout}}{15}{algorithm.1}%
-\contentsline {algorithm}{\numberline {2}{\ignorespaces Feature Extraction: Spherical Harmonics around a point}}{16}{algorithm.2}%
-\contentsline {algorithm}{\numberline {3}{\ignorespaces Feature Extraction: Light Variance around a point}}{17}{algorithm.3}%
-\contentsline {algorithm}{\numberline {4}{\ignorespaces Feature Extraction: Occlusion Factor around a point}}{17}{algorithm.4}%
-\contentsline {algorithm}{\numberline {5}{\ignorespaces Feature Extraction: Normal Variance around a point}}{18}{algorithm.5}%
-\contentsline {algorithm}{\numberline {6}{\ignorespaces Feature Extraction: Occlusion Factor around a point}}{18}{algorithm.6}%
+\contentsline {algorithm}{\numberline {1}{\ignorespaces Placement of Evaluation Points on a grid-like layout}}{16}{algorithm.1}%
+\contentsline {algorithm}{\numberline {2}{\ignorespaces Feature Extraction: Spherical Harmonics around a point}}{17}{algorithm.2}%
+\contentsline {algorithm}{\numberline {3}{\ignorespaces Feature Extraction: Light Variance around a point}}{18}{algorithm.3}%
+\contentsline {algorithm}{\numberline {4}{\ignorespaces Feature Extraction: RGB Variance around a point}}{18}{algorithm.4}%
+\contentsline {algorithm}{\numberline {5}{\ignorespaces Feature Extraction: Normal Variance around a point}}{19}{algorithm.5}%
+\contentsline {algorithm}{\numberline {6}{\ignorespaces Feature Extraction: Occlusion Factor around a point}}{19}{algorithm.6}%
+\contentsline {algorithm}{\numberline {7}{\ignorespaces Label Extraction per-EP}}{20}{algorithm.7}%

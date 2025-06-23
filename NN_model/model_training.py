@@ -66,9 +66,9 @@ def make_model_pointnet(feature_dim: int):
 
 
 def main():
-
+    from os import getcwd
     #LABELS
-    with open(r"C:\Users\Andreas\Desktop\UniStuff\Diploma\project\LPNN\Unity_diploma_Impl\Assets\LPNN\Results\comparisons.txt", "r") as f:
+    with open(getcwd()+r"\data\comparisons.txt", "r") as f:
         label_lines = [line.strip() for line in f if line.strip() != '']
 
     labels = np.array([1.0 if l.lower() == "true" else 0.0 for l in label_lines], dtype=np.float32)
@@ -77,7 +77,7 @@ def main():
     #FEATURES
     features = []
 
-    with open(r"C:\Users\Andreas\Desktop\UniStuff\Diploma\project\LPNN\Unity_diploma_Impl\Assets\LPNN\Results\features.txt", "r") as f:
+    with open(getcwd()+r"\data\features.txt", "r") as f:
         block = []
         F = int(f.readline().strip().split()[0]) # read first line and get number of features
 

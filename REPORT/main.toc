@@ -9,17 +9,17 @@
 \contentsline {section}{\numberline {2.2}Spherical Harmonics}{13}{section.2.2}%
 \contentsline {section}{\numberline {2.3}PointNet}{13}{section.2.3}%
 \contentsline {section}{\numberline {2.4}Tools}{13}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Graphics Engine}{13}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.1}Graphics Engine}{14}{subsection.2.4.1}%
 \contentsline {subsection}{\numberline {2.4.2}Sentis}{14}{subsection.2.4.2}%
 \contentsline {subsection}{\numberline {2.4.3}3D Scenes}{14}{subsection.2.4.3}%
-\contentsline {subsection}{\numberline {2.4.4}Python and TensorFlow}{14}{subsection.2.4.4}%
-\contentsline {chapter}{\numberline {3}Our Approach}{15}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Feature Collection}{15}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Label Collection}{19}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Model Training}{19}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Light Probe Prediction}{19}{section.3.4}%
-\contentsline {section}{\numberline {3.5}LPNN inside Unity Editor}{19}{section.3.5}%
-\contentsline {chapter}{\numberline {4}Experiments}{20}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Performance}{20}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Quality}{21}{section.4.2}%
-\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{24}{chapter.5}%
+\contentsline {subsection}{\numberline {2.4.4}Python and TensorFlow}{15}{subsection.2.4.4}%
+\contentsline {chapter}{\numberline {3}Our Approach}{16}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Feature Collection}{16}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Label Collection}{20}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Model Training}{20}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Light Probe Prediction}{20}{section.3.4}%
+\contentsline {section}{\numberline {3.5}LPNN inside Unity Editor}{20}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Experiments}{21}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Performance}{21}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Quality}{22}{section.4.2}%
+\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{25}{chapter.5}%

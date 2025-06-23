@@ -39,10 +39,10 @@
 \abx@aux@segm{0}{0}{WikiLightmaps}
 \@writefile{toc}{\contentsline {section}{\numberline {1.1}Related Work}{9}{section.1.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.1.1}Offline Methods}{9}{subsection.1.1.1}\protected@file@percent }
-\abx@aux@page{3}{9}
 \abx@aux@page{4}{9}
 \abx@aux@page{5}{9}
 \abx@aux@page{6}{9}
+\abx@aux@page{7}{9}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.1.2}Online Methods}{9}{subsection.1.1.2}\protected@file@percent }
 \citation{Greger1998}
 \abx@aux@cite{0}{Greger1998}
@@ -80,7 +80,6 @@
 \citation{You2024}
 \abx@aux@cite{0}{You2024}
 \abx@aux@segm{0}{0}{You2024}
-\abx@aux@page{7}{10}
 \abx@aux@page{8}{10}
 \abx@aux@page{9}{10}
 \abx@aux@page{10}{10}
@@ -91,8 +90,9 @@
 \abx@aux@page{15}{10}
 \abx@aux@page{16}{10}
 \abx@aux@page{17}{10}
-\abx@aux@page{18}{11}
+\abx@aux@page{18}{10}
 \abx@aux@page{19}{11}
+\abx@aux@page{20}{11}
 \@writefile{toc}{\contentsline {section}{\numberline {1.2}Thesis Structure}{11}{section.1.2}\protected@file@percent }
 \citation{Greger1998}
 \abx@aux@cite{0}{Greger1998}
@@ -108,13 +108,22 @@
 \@writefile{lot}{\addvspace {10\p@ }}
 \newlabel{sec:Background}{{2}{12}{Background}{chapter.2}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {2.1}Light Probes}{12}{section.2.1}\protected@file@percent }
-\abx@aux@page{20}{12}
+\abx@aux@page{21}{12}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces A 3D Scene showing a few light probes placed in important locations \blx@tocontentsinit {0}\parencite {Unity2016}.}}{12}{figure.2.1}\protected@file@percent }
 \newlabel{fig:Light_probes}{{2.1}{12}{A 3D Scene showing a few light probes placed in important locations \parencite {Unity2016}}{figure.2.1}{}}
+\citation{PointNet2017}
+\abx@aux@cite{0}{PointNet2017}
+\abx@aux@segm{0}{0}{PointNet2017}
+\citation{PointNet2017}
+\abx@aux@cite{0}{PointNet2017}
+\abx@aux@segm{0}{0}{PointNet2017}
 \@writefile{toc}{\contentsline {section}{\numberline {2.2}Spherical Harmonics}{13}{section.2.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {2.3}PointNet}{13}{section.2.3}\protected@file@percent }
+\newlabel{sec:background:pointnet}{{2.3}{13}{PointNet}{section.2.3}{}}
+\abx@aux@page{24}{13}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces PointNet architecture. Image from \blx@tocontentsinit {0}\cite {PointNet2017}.}}{13}{figure.2.2}\protected@file@percent }
+\newlabel{fig:pointnet}{{2.2}{13}{PointNet architecture. Image from \cite {PointNet2017}}{figure.2.2}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {2.4}Tools}{13}{section.2.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}Graphics Engine}{13}{subsection.2.4.1}\protected@file@percent }
 \citation{Sponza2017}
 \abx@aux@cite{0}{Sponza2017}
 \abx@aux@segm{0}{0}{Sponza2017}
@@ -130,43 +139,56 @@
 \citation{Sponza2017}
 \abx@aux@cite{0}{Sponza2017}
 \abx@aux@segm{0}{0}{Sponza2017}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}Graphics Engine}{14}{subsection.2.4.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4.2}Sentis}{14}{subsection.2.4.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4.3}3D Scenes}{14}{subsection.2.4.3}\protected@file@percent }
-\abx@aux@page{23}{14}
-\abx@aux@page{24}{14}
-\abx@aux@page{25}{14}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces The Sponza Unity Scene showing light probes placed on a grid \blx@tocontentsinit {0}\parencite {Sponza2017}.}}{14}{figure.2.2}\protected@file@percent }
-\newlabel{fig:Sponza_lp}{{2.2}{14}{The Sponza Unity Scene showing light probes placed on a grid \parencite {Sponza2017}}{figure.2.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.4}Python and TensorFlow}{14}{subsection.2.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Our Approach}{15}{chapter.3}\protected@file@percent }
+\abx@aux@page{26}{14}
+\abx@aux@page{27}{14}
+\abx@aux@page{28}{14}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces The Sponza Unity Scene showing light probes placed on a grid \blx@tocontentsinit {0}\parencite {Sponza2017}.}}{14}{figure.2.3}\protected@file@percent }
+\newlabel{fig:Sponza_lp}{{2.3}{14}{The Sponza Unity Scene showing light probes placed on a grid \parencite {Sponza2017}}{figure.2.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.4}Python and TensorFlow}{15}{subsection.2.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Our Approach}{16}{chapter.3}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{sec:Approach}{{3}{15}{Our Approach}{chapter.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}Feature Collection}{15}{section.3.1}\protected@file@percent }
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Placement of Evaluation Points on a grid-like layout}}{15}{algorithm.1}\protected@file@percent }
-\newlabel{alg:grid_place}{{1}{15}{Feature Collection}{algorithm.1}{}}
+\newlabel{sec:Approach}{{3}{16}{Our Approach}{chapter.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Feature Collection}{16}{section.3.1}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Placement of Evaluation Points on a grid-like layout}}{16}{algorithm.1}\protected@file@percent }
+\newlabel{alg:grid_place}{{1}{16}{Feature Collection}{algorithm.1}{}}
 \citation{Luminance2015}
 \abx@aux@cite{0}{Luminance2015}
 \abx@aux@segm{0}{0}{Luminance2015}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces A 3D Scene showing the placement of Evaluation Points (shown in yellow) inside the user defined bounds (shown in pink), contained within the calculated volume (shown in red).}}{16}{figure.3.1}\protected@file@percent }
-\newlabel{fig:grid}{{3.1}{16}{A 3D Scene showing the placement of Evaluation Points (shown in yellow) inside the user defined bounds (shown in pink), contained within the calculated volume (shown in red)}{figure.3.1}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Feature Extraction: Spherical Harmonics around a point}}{16}{algorithm.2}\protected@file@percent }
-\newlabel{alg:feat_sh}{{2}{16}{Feature Collection}{algorithm.2}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Feature Extraction: Light Variance around a point}}{17}{algorithm.3}\protected@file@percent }
-\newlabel{alg:feat_lv}{{3}{17}{Feature Collection}{algorithm.3}{}}
-\newlabel{alg:feat_lv:7}{{7}{17}{Feature Collection}{algorithm.3}{}}
-\abx@aux@page{28}{17}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces Feature Extraction: Occlusion Factor around a point}}{17}{algorithm.4}\protected@file@percent }
-\newlabel{alg:feat_rgbv}{{4}{17}{Feature Collection}{algorithm.4}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {5}{\ignorespaces Feature Extraction: Normal Variance around a point}}{18}{algorithm.5}\protected@file@percent }
-\newlabel{alg:feat_nv}{{5}{18}{Feature Collection}{algorithm.5}{}}
-\newlabel{alg:feat_nv:12}{{12}{18}{Feature Collection}{algorithm.5}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {6}{\ignorespaces Feature Extraction: Occlusion Factor around a point}}{18}{algorithm.6}\protected@file@percent }
-\newlabel{alg:feat_of}{{6}{18}{Feature Collection}{algorithm.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Label Collection}{19}{section.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Model Training}{19}{section.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.4}Light Probe Prediction}{19}{section.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.5}LPNN inside Unity Editor}{19}{section.3.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces A 3D Scene showing the placement of Evaluation Points (shown in yellow) inside the user defined bounds (shown in pink), contained within the calculated volume (shown in red).}}{17}{figure.3.1}\protected@file@percent }
+\newlabel{fig:grid}{{3.1}{17}{A 3D Scene showing the placement of Evaluation Points (shown in yellow) inside the user defined bounds (shown in pink), contained within the calculated volume (shown in red)}{figure.3.1}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Feature Extraction: Spherical Harmonics around a point}}{17}{algorithm.2}\protected@file@percent }
+\newlabel{alg:feat_sh}{{2}{17}{Feature Collection}{algorithm.2}{}}
+\citation{Vardis2021}
+\abx@aux@cite{0}{Vardis2021}
+\abx@aux@segm{0}{0}{Vardis2021}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Feature Extraction: Light Variance around a point}}{18}{algorithm.3}\protected@file@percent }
+\newlabel{alg:feat_lv}{{3}{18}{Feature Collection}{algorithm.3}{}}
+\newlabel{alg:feat_lv:7}{{7}{18}{Feature Collection}{algorithm.3}{}}
+\abx@aux@page{31}{18}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces Feature Extraction: RGB Variance around a point}}{18}{algorithm.4}\protected@file@percent }
+\newlabel{alg:feat_rgbv}{{4}{18}{Feature Collection}{algorithm.4}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {5}{\ignorespaces Feature Extraction: Normal Variance around a point}}{19}{algorithm.5}\protected@file@percent }
+\newlabel{alg:feat_nv}{{5}{19}{Feature Collection}{algorithm.5}{}}
+\newlabel{alg:feat_nv:12}{{12}{19}{Feature Collection}{algorithm.5}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {6}{\ignorespaces Feature Extraction: Occlusion Factor around a point}}{19}{algorithm.6}\protected@file@percent }
+\newlabel{alg:feat_of}{{6}{19}{Feature Collection}{algorithm.6}{}}
+\citation{PointNet2017}
+\abx@aux@cite{0}{PointNet2017}
+\abx@aux@segm{0}{0}{PointNet2017}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Label Collection}{20}{section.3.2}\protected@file@percent }
+\abx@aux@page{32}{20}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {7}{\ignorespaces Label Extraction per-EP}}{20}{algorithm.7}\protected@file@percent }
+\newlabel{alg:labels}{{7}{20}{Label Collection}{algorithm.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Model Training}{20}{section.3.3}\protected@file@percent }
+\newlabel{sec:model_training}{{3.3}{20}{Model Training}{section.3.3}{}}
+\abx@aux@page{33}{20}
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Light Probe Prediction}{20}{section.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.5}LPNN inside Unity Editor}{20}{section.3.5}\protected@file@percent }
+\newlabel{sec:LPNN_UI}{{3.5}{20}{LPNN inside Unity Editor}{section.3.5}{}}
 \citation{Vardis2021}
 \abx@aux@cite{0}{Vardis2021}
 \abx@aux@segm{0}{0}{Vardis2021}
@@ -179,56 +201,57 @@
 \citation{Office2021}
 \abx@aux@cite{0}{Office2021}
 \abx@aux@segm{0}{0}{Office2021}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Experiments}{20}{chapter.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Experiments}{21}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{sec:Experiments}{{4}{20}{Experiments}{chapter.4}{}}
-\abx@aux@page{29}{20}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Performance}{20}{section.4.1}\protected@file@percent }
-\newlabel{sec:4_performance}{{4.1}{20}{Performance}{section.4.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Execution time for LPNN and LumiProbes on a select number of scenes and probe counts. \textit  {P. count} represents the total amount of probes in the scene, before simplification. \textit  {P. Present} depict the final amount of probes after running the tools. The number in parenthesis is the amount of probes removed by the tool, in respect to the settings. Fastest times are shown in \textbf  {bold}.}}{21}{table.4.1}\protected@file@percent }
-\newlabel{table:times}{{4.1}{21}{Execution time for LPNN and LumiProbes on a select number of scenes and probe counts. \textit {P. count} represents the total amount of probes in the scene, before simplification. \textit {P. Present} depict the final amount of probes after running the tools. The number in parenthesis is the amount of probes removed by the tool, in respect to the settings. Fastest times are shown in \textbf {bold}}{table.4.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Quality}{21}{section.4.2}\protected@file@percent }
-\newlabel{sec:4_quality}{{4.2}{21}{Quality}{section.4.2}{}}
-\abx@aux@page{30}{21}
-\abx@aux@page{31}{21}
-\abx@aux@page{32}{21}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces A 3D Scene showing a comparison of light probe placement in a \textbf  {high} color-variance scenario, between LPNN (left) and LumiProbes (right) with settings 0.549, 1.94 and (27,3,3), 256 respectively, in the Corridor scene.}}{21}{figure.4.1}\protected@file@percent }
-\newlabel{fig:comp1}{{4.1}{21}{A 3D Scene showing a comparison of light probe placement in a \textbf {high} color-variance scenario, between LPNN (left) and LumiProbes (right) with settings 0.549, 1.94 and (27,3,3), 256 respectively, in the Corridor scene}{figure.4.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces A 3D Scene showing a comparison of light probe placement in a \textbf  {low} color-variance scenario, between LPNN (left) and LumiProbes (right) with settings 0.615, 1.5 and (27,3,3), 256 respectively, in the Corridor scene.}}{22}{figure.4.2}\protected@file@percent }
-\newlabel{fig:comp2}{{4.2}{22}{A 3D Scene showing a comparison of light probe placement in a \textbf {low} color-variance scenario, between LPNN (left) and LumiProbes (right) with settings 0.615, 1.5 and (27,3,3), 256 respectively, in the Corridor scene}{figure.4.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces A 3D Scene showing under-sampling of light probe placement in the Corridor scene. The example was captured with LPNN with settings 0.615, 1.5.}}{23}{figure.4.3}\protected@file@percent }
-\newlabel{fig:comp3}{{4.3}{23}{A 3D Scene showing under-sampling of light probe placement in the Corridor scene. The example was captured with LPNN with settings 0.615, 1.5}{figure.4.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces A 3D Scene showing improved light probe placement in the Corridor scene. The example was captured with LPNN with settings 0.549, 1.94.}}{23}{figure.4.4}\protected@file@percent }
-\newlabel{fig:comp4}{{4.4}{23}{A 3D Scene showing improved light probe placement in the Corridor scene. The example was captured with LPNN with settings 0.549, 1.94}{figure.4.4}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{24}{chapter.5}\protected@file@percent }
+\newlabel{sec:Experiments}{{4}{21}{Experiments}{chapter.4}{}}
+\abx@aux@page{34}{21}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Performance}{21}{section.4.1}\protected@file@percent }
+\newlabel{sec:4_performance}{{4.1}{21}{Performance}{section.4.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Execution time for LPNN and LumiProbes on a select number of scenes and probe counts. \textit  {P. count} represents the total amount of probes in the scene, before simplification. \textit  {P. Present} depict the final amount of probes after running the tools. The number in parenthesis is the amount of probes removed by the tool, in respect to the settings. Fastest times are shown in \textbf  {bold}.}}{22}{table.4.1}\protected@file@percent }
+\newlabel{table:times}{{4.1}{22}{Execution time for LPNN and LumiProbes on a select number of scenes and probe counts. \textit {P. count} represents the total amount of probes in the scene, before simplification. \textit {P. Present} depict the final amount of probes after running the tools. The number in parenthesis is the amount of probes removed by the tool, in respect to the settings. Fastest times are shown in \textbf {bold}}{table.4.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Quality}{22}{section.4.2}\protected@file@percent }
+\newlabel{sec:4_quality}{{4.2}{22}{Quality}{section.4.2}{}}
+\abx@aux@page{35}{22}
+\abx@aux@page{36}{22}
+\abx@aux@page{37}{22}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces A 3D Scene showing a comparison of light probe placement in a \textbf  {high} color-variance scenario, between LPNN (left) and LumiProbes (right) with settings 0.549, 1.94 and (27,3,3), 256 respectively, in the Corridor scene.}}{22}{figure.4.1}\protected@file@percent }
+\newlabel{fig:comp1}{{4.1}{22}{A 3D Scene showing a comparison of light probe placement in a \textbf {high} color-variance scenario, between LPNN (left) and LumiProbes (right) with settings 0.549, 1.94 and (27,3,3), 256 respectively, in the Corridor scene}{figure.4.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces A 3D Scene showing a comparison of light probe placement in a \textbf  {low} color-variance scenario, between LPNN (left) and LumiProbes (right) with settings 0.615, 1.5 and (27,3,3), 256 respectively, in the Corridor scene.}}{23}{figure.4.2}\protected@file@percent }
+\newlabel{fig:comp2}{{4.2}{23}{A 3D Scene showing a comparison of light probe placement in a \textbf {low} color-variance scenario, between LPNN (left) and LumiProbes (right) with settings 0.615, 1.5 and (27,3,3), 256 respectively, in the Corridor scene}{figure.4.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces A 3D Scene showing under-sampling of light probe placement in the Corridor scene. The example was captured with LPNN with settings 0.615, 1.5.}}{24}{figure.4.3}\protected@file@percent }
+\newlabel{fig:comp3}{{4.3}{24}{A 3D Scene showing under-sampling of light probe placement in the Corridor scene. The example was captured with LPNN with settings 0.615, 1.5}{figure.4.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces A 3D Scene showing improved light probe placement in the Corridor scene. The example was captured with LPNN with settings 0.549, 1.94.}}{24}{figure.4.4}\protected@file@percent }
+\newlabel{fig:comp4}{{4.4}{24}{A 3D Scene showing improved light probe placement in the Corridor scene. The example was captured with LPNN with settings 0.549, 1.94}{figure.4.4}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{25}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{sec:Conclusions}{{5}{24}{Conclusions and Future Work}{chapter.5}{}}
-\abx@aux@page{33}{25}
-\abx@aux@page{34}{25}
-\abx@aux@page{35}{25}
-\abx@aux@page{36}{25}
-\abx@aux@page{37}{25}
-\abx@aux@page{38}{25}
-\abx@aux@page{39}{25}
-\abx@aux@page{40}{25}
-\abx@aux@page{41}{25}
-\abx@aux@page{42}{25}
-\abx@aux@page{43}{25}
+\newlabel{sec:Conclusions}{{5}{25}{Conclusions and Future Work}{chapter.5}{}}
+\abx@aux@page{38}{26}
+\abx@aux@page{39}{26}
+\abx@aux@page{40}{26}
+\abx@aux@page{41}{26}
+\abx@aux@page{42}{26}
+\abx@aux@page{43}{26}
 \abx@aux@page{44}{26}
 \abx@aux@page{45}{26}
 \abx@aux@page{46}{26}
 \abx@aux@page{47}{26}
 \abx@aux@page{48}{26}
-\abx@aux@page{49}{26}
-\abx@aux@page{50}{26}
-\abx@aux@page{51}{26}
-\abx@aux@page{52}{26}
-\abx@aux@page{53}{26}
-\abx@aux@page{54}{26}
+\abx@aux@page{49}{27}
+\abx@aux@page{50}{27}
+\abx@aux@page{51}{27}
+\abx@aux@page{52}{27}
+\abx@aux@page{53}{27}
+\abx@aux@page{54}{27}
+\abx@aux@page{55}{27}
+\abx@aux@page{56}{27}
+\abx@aux@page{57}{27}
+\abx@aux@page{58}{27}
+\abx@aux@page{59}{27}
+\abx@aux@page{60}{27}
 \gdef\svg@ink@ver@settings{{\m@ne }{inkscape}{\m@ne }}
-\abx@aux@read@bbl@mdfivesum{9C89BCA69EEDA10E82BF70E07DE75274}
+\abx@aux@read@bbl@mdfivesum{7D308986F35AA52406A60EE403AC1520}
 \abx@aux@defaultrefcontext{0}{Office2021}{nyt/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{Crassin2011}{nyt/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{Unreal2025}{nyt/global//global/global/global}
@@ -241,6 +264,7 @@
 \abx@aux@defaultrefcontext{0}{Sponza2017}{nyt/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{McGuire2017}{nyt/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{Nvidia2024}{nyt/global//global/global/global}
+\abx@aux@defaultrefcontext{0}{PointNet2017}{nyt/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{Teuber2024}{nyt/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{Unity2016}{nyt/global//global/global/global}
 \abx@aux@defaultrefcontext{0}{Unity2025}{nyt/global//global/global/global}
@@ -263,6 +287,7 @@
 \abx@aux@defaultlabelprefix{0}{Sponza2017}{}
 \abx@aux@defaultlabelprefix{0}{McGuire2017}{}
 \abx@aux@defaultlabelprefix{0}{Nvidia2024}{}
+\abx@aux@defaultlabelprefix{0}{PointNet2017}{}
 \abx@aux@defaultlabelprefix{0}{Teuber2024}{}
 \abx@aux@defaultlabelprefix{0}{Unity2016}{}
 \abx@aux@defaultlabelprefix{0}{Unity2025}{}
@@ -273,4 +298,4 @@
 \abx@aux@defaultlabelprefix{0}{WikiLightmaps}{}
 \abx@aux@defaultlabelprefix{0}{Xu2022}{}
 \abx@aux@defaultlabelprefix{0}{You2024}{}
-\gdef \@abspage@last{28}
+\gdef \@abspage@last{29}

@@ -409,6 +409,7 @@ public class LPNN_script : MonoBehaviour
         catch (System.Exception e)
         {
             Debug.LogError($"Model evaluation failed: {e.Message}");
+            stopwatch.Stop();
             return;
         }
         stopwatch.Stop();

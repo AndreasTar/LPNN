@@ -511,6 +511,54 @@
     \field{year}{2024}
   \endentry
 
+  \entry{PointNet2017}{misc}{}{}
+    \name{author}{4}{}{%
+      {{hash=QCR}{%
+         family={Qi},
+         familyi={Q\bibinitperiod},
+         given={Charles\bibnamedelima R.},
+         giveni={C\bibinitperiod\bibinitdelim R\bibinitperiod},
+      }}%
+      {{hash=SH}{%
+         family={Su},
+         familyi={S\bibinitperiod},
+         given={Hao},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=MK}{%
+         family={Mo},
+         familyi={M\bibinitperiod},
+         given={Kaichun},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=GLJ}{%
+         family={Guibas},
+         familyi={G\bibinitperiod},
+         given={Leonidas\bibnamedelima J.},
+         giveni={L\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{QCR+1}
+    \strng{fullhash}{QCRSHMKGLJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2017}
+    \field{labeldatesource}{}
+    \field{sortinit}{Q}
+    \field{sortinithash}{Q}
+    \verb{eprint}
+    \verb 1612.00593
+    \endverb
+    \field{title}{PointNet: Deep Learning on Point Sets for 3D Classification
+  and Segmentation}
+    \verb{url}
+    \verb https://arxiv.org/abs/1612.00593
+    \endverb
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.CV}
+    \field{year}{2017}
+  \endentry
+
   \entry{Teuber2024}{inproceedings}{}{}
     \name{author}{4}{}{%
       {{hash=TM}{%
