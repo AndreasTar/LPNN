@@ -10,7 +10,7 @@
 \contentsline {figure}{\numberline {3.1}{\ignorespaces A 3D Scene showing the placement of Evaluation Points (shown in yellow) inside the user defined bounds (shown in pink), contained within the calculated volume (shown in red).}}{17}{figure.3.1}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces A 3D Scene showing a comparison of light probe placement in a \textbf {high} color-variance scenario, between LPNN (left) and LumiProbes (right) with settings 0.549, 1.94 and (27,3,3), 256 respectively, in the Corridor scene.}}{22}{figure.4.1}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces A 3D Scene showing a comparison of light probe placement in a \textbf {low} color-variance scenario, between LPNN (left) and LumiProbes (right) with settings 0.615, 1.5 and (27,3,3), 256 respectively, in the Corridor scene.}}{23}{figure.4.2}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces A 3D Scene showing a comparison of light probe placement in a \textbf {low} color-variance scenario, but \textbf {high} luminance variety, between LPNN (left) and LumiProbes (right) with settings 0.615, 1.5 and (27,3,3), 256 respectively, in the Corridor scene.}}{23}{figure.4.2}%
 \contentsline {figure}{\numberline {4.3}{\ignorespaces A 3D Scene showing under-sampling of light probe placement in the Corridor scene. The example was captured with LPNN with settings 0.615, 1.5.}}{24}{figure.4.3}%
 \contentsline {figure}{\numberline {4.4}{\ignorespaces A 3D Scene showing improved light probe placement in the Corridor scene. The example was captured with LPNN with settings 0.549, 1.94.}}{24}{figure.4.4}%
 \addvspace {10\p@ }

@@ -1,7 +1,7 @@
 In this chapter, we will present the pipeline of the tool and its implementation. The chapter will be split into five parts, describing the process of collecting the features, how labels are created, LPNN training in python, and predicting light probe positions using the trained model accordingly. Lastly, we will present the tool inside the Unity Editor.
 
 \section{Feature Collection}
-A necessary step before collecting scene and lighting features is to first place points in the scene to collect data per-point. We decided to create an algorithm that places those points, called Evaluation Points (EP) henceforth, inside a collection of user-defined potentially concave scene bounds of arbitrary shape. As shown in algorithm \ref{alg:grid_place}, we begin by placing the Evaluation Points on a volume that surrounds the collection of bounds the user defined, then we remove the points that are not within the bounds, as seen in figure \ref{fig:grid}.
+A necessary step before collecting scene and lighting features is to first place points in the scene to collect data per-point. We decided to create an algorithm that places those points, called Evaluation Points (EP) henceforth, inside a collection of user-defined scene bounds of arbitrary shape. As shown in algorithm \ref{alg:grid_place}, we begin by placing the Evaluation Points on a volume that surrounds the collection of bounds the user defined, then we remove the points that are not within the bounds, as seen in figure \ref{fig:grid}.
 
 
 \begin{algorithm}
@@ -12,7 +12,7 @@ A necessary step before collecting scene and lighting features is to first place
 		\State $EP = \emptyset$
 		\ForAll{$points \in volume$}
 			\If{$point \in bounds$}
-				\State $EP \gets EP + point$ \Comment add point to the set
+				\State $EP \gets EP + point$ \Comment Append point to the set
 			\EndIf
 		\EndFor
 		\State \Return $EP$
@@ -41,7 +41,7 @@ Along with the features mentioned above, we additionally include a vector that c
 		\State $values = \emptyset$
 		\ForAll{$points \in EP$}
 			\State $value \gets evaluateSH(point)$
-			\State $values \gets values + value$ \Comment add SH to the list
+			\State $values \gets values + value$ \Comment Append SH to the list
 		\EndFor
 		\State \Return $values$
 	\end{algorithmic}
@@ -71,6 +71,8 @@ Along with the features mentioned above, we additionally include a vector that c
 \end{algorithm}
 
 In line \algref{alg:feat_lv}{alg:feat_lv:7}, to convert from RGB channel values to perceived light intensity of the pixel, also known as luminance, we use the formula shown in \cite{Luminance2015}, under section 3 item 3.2. This formula is used to calculate how bright a pixel in regards to the RGB channel values it currently shows.
+
+Similarly, we collect the RGB-Variance independently for each channel. The formula is similar to Light-Variance, with the exception of line \algref{alg:feat_lv}{alg:feat_lv:7}, since it is not applicable. We need each channel RGB value to be unaffected by any conversion. This is seen in algorithm \ref{alg:feat_rgbv}.
 
 \begin{algorithm}
 	\caption{Feature Extraction: RGB Variance around a point}
@@ -142,7 +144,7 @@ In line \algref{alg:feat_nv}{alg:feat_nv:12}, we want the higher values to defin
 	\end{algorithmic}
 \end{algorithm}
 
-After collecting all the features, we compact them into a feature vector per-EP, and save them into a file for later use. As shown in \ref{sec:LPNN_UI}, it is also possible to collect feature vectors from multiple scenes at different times, as well as labels, to make the model more accurate by providing more input data. 
+After collecting all the features, we compact them into a feature vector per-EP, and save them into a file for use during training, or directly for light probe placement, as we will see shortly. As shown in section \ref{sec:LPNN_UI}, it is also possible to collect feature vectors from multiple scenes at different times, as well as labels, to make the model more accurate by providing more input data. 
 
 \section{Label Collection}
 
@@ -174,9 +176,10 @@ After collecting the labels into a list, they are saved into a file on the hard 
 \section{Model Training}
 \label{sec:model_training}
 
-The model basis for LPNN, as mentioned previously, was a PointNet architecture \parencite{PointNet2017} as described in \ref{sec:background:pointnet}.
+The model basis for LPNN, as described in section \ref{sec:background:pointnet}, was a PointNet architecture \parencite{PointNet2017} .
 
 \section{Light Probe Prediction}
+In order to use the model to infer importance scores for the EP, we need to import it to Unity. For this purpose, we use Sentis. After model import, it can be used for our goals. First,
 
 \section{LPNN inside Unity Editor}
 \label{sec:LPNN_UI}
