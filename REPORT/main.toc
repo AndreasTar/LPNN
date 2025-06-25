@@ -17,11 +17,11 @@
 \contentsline {section}{\numberline {3.1}Feature Collection}{16}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Label Collection}{20}{section.3.2}%
 \contentsline {section}{\numberline {3.3}Model Training}{20}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Data Preparation}{20}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.1}Data Preparation}{21}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2}Model Architecture \bbl@greek@ampersand Training}{21}{subsection.3.3.2}%
-\contentsline {section}{\numberline {3.4}Light Probe Prediction}{21}{section.3.4}%
-\contentsline {section}{\numberline {3.5}LPNN inside Unity Editor}{21}{section.3.5}%
-\contentsline {chapter}{\numberline {4}Experiments}{22}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Performance}{22}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Quality}{23}{section.4.2}%
-\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{26}{chapter.5}%
+\contentsline {section}{\numberline {3.4}Light Probe Prediction}{22}{section.3.4}%
+\contentsline {section}{\numberline {3.5}LPNN inside Unity Editor}{24}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Experiments}{25}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Performance}{25}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Quality}{26}{section.4.2}%
+\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{29}{chapter.5}%

@@ -5,3 +5,5 @@
 \contentsline {algorithm}{\numberline {5}{\ignorespaces Feature Extraction: Normal Variance around a point}}{19}{algorithm.5}%
 \contentsline {algorithm}{\numberline {6}{\ignorespaces Feature Extraction: Occlusion Factor around a point}}{19}{algorithm.6}%
 \contentsline {algorithm}{\numberline {7}{\ignorespaces Label Extraction per-EP}}{20}{algorithm.7}%
+\contentsline {algorithm}{\numberline {8}{\ignorespaces Inferred Scores Range Remapping}}{23}{algorithm.8}%
+\contentsline {algorithm}{\numberline {9}{\ignorespaces Thresholded Placement of Light Probes}}{23}{algorithm.9}%
