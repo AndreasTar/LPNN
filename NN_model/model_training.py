@@ -33,14 +33,14 @@ def make_model_pointnet(feature_dim: int):
     global_feat = layers.Concatenate()([global_max, global_avg])  # (batch, 512)
 
 
-  # dynamic tile → (batch, N, 256)
+  # dynamic tile → (batch, N, 512)
     def tile_fn(inputs):
         gf, points = inputs
         N = K.shape(points)[1]
-        gf = K.expand_dims(gf, 1)    # (batch, 1, 256)
-        return K.tile(gf, [1, N, 1]) # (batch, N, 256)
+        gf = K.expand_dims(gf, 1)
+        return K.tile(gf, [1, N, 1])
 
-    # tell Keras the output shape is (batch, N, 256)
+    # tell Keras the output shape is (batch, N, 512)
     global_tiled = layers.Lambda(
         tile_fn,
         output_shape=lambda input_shapes: (input_shapes[1][0], input_shapes[1][1], 512)
@@ -59,7 +59,7 @@ def make_model_pointnet(feature_dim: int):
     # final per point importance
     out = layers.Conv1D(1, 1, activation='sigmoid')(x)  # (batch, N, 1)
 
-    model = models.Model(inputs=pts, outputs=out, name="LPNN_plus_plus")
+    model = models.Model(inputs=pts, outputs=out, name="LPNN")
     model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['mae'])
     return model
 

@@ -176,7 +176,24 @@ After collecting the labels into a list, they are saved into a file on the hard 
 \section{Model Training}
 \label{sec:model_training}
 
-The model basis for LPNN, as described in section \ref{sec:background:pointnet}, was a PointNet architecture \parencite{PointNet2017} .
+The model basis for LPNN, as described in section \ref{sec:background:pointnet}, was a PointNet architecture \parencite{PointNet2017}. We followed the style loosely, mainly focusing on making a model that is able to predict importance scores per-point, and able to handle an arbitrary amount of input points without retraining. 
+
+\subsection{Data Preparation}
+The feature vectors that were created from the previous steps are read from the files stored on the hard disk. For the labels, we convert each True or False line into numerical 1 or 0, respectively. Then, a Numpy array is created, containing all the values in order of appearance.
+For the feature vectors, a similar method is used. Additional logic is needed since there are multiple values per line, but the features are finally converted into an array of arrays. Each sub-array contains the values per-point, in order of appearance.
+
+\subsection{Model Architecture \& Training}
+
+The architecture is as follows; First, three Convolution1D layers followed by three Batch Normalization layers expand the input from a feature vector of length 30 to 256. Each of these 6 layers are used one after the other, first a Convolution1D with dimensions 64x30x1x1 and a ReLu activation, followed by a Batch Normalization layer, then the next Convolution1D layer with dimensions 128x64x1x1 with the same activation function, etc. Then, in order for the model to have some knowledge of the global context, we use a Global Max Pooling 1D layer and a Global Average Pooling Layer 1D, concatenated together with each per point local context, resulting in a 512 dimensional feature layer. In order to avoid averaging all neurons together, we tile the global context, using a custom tiling function, making each neuron have knowledge of only the surrounding points, instead of every point in the scene. This ensures that each point's significance will only be affected by the surrounding lighting data of itself and the nearby points.
+
+Finally, another Convolution1D and Dropout sequence is used to reduce the high-dimensional hidden layers into a single importance score $i \in [0,1]$. The Dropout layers are important to reduce learning error rates by randomly deactivating a small set of neurons and their connections during the training process. The probability for drop-out is set to 0.3, meaning 30\%. This sequence of layers are then directed into another Convolution1D layer with Sigmoid activation function, and trained for 50 epochs.The model is then compiled and saved in an .onnx file for import back into the Unity engine.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.392]{Graphics/LPNN.jpg}
+	\caption{Neural Network architecture of our LPNN model.}
+	\label{fig:LPNN_arch}
+\end{figure}
 
 \section{Light Probe Prediction}
 In order to use the model to infer importance scores for the EP, we need to import it to Unity. For this purpose, we use Sentis. After model import, it can be used for our goals. First,
