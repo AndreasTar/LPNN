@@ -181,6 +181,7 @@
 \abx@aux@cite{0}{PointNet2017}
 \abx@aux@segm{0}{0}{PointNet2017}
 \@writefile{toc}{\contentsline {section}{\numberline {3.2}Label Collection}{20}{section.3.2}\protected@file@percent }
+\newlabel{sec:label_coll}{{3.2}{20}{Label Collection}{section.3.2}{}}
 \abx@aux@page{32}{20}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {7}{\ignorespaces Label Extraction per-EP}}{20}{algorithm.7}\protected@file@percent }
 \newlabel{alg:labels}{{7}{20}{Label Collection}{algorithm.7}{}}
@@ -192,6 +193,7 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Neural Network architecture of our LPNN model.}}{21}{figure.3.2}\protected@file@percent }
 \newlabel{fig:LPNN_arch}{{3.2}{21}{Neural Network architecture of our LPNN model}{figure.3.2}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.4}Light Probe Prediction}{22}{section.3.4}\protected@file@percent }
+\newlabel{sec:lp_predict}{{3.4}{22}{Light Probe Prediction}{section.3.4}{}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {8}{\ignorespaces Inferred Scores Range Remapping}}{23}{algorithm.8}\protected@file@percent }
 \newlabel{alg:lp_place}{{8}{23}{Light Probe Prediction}{algorithm.8}{}}
 \newlabel{alg:lp_place:11}{{11}{23}{Light Probe Prediction}{algorithm.8}{}}
@@ -200,6 +202,14 @@
 \newlabel{alg:lp_thres:1}{{1}{23}{Light Probe Prediction}{algorithm.9}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.5}LPNN inside Unity Editor}{24}{section.3.5}\protected@file@percent }
 \newlabel{sec:LPNN_UI}{{3.5}{24}{LPNN inside Unity Editor}{section.3.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.1}Normal Execution of the Tool}{24}{subsection.3.5.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Figure showing the tool asset, called $LPNN Object$, available as a Menu Item under $Light$ category, allowing for easy importing to any Unity scene.}}{24}{figure.3.3}\protected@file@percent }
+\newlabel{fig:UI_add}{{3.3}{24}{Figure showing the tool asset, called $LPNN Object$, available as a Menu Item under $Light$ category, allowing for easy importing to any Unity scene}{figure.3.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Overview of the UI of the tool, as seen inside the Unity Editor window. On the right, each section of the UI has been color-coded depending on the usage. \textit  {Red} are necessary pre-process steps. \textit  {Green} are steps required for normal usage, when a model has been trained. For manual retraining of the model, the \textit  {Orange} section houses the necessary fields.}}{25}{figure.3.4}\protected@file@percent }
+\newlabel{fig:UI_editor}{{3.4}{25}{Overview of the UI of the tool, as seen inside the Unity Editor window. On the right, each section of the UI has been color-coded depending on the usage. \textit {Red} are necessary pre-process steps. \textit {Green} are steps required for normal usage, when a model has been trained. For manual retraining of the model, the \textit {Orange} section houses the necessary fields}{figure.3.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.2}Extraction of data for Retraining}{26}{subsection.3.5.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Figure showing the script that controls the AI model for inferring light probe importance in the scene, shown in \textit  {Orange}.}}{26}{figure.3.5}\protected@file@percent }
+\newlabel{fig:UI_ai}{{3.5}{26}{Figure showing the script that controls the AI model for inferring light probe importance in the scene, shown in \textit {Orange}}{figure.3.5}{}}
 \citation{Vardis2021}
 \abx@aux@cite{0}{Vardis2021}
 \abx@aux@segm{0}{0}{Vardis2021}
@@ -212,55 +222,57 @@
 \citation{Office2021}
 \abx@aux@cite{0}{Office2021}
 \abx@aux@segm{0}{0}{Office2021}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Experiments}{25}{chapter.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Experiments}{28}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{sec:Experiments}{{4}{25}{Experiments}{chapter.4}{}}
-\abx@aux@page{34}{25}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Performance}{25}{section.4.1}\protected@file@percent }
-\newlabel{sec:4_performance}{{4.1}{25}{Performance}{section.4.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Execution time for LPNN and LumiProbes on a select number of scenes and probe counts. \textit  {P. count} represents the total amount of probes in the scene, before simplification. \textit  {P. Present} depict the final amount of probes after running the tools. The number in parenthesis is the amount of probes removed by the tool, in respect to the settings. Fastest times are shown in \textbf  {bold}.}}{26}{table.4.1}\protected@file@percent }
-\newlabel{table:times}{{4.1}{26}{Execution time for LPNN and LumiProbes on a select number of scenes and probe counts. \textit {P. count} represents the total amount of probes in the scene, before simplification. \textit {P. Present} depict the final amount of probes after running the tools. The number in parenthesis is the amount of probes removed by the tool, in respect to the settings. Fastest times are shown in \textbf {bold}}{table.4.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Quality}{26}{section.4.2}\protected@file@percent }
-\newlabel{sec:4_quality}{{4.2}{26}{Quality}{section.4.2}{}}
-\abx@aux@page{35}{26}
-\abx@aux@page{36}{26}
-\abx@aux@page{37}{26}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces A 3D Scene showing a comparison of light probe placement in a \textbf  {high} color-variance scenario, between LPNN (left) and LumiProbes (right) with settings 0.549, 1.94 and (27,3,3), 256 respectively, in the Corridor scene.}}{26}{figure.4.1}\protected@file@percent }
-\newlabel{fig:comp1}{{4.1}{26}{A 3D Scene showing a comparison of light probe placement in a \textbf {high} color-variance scenario, between LPNN (left) and LumiProbes (right) with settings 0.549, 1.94 and (27,3,3), 256 respectively, in the Corridor scene}{figure.4.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces A 3D Scene showing a comparison of light probe placement in a \textbf  {low} color-variance scenario, but \textbf  {high} luminance variance, between LPNN (left) and LumiProbes (right) with settings 0.615, 1.5 and (27,3,3), 256 respectively, in the Corridor scene.}}{27}{figure.4.2}\protected@file@percent }
-\newlabel{fig:comp2}{{4.2}{27}{A 3D Scene showing a comparison of light probe placement in a \textbf {low} color-variance scenario, but \textbf {high} luminance variance, between LPNN (left) and LumiProbes (right) with settings 0.615, 1.5 and (27,3,3), 256 respectively, in the Corridor scene}{figure.4.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces A 3D Scene showing under-sampling of light probe placement in the Corridor scene. The example was captured with LPNN with settings 0.615, 1.5.}}{28}{figure.4.3}\protected@file@percent }
-\newlabel{fig:comp3}{{4.3}{28}{A 3D Scene showing under-sampling of light probe placement in the Corridor scene. The example was captured with LPNN with settings 0.615, 1.5}{figure.4.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces A 3D Scene showing improved light probe placement in the Corridor scene. The example was captured with LPNN with settings 0.549, 1.94.}}{28}{figure.4.4}\protected@file@percent }
-\newlabel{fig:comp4}{{4.4}{28}{A 3D Scene showing improved light probe placement in the Corridor scene. The example was captured with LPNN with settings 0.549, 1.94}{figure.4.4}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{29}{chapter.5}\protected@file@percent }
+\newlabel{sec:Experiments}{{4}{28}{Experiments}{chapter.4}{}}
+\abx@aux@page{34}{28}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Performance}{28}{section.4.1}\protected@file@percent }
+\newlabel{sec:4_performance}{{4.1}{28}{Performance}{section.4.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Execution time for LPNN and LumiProbes on a select number of scenes and probe counts. \textit  {P. count} represents the total amount of probes in the scene, before simplification. \textit  {P. Present} depict the final amount of probes after running the tools. The number in parenthesis is the amount of probes removed by the tool, in respect to the settings. Fastest times are shown in \textbf  {bold}.}}{29}{table.4.1}\protected@file@percent }
+\newlabel{table:times}{{4.1}{29}{Execution time for LPNN and LumiProbes on a select number of scenes and probe counts. \textit {P. count} represents the total amount of probes in the scene, before simplification. \textit {P. Present} depict the final amount of probes after running the tools. The number in parenthesis is the amount of probes removed by the tool, in respect to the settings. Fastest times are shown in \textbf {bold}}{table.4.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Quality}{29}{section.4.2}\protected@file@percent }
+\newlabel{sec:4_quality}{{4.2}{29}{Quality}{section.4.2}{}}
+\abx@aux@page{35}{29}
+\abx@aux@page{36}{29}
+\abx@aux@page{37}{29}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces An indoor 3D Scene showing a comparison of light probe placement in a \textbf  {high} color-variance scenario, between LPNN (left) and LumiProbes (right) with settings 0.549, 1.94 and (27,3,3), 256 respectively, in the Corridor scene.}}{29}{figure.4.1}\protected@file@percent }
+\newlabel{fig:comp1}{{4.1}{29}{An indoor 3D Scene showing a comparison of light probe placement in a \textbf {high} color-variance scenario, between LPNN (left) and LumiProbes (right) with settings 0.549, 1.94 and (27,3,3), 256 respectively, in the Corridor scene}{figure.4.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces A 3D Scene showing a comparison of light probe placement in a \textbf  {low} color-variance scenario, but \textbf  {high} luminance variance, between LPNN (left) and LumiProbes (right) with settings 0.615, 1.5 and (27,3,3), 256 respectively, in the Corridor scene.}}{30}{figure.4.2}\protected@file@percent }
+\newlabel{fig:comp2}{{4.2}{30}{A 3D Scene showing a comparison of light probe placement in a \textbf {low} color-variance scenario, but \textbf {high} luminance variance, between LPNN (left) and LumiProbes (right) with settings 0.615, 1.5 and (27,3,3), 256 respectively, in the Corridor scene}{figure.4.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces A 3D Scene showing a better placement of light probes in the Corridor scene, fixing the under-sampling issue of figure \ref {fig:comp2}. The example was captured with LPNN with settings 0.244, 1.3.}}{31}{figure.4.3}\protected@file@percent }
+\newlabel{fig:corr_1}{{4.3}{31}{A 3D Scene showing a better placement of light probes in the Corridor scene, fixing the under-sampling issue of figure \ref {fig:comp2}. The example was captured with LPNN with settings 0.244, 1.3}{figure.4.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces A 3D Scene showing under-sampling of light probe placement in the Corridor scene. The example was captured with LPNN with settings 0.615, 1.5.}}{32}{figure.4.4}\protected@file@percent }
+\newlabel{fig:comp3}{{4.4}{32}{A 3D Scene showing under-sampling of light probe placement in the Corridor scene. The example was captured with LPNN with settings 0.615, 1.5}{figure.4.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces A 3D Scene showing improved light probe placement in the Corridor scene. The example was captured with LPNN with settings 0.549, 1.94.}}{32}{figure.4.5}\protected@file@percent }
+\newlabel{fig:comp4}{{4.5}{32}{A 3D Scene showing improved light probe placement in the Corridor scene. The example was captured with LPNN with settings 0.549, 1.94}{figure.4.5}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{33}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{sec:Conclusions}{{5}{29}{Conclusions and Future Work}{chapter.5}{}}
-\abx@aux@page{38}{30}
-\abx@aux@page{39}{30}
-\abx@aux@page{40}{30}
-\abx@aux@page{41}{30}
-\abx@aux@page{42}{30}
-\abx@aux@page{43}{30}
-\abx@aux@page{44}{30}
-\abx@aux@page{45}{30}
-\abx@aux@page{46}{30}
-\abx@aux@page{47}{30}
-\abx@aux@page{48}{30}
-\abx@aux@page{49}{31}
-\abx@aux@page{50}{31}
-\abx@aux@page{51}{31}
-\abx@aux@page{52}{31}
-\abx@aux@page{53}{31}
-\abx@aux@page{54}{31}
-\abx@aux@page{55}{31}
-\abx@aux@page{56}{31}
-\abx@aux@page{57}{31}
-\abx@aux@page{58}{31}
-\abx@aux@page{59}{31}
-\abx@aux@page{60}{31}
+\newlabel{sec:Conclusions}{{5}{33}{Conclusions and Future Work}{chapter.5}{}}
+\abx@aux@page{38}{34}
+\abx@aux@page{39}{34}
+\abx@aux@page{40}{34}
+\abx@aux@page{41}{34}
+\abx@aux@page{42}{34}
+\abx@aux@page{43}{34}
+\abx@aux@page{44}{34}
+\abx@aux@page{45}{34}
+\abx@aux@page{46}{34}
+\abx@aux@page{47}{34}
+\abx@aux@page{48}{34}
+\abx@aux@page{49}{35}
+\abx@aux@page{50}{35}
+\abx@aux@page{51}{35}
+\abx@aux@page{52}{35}
+\abx@aux@page{53}{35}
+\abx@aux@page{54}{35}
+\abx@aux@page{55}{35}
+\abx@aux@page{56}{35}
+\abx@aux@page{57}{35}
+\abx@aux@page{58}{35}
+\abx@aux@page{59}{35}
+\abx@aux@page{60}{35}
 \gdef\svg@ink@ver@settings{{\m@ne }{inkscape}{\m@ne }}
 \abx@aux@read@bbl@mdfivesum{7D308986F35AA52406A60EE403AC1520}
 \abx@aux@defaultrefcontext{0}{Office2021}{nyt/global//global/global/global}
@@ -309,4 +321,4 @@
 \abx@aux@defaultlabelprefix{0}{WikiLightmaps}{}
 \abx@aux@defaultlabelprefix{0}{Xu2022}{}
 \abx@aux@defaultlabelprefix{0}{You2024}{}
-\gdef \@abspage@last{33}
+\gdef \@abspage@last{37}

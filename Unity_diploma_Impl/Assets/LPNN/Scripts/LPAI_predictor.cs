@@ -11,12 +11,6 @@ public class LightProbeAI : MonoBehaviour
     private Model runtimeModel;
     private Worker worker;
 
-    // Example voxel grid size. Adjust these to your scene's grid dimensions.
-    public int depth = 10;  // D
-    public int height = 5;  // H
-    public int width = 10;   // W
-    public int channels = 24; // C
-
     void Start()
     {
         runtimeModel = ModelLoader.Load(modelAsset);

@@ -21,7 +21,9 @@
 \contentsline {subsection}{\numberline {3.3.2}Model Architecture \bbl@greek@ampersand Training}{21}{subsection.3.3.2}%
 \contentsline {section}{\numberline {3.4}Light Probe Prediction}{22}{section.3.4}%
 \contentsline {section}{\numberline {3.5}LPNN inside Unity Editor}{24}{section.3.5}%
-\contentsline {chapter}{\numberline {4}Experiments}{25}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Performance}{25}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Quality}{26}{section.4.2}%
-\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{29}{chapter.5}%
+\contentsline {subsection}{\numberline {3.5.1}Normal Execution of the Tool}{24}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Extraction of data for Retraining}{26}{subsection.3.5.2}%
+\contentsline {chapter}{\numberline {4}Experiments}{28}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Performance}{28}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Quality}{29}{section.4.2}%
+\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{33}{chapter.5}%

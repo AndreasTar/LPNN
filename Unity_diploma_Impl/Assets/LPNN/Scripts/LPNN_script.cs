@@ -18,6 +18,11 @@ public class LPNN_script : MonoBehaviour
         // Create a custom game object
         GameObject go = new("LPNN Parent");
         go.AddComponent<LPNN_script>();
+        go.AddComponent<LightProbeAI>();
+        go.AddComponent<LightProbeGroup>();
+
+        GameObject child = new("BoundingVolumes");
+        child.transform.parent = go.transform;
 
         // Ensure it gets reparented if this was a context click (otherwise does nothing)
         GameObjectUtility.SetParentAndAlign(go, menuCommand.context as GameObject);
@@ -478,7 +483,7 @@ public class LPNN_Inspector: Editor {
         GUIContent content = new("Bounds", "The Bounds that will be used to place the evaluation volumes.");
         EditorGUILayout.BoundsField(content, lpnn.bounds); // HACK this may need to be stored
 
-        content = new("Visualise Bounds", "Show a Rectangle in the Scene View that represents the Bounds.");
+        content = new("Visualize Bounds", "Show a Rectangle in the Scene View that represents the Bounds.");
 
         bool toggle = EditorGUILayout.Toggle(content, lpnn.vis_bounds); // HACK same with this and everything tbh
         if (toggle != lpnn.vis_bounds) {
