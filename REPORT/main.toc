@@ -1,29 +1,32 @@
 \babel@toc {english}{}\relax 
-\contentsline {chapter}{\numberline {1}Introduction}{8}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Related Work}{9}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1}Offline Methods}{9}{subsection.1.1.1}%
-\contentsline {subsection}{\numberline {1.1.2}Online Methods}{9}{subsection.1.1.2}%
-\contentsline {section}{\numberline {1.2}Thesis Structure}{11}{section.1.2}%
-\contentsline {chapter}{\numberline {2}Background}{12}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Light Probes}{12}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Spherical Harmonics}{13}{section.2.2}%
-\contentsline {section}{\numberline {2.3}PointNet}{13}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Tools}{13}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Graphics Engine}{14}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}Sentis}{14}{subsection.2.4.2}%
-\contentsline {subsection}{\numberline {2.4.3}3D Scenes}{14}{subsection.2.4.3}%
+\contentsline {chapter}{\numberline {1}Introduction}{9}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Related Work}{10}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Offline Methods}{10}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Online Methods}{10}{subsection.1.1.2}%
+\contentsline {section}{\numberline {1.2}Thesis Structure}{12}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Background}{13}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Light Probes}{13}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Spherical Harmonics}{14}{section.2.2}%
+\contentsline {section}{\numberline {2.3}PointNet}{14}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Tools}{15}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Graphics Engine}{15}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Sentis}{15}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}3D Scenes}{15}{subsection.2.4.3}%
 \contentsline {subsection}{\numberline {2.4.4}Python and TensorFlow}{15}{subsection.2.4.4}%
-\contentsline {chapter}{\numberline {3}Our Approach}{16}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Feature Collection}{16}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Label Collection}{20}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Model Training}{20}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Data Preparation}{21}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Model Architecture \bbl@greek@ampersand Training}{21}{subsection.3.3.2}%
-\contentsline {section}{\numberline {3.4}Light Probe Prediction}{22}{section.3.4}%
-\contentsline {section}{\numberline {3.5}LPNN inside Unity Editor}{24}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Normal Execution of the Tool}{24}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}Extraction of data for Retraining}{26}{subsection.3.5.2}%
-\contentsline {chapter}{\numberline {4}Experiments}{28}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Performance}{28}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Quality}{29}{section.4.2}%
-\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{33}{chapter.5}%
+\contentsline {chapter}{\numberline {3}Our Approach}{17}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Feature Collection}{17}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Label Collection}{21}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Model Training}{21}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Data Preparation}{22}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Model Architecture \bbl@greek@ampersand Training}{22}{subsection.3.3.2}%
+\contentsline {section}{\numberline {3.4}Light Probe Prediction}{23}{section.3.4}%
+\contentsline {section}{\numberline {3.5}LPNN inside Unity Editor}{25}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Normal Execution of the Tool}{25}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Extraction of data for Retraining}{27}{subsection.3.5.2}%
+\contentsline {chapter}{\numberline {4}Experiments}{29}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Performance}{29}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Quality}{30}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Indoors Example}{30}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Outdoors Example}{33}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Shortcomings of LPNN}{36}{subsection.4.2.3}%
+\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{38}{chapter.5}%

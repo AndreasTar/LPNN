@@ -16,13 +16,13 @@ Spherical Harmonics (SH), first introduced by Pierre Simon de Laplace, are a met
 
 \section{PointNet}
 \label{sec:background:pointnet}
-PointNet \parencite{PointNet2017} is a neural-network architecture designed to work directly on unordered 3D point-clouds; a collection of points without any required grid connectivity. Each point passes through a small MultiLayer Perceptron (MLP), extracting a feature vector that describes its local attributes, e.g. color and normal. After per-point features are computed, PointNet aggregates them into a global descriptor by applying a symmetric operation, usually max-pooling across all points, capturing the strongest signal from the features. Then, the global descriptor is concatenated back to the per-point features, resulting in every point having knowledge about both its characteristics and the broader context. Finally, a per-point MLP refines these combined values into task-specific outputs, commonly classification scores or per-point importance metrics.
+PointNet \parencite{PointNet2017} is a neural-network architecture designed to work directly on unordered 3D point-clouds; a collection of points without any required grid connectivity. Each point passes through a small MultiLayer Perceptron (MLP), extracting a feature vector that describes its local attributes, e.g. color and normal. After per-point features are computed, PointNet aggregates them into a global descriptor by applying a symmetric operation, usually max-pooling across all points, capturing the strongest signal from the features. Then, the global descriptor is concatenated back to the per-point features, resulting in every point having knowledge about both its characteristics and the broader context. Finally, a per-point MLP refines these combined values into task-specific outputs, commonly classification scores or per-point importance metrics.\newline
 
 Since there is no fixed grid, meaning the points are assumed to be unordered and irregular, traditional CNNs can't be applied directly. Additionally, since PointNet predicts values per-point, it can be used to handle point clouds of any shape and point amount without retraining, limited only by the system's memory. This makes PointNet a fitting candidate to base our model on, with the implementation being the only varying factor.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.16]{Graphics/pointnet.jpg}
+	\includegraphics[width=\linewidth]{Graphics/pointnet.jpg}
 	\caption{PointNet architecture. Image from \cite{PointNet2017}.}
 	\label{fig:pointnet}
 \end{figure}
@@ -41,14 +41,14 @@ For training and testing the AI model, we used the Sponza scene \parencite{Sponz
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.294]{Graphics/Sponza_lightprobes.jpg}
+	\includegraphics[width=\linewidth]{Graphics/Sponza_lightprobes.jpg}
 	\caption{The Sponza Unity Scene showing light probes placed on a grid \parencite{Sponza2017}.}
 	\label{fig:Sponza_lp}
 \end{figure}
 
 
 \subsection{Python and TensorFlow}
-For this thesis, Python was used as the language of choice for the creation of our Deep Learning AI Model. Python is an interpreted programming language. Its high-level nature makes it ideal for general purpose scenarios and easy to work with. Python was used for its simplicity, making the reading, preparation, post-processing, and saving of the data a fast process during the development of LPNN.
+For this thesis, Python was used as the language of choice for the creation of our Deep Learning AI Model. Python is an interpreted programming language. Its high-level nature makes it ideal for general purpose scenarios and easy to work with. Python was used for its simplicity, making the reading, preparation, post-processing, and saving of the data a fast process during the development of LPNN.\newline
 
 TensorFlow is a free and open-source software library used for machine-learning and artificial-intelligence applications. It supports a variety of well-known programming languages, but for this thesis we used the Python version for creating and training our model.
 

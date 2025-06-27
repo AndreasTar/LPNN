@@ -24,12 +24,12 @@ In algorithm \ref{alg:grid_place}, \textit{cellsize} is the distance between eac
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.43]{Graphics/Grid_Example.jpg}
+	\includegraphics[width=\linewidth]{Graphics/Grid_Example.jpg}
 	\caption{A 3D Scene showing the placement of Evaluation Points (shown in yellow) inside the user defined bounds (shown in pink), contained within the calculated volume (shown in red).}
 	\label{fig:grid}
 \end{figure}
 
-After placing the EP, we use each point to calculate the data needed for the feature vectors. The aim of the LPNN model is to give an importance value to each of those EP that it is given. Therefore, it is vital that it understands what defines a significant point via the features that it is trained on. Our knowledge dictates that an important location for a light probe is one that has great variance in illumination. Therefore, we include light-, RGB- and normal-variance as features for each point. Light-Variance dictates how much the light intensity changes around a point. RGB-Variance is similar, since it shows the change in Red, Green, and Blue light around each point, each channel being independent from the others. Normal-Variance is a value that makes locations like corners distinct from empty areas or from locations near a wall. Similarly, we also calculate Occlusion-Factor, a feature that gives each point a value depending on how empty or cluttered the area around it is. Normal-Variance together with Occlusion-Factor inform the model of areas that are enclosed or close to complex geometry. This makes the model able to distinguish these locations, even when all other values are identical, making it able to give different importance values to those distinct locations.
+After placing the EP, we use each point to calculate the data needed for the feature vectors. The aim of the LPNN model is to give an importance value to each of those EP that it is given. Therefore, it is vital that it understands what defines a significant point via the features that it is trained on. Our knowledge dictates that an important location for a light probe is one that has great variance in illumination. Therefore, we include light-, RGB- and normal-variance as features for each point. Light-Variance dictates how much the light intensity changes around a point. RGB-Variance is similar, since it shows the change in Red, Green, and Blue light around each point, each channel being independent from the others. Normal-Variance is a value that makes locations like corners distinct from empty areas or from locations near a wall. Similarly, we also calculate Occlusion-Factor, a feature that gives each point a value depending on how empty or cluttered the area around it is. Normal-Variance together with Occlusion-Factor inform the model of areas that are enclosed or close to complex geometry. This makes the model able to distinguish these locations, even when all other values are identical, making it able to give different importance values to those distinct locations.\newline
 
 Along with the features mentioned above, we additionally include a vector that contains the spherical-harmonic values for a small amount of distinct directions around each point. The implementations of each feature collection method are shown in \ref{alg:feat_sh}, \ref{alg:feat_lv}, \ref{alg:feat_rgbv}, \ref{alg:feat_nv}, and \ref{alg:feat_of}.
 
@@ -120,7 +120,7 @@ Similarly, we collect the RGB-Variance independently for each channel. The formu
 	\end{algorithmic}
 \end{algorithm}
 
-In line \algref{alg:feat_nv}{alg:feat_nv:12}, we want the higher values to define the areas with more complex geometry. The dot product of vectors is a value between 0 and 1, therefore we subtract the dot product from 1, to invert the range of the variance.
+In line \algref{alg:feat_nv}{alg:feat_nv:12}, we want the higher values to define the areas with more complex geometry. The dot product of vectors is a value between 0 and 1, therefore we subtract the dot product from 1, to invert the range of the variance.\newline
 
 \begin{algorithm}
 	\caption{Feature Extraction: Occlusion Factor around a point}
@@ -197,20 +197,24 @@ Finally, another Convolution1D and Dropout sequence is used to reduce the high-d
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.392]{Graphics/LPNN.jpg}
+	\includegraphics[width=\linewidth]{Graphics/LPNN.jpg}
 	\caption{Neural Network architecture of our LPNN model.}
 	\label{fig:LPNN_arch}
 \end{figure}
 
+The model was trained using 3485 total feature vectors, collected from a number of scenes, with multiple LPNN layouts and LumiProbes settings for each scene, ensuring the model has access to a variety of different scenarios to better understand the task, improving accuracy.\newline
+
+The architecture of the model, combined with the fact that the features do not contain any information about the scene itself, e.g. where lights, walls, windows etc. are placed, ensures that the model is fully agnostic to each scene, even if it was used for training. Different layouts for each scene can be used to increase the dataset, while avoiding overfitting, making the feature collection process easier.
+
 \section{Light Probe Prediction}
 \label{sec:lp_predict}
-In order to use the model to infer importance scores for the EP, we need to import it to Unity. For this purpose, we use Sentis. After model import, it can be used for our goals. First, since the model is agnostic to each scene and each EP layout, we need to provide it with the feature vector list, containing the feature vector for each EP. This process is the same as in \ref{sec:feature_collection}, therefore it is not described again. The only exception is that the list is not saved into a file at the end of the process, since it will be used directly inside Unity, therefore we only need the variable that contains the list object inside the code implementation.
+In order to use the model to infer importance scores for the EP, we need to import it to Unity. For this purpose, we use Sentis. After model import, it can be used for our task. First, since the model is agnostic to each scene and each EP layout, we need to provide it with the feature vector list, containing the feature vector for each EP. This process is the same as in \ref{sec:feature_collection}, therefore it is not described again. The only exception is that the list is not saved into a file at the end of the process, since it will be used directly inside Unity, therefore we only need the variable that contains the list object inside the code implementation.
 
 First, it is necessary to convert the feature vectors into the same data format that was used when the model was trained using Python and TensorFlow. Providing any other format will result in the program not executing correctly, causing an error message or even a crash. This is because Sentis is able to execute model inference workloads on the GPU for parallelism and therefore faster execution. This is optional, since Sentis has a fallback feature. If no capable GPU is detected on the system, it uses the system's CPU instead. We have set Sentis to prefer using GPU compute for faster execution even with larger datasets, but the CPU fallback makes sure no additional logic is needed in cases where the system used does not contain a GPU. 
 
-After converting the vectors into the correct format, the compute device that was chosen is then sent the data and requested to infer using the model that we trained. This is done asynchronously, meaning that the execution of the code is not halted while the device is processing. It is therefore possible to request the inferred values back at a later time, but that is not necessary for our use-case. We save the inferred values to a file on the hard disk, meaning we can perform calculations on the values without affecting the original list, as we will see shortly, and remain able to read the original values without needing to re-infer using the model.
+After converting the vectors into the correct format, the compute device that was chosen is then sent the data and requested to infer using the model that we trained. This is done asynchronously, meaning that the execution of the code is not halted while the device is processing. It is therefore possible to request the inferred values back at a later time, but that is not necessary for our use-case. We save the inferred values to a file on the hard disk, meaning we can perform calculations on the values without affecting the original list, as we will see shortly, and remain able to read the original values without needing to re-infer using the model.\newline
 
-After inferring, the Light probe group can now be populated according to the inferred importance scores. For that purpose, as seen in algorithm \ref{alg:lp_place}, it is necessary to pre-process all the values for better handling. It is not unlikely that the scores given by the model are very concentrated to some value, sometimes clusters forming in the data, making the use of the threshold system delicate. To fix this, we remap the range of the values from the minimum and maximum value to 0 and 1. This results in the values covering the entirety of the output range 0-1, instead of potentially only parts of it, spreading out any clustering of values.
+After inferring, the Light probe group can be populated according to the inferred importance scores. For that purpose, as seen in algorithm \ref{alg:lp_place}, it is necessary to pre-process all the values for better handling. It is not unlikely that the scores given by the model are very concentrated to some value, sometimes clusters forming in the data, making the use of the threshold system delicate. To fix this, we remap the range of the values from the minimum and maximum value to 0 and 1. This results in the values covering the entirety of the output range 0-1, instead of potentially only parts of it, spreading out any clustering of values.
 
 \begin{algorithm}
 	\caption{Inferred Scores Range Remapping}
@@ -268,7 +272,7 @@ With the values remapped, the threshold system can be used without delicate cont
 	\end{algorithmic}
 \end{algorithm}
 
-In line \algref{alg:lp_thres}{alg:lp_thres:1}, we invert the threshold, since, as mentioned before, we want the higher-importance values to appear first. This means that with a 90\% threshold, the top 10\% light probes with the highest importance score should be placed, while the remaining 90\% with lower significance should be ignored. 
+In line \algref{alg:lp_thres}{alg:lp_thres:1}, we invert the threshold, since, as mentioned before, we want the higher-importance values to appear first. This means that with a 90\% threshold, the top 10\% light probes with the highest importance score should be placed, while the remaining 90\% with lower significance should be ignored.\newline 
 
 Finally, we set the positions of the Light Probe Group Unity object to be the ones that are within the threshold that we calculated, seen as the $positions$ variable in the algorithm mentioned. As we will see in section \ref{sec:LPNN_UI}, the light probes are now placed in the scene and visible to the user, completing the execution of the tool.
 
@@ -278,6 +282,7 @@ Finally, we set the positions of the Light Probe Group Unity object to be the on
 In this section, we will describe the workflow of the tool and how a developer can speed up the process using LPNN. Additionally, the steps needed for data extraction are described, allowing for retraining of the LPNN model by the user.
 
 \subsection{Normal Execution of the Tool}
+\label{sec:LPNN_UI:normal}
 
 For the tool to be executable inside the Unity Engine editor view, we implemented a GUI using Unity's $CustomEditor$ attribute, allowing us to configure the layout via code for the Inspector view. First, as seen in figure \ref{fig:UI_add}, the user imports the tool into the scene by the same method when importing any built-in asset available.
 
@@ -290,7 +295,7 @@ For the tool to be executable inside the Unity Engine editor view, we implemente
 
 An $LPNN Parent$ object is then created inside the scene's hierarchy, appearing in the related window. As we will see shortly, this object houses all the objects needed for execution of the tool. Namely, a $BoundingVolumes$ object is added automatically, which will contain all the bounding volumes the user wants to be included when creating the EP grid. Additionally, a $VoxelsParent$ object is created automatically when placing the EP using the necessary button. 
 
-In the case where the user wants a standard bounding box to be used, this can be specified using a simple box as a bounding volume. For more complex bounding volumes, more shapes can be added and the tool will show the new bounding areas, after recalculation. The complete bounding volume dimensions are shown in the editor window using fields that describe the Center point and the Extend of the bounding volume in each axis, as seen in \ref{fig:UI_editor}. Setting up the area that the tool should place the EP in is a necessary step. Without it, error log messages will appear in the Unity Console when the user attempts to run almost any other step in the process. The \textit{Calculate Bounds} can be clicked when the user has defined their bounding volumes. The system will execute a number of calculations to create the necessary objects for the next steps.
+In the case where the user wants a standard bounding box to be used, this can be specified using a simple box as a bounding volume. For more complex bounding volumes, more shapes can be added and the tool will show the new bounding areas, after recalculation. The complete bounding volume dimensions are shown in the editor window using fields that describe the Center point and the Extend of the bounding volume in each axis, as seen in \ref{fig:UI_editor}. Setting up the area that the tool should place the EP in is a necessary step. Without it, error log messages will appear in the Unity Console when the user attempts to run almost any other step in the process. The \textit{Calculate Bounds} can be clicked when the user has defined their bounding volumes. The system will execute a number of calculations to create the necessary objects for the next steps.\newline
 
 \begin{figure}[h]
 	\centering
@@ -302,7 +307,7 @@ In the case where the user wants a standard bounding box to be used, this can be
 
 The \textit{Visualise Bounds} flag is available to the user optionally, set to True as a default. In the True state, it reveals to the user the total volume, each bound, and the EP points, if set, inside the Scene window of the Unity editor, as seen in figure \ref{fig:grid}. Additionally, it is updated in real-time when the user changes the size of the \textit{Voxel Size} that will be described shortly, making the process of finding the desired grid layout faster. If the user disables the flag, none of the bounds or the EP will be shown, allowing for a visually simpler Scene view.
 
-In order for the EP grid to be created, the \textit{Place Evaluation Points} button is available. When clicked, the implementation of the algorithm \ref{alg:grid_place} is executed, placing the EP on a grid inside the user-defined bounds, taking into consideration the \textit{Voxel Size} field to determine the size of each cell.
+In order for the EP grid to be created, the \textit{Place Evaluation Points} button is available. When clicked, the implementation of the algorithm \ref{alg:grid_place} is executed, placing the EP on a grid inside the user-defined bounds, taking into consideration the \textit{Voxel Size} field to determine the size of each cell.\newline
 
 For the EP to capture Global Illumination data properly, Unity must have created the necessary objects, maps, and assets for each point to collect the features from. However, this process is not always executed beforehand. for this reason, we added the \textit{Bake Global Illumination} button, which requests a total recalculation of the scene's GI information from Unity, ensuring all data is available for the tool.
 
@@ -324,7 +329,7 @@ The user can click the \textit{Save Features to File} button to extract the feat
 	\label{fig:UI_ai}
 \end{figure}
 
-Similarly, the \textit{Get Labels \& Save} and the \textit{Get Labels \& Append} buttons are responsible for calculating the labels for the current scene. The process has been described in section \ref{sec:label_coll}. It is vital for the user to have a ground-truth light probe layout for the labels to be collected. The LightProbeGroup object can be exposed to the tool via the field shown in red in figure \ref{fig:UI_editor}, called \textit{Predef\_light Probes}.
+Similarly, the \textit{Get Labels \& Save} and the \textit{Get Labels \& Append} buttons are responsible for calculating the labels for the current scene and saving or appending the data to a file on the hard disk. The process has been described in section \ref{sec:label_coll}. It is vital for the user to have a ground-truth light probe layout for the labels to be collected. The LightProbeGroup object can be exposed to the tool via the field shown in red in figure \ref{fig:UI_editor}, called \textit{Predef\_light Probes}.
 
-After extracting the necessary data, the user can now train an updated model externally using the process mentioned in section \ref{sec:model_training}. For import back inside Unity for the tool to use the updated model, the user needs to pass in the new imported model to the field \textit{Model Asset} of the \textit{Light Probe AI} script, which is added automatically when creating the \textit{LPNN Parent} object. The field can be seen in figure \ref{fig:UI_ai}.
+After extracting the necessary data, the user can now train an updated model externally using the process mentioned in section \ref{sec:model_training}. For import back inside Unity for the tool to use the updated model, the user needs to pass in the new imported model to the field \textit{Model Asset} of the \textit{Light Probe AI} script, which is added automatically when creating the \textit{LPNN Parent} object. The field can be seen in figure \ref{fig:UI_ai} in orange. After providing the model asset to the tool, standard workflow can be resumed, following the steps described in sub-section \ref{sec:LPNN_UI:normal}.
 

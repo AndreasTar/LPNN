@@ -4,7 +4,7 @@ In this chapter, we present experimental results of the LPNN approach. The evalu
 \label{sec:4_performance}
 Since the focus of the thesis was to speed up the placement of light probes in this stage of any 3D application development iteration process, we will focus on the execution time of the tool and also critique the results and their qualitative properties shortly, to make sure the placements are correct. Indeed, as seen in table \ref{table:times}, the LPNN approach speeds up light probe placement by orders of magnitude faster than the LumiProbes, but it may suffer from occasional misplacement; probes that were placed in positions that are not vital, leading to oversampling, which we will show shortly. 
 
-In experiments where LumiProbes and LPNN were requested to place close to the same amount of light probes in the same scene, LPNN time stayed close to constant, typically up to a few seconds, regardless of the scenario or the amount requested. Results for various amounts of light probes and scenes are presented in table \ref{table:times}. Times are averaged over multiple runs. Units are represented in minutes (m), seconds (s), or milliseconds (ms). Where applicable, we also append the settings used for each tool. For LumiProbes, settings include the grid parameters and the evaluation-point count. All other settings are as follows: Evaluation point placement type is set to Poisson, Decimation type is set to Medium, Decimation directions are averaged, Decimation metric is set to  Chrominance, Minimum LP set is disabled, and Maximum Error is set to 3. For LPNN, settings include the threshold value used for the specific result and the cell size of the 3D grid, in order. 
+In experiments where LumiProbes and LPNN were requested to place close to the same amount of light probes in the same scene, LPNN time stayed close to constant, typically up to a few seconds, regardless of the scenario or the amount requested. Results for various amounts of light probes and scenes are presented in table \ref{table:times}. Times are averaged over multiple runs. Units are represented in minutes (m), seconds (s), or milliseconds (ms). Where applicable, we also append the settings used for each tool. For LumiProbes, settings include the grid parameters and the evaluation-point count. All other settings are as follows: Evaluation point placement type is set to Poisson, Decimation type is set to Medium, Decimation directions are averaged, Decimation metric is set to  Chrominance, Minimum LP set is disabled, and Maximum Error is set to 3. For LPNN, settings include the threshold value used for the specific result and the cell size of the 3D grid, in order.\newline
 
 Figures for the results are shown in section \ref{sec:4_quality}. Memory requirements for this tool are strictly dependent on the amount of light probes present in the scene, since all information needed by the tool is either already present in Unity and are needed regardless of the presence of the tool, e.g. Global Illumination data, or are stored on the Hard Disk of the system as files with storage sizes dependent on the amount of probes placed before the execution of the tool. File sizes for 150 probes were less than 2KB. Typically, the tool creates files needed for placing the light probes with size-scaling 1KB per approximately 100 probes.
 
@@ -14,7 +14,7 @@ Figures for the results are shown in section \ref{sec:4_quality}. Memory require
 	\hline
 	\multicolumn{6}{|c|}{Execution Results} \\
 	\hline
-	Method & Scene & Time & P. Count & P. Present (\& Removed) & Settings\\
+	Method & Scene & Time & P. Count & P. Present (\&Removed) & Settings\\
 	\hline
 	LumiProbes & Sponza   & 22.443s  & 105 & 34 (75)  & (7,3,5), 128 \\
 			   &          & 600.285s & 240 & 54 (186) & (12,4,5), 256 \\
@@ -47,36 +47,46 @@ For execution times greater than 20000 seconds (approximately 5 hours and 30 min
 
 \section{Quality}
 \label{sec:4_quality}
+
 The tools were tested on the aforementioned edited Sponza scene \parencite{Sponza2017}, Corridor scene \parencite{Corridor2021} and Office scene \parencite{Office2021}. We will present the qualitative results. As we will see shortly, LPNN correctly places light probes in areas of high variance.
+
+\subsection{Indoors Example}
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.18]{Graphics/results/concats/comparison1.png}
-	\caption{An indoor 3D Scene showing a comparison of light probe placement in a \textbf{high} color-variance scenario, between LPNN (left) and LumiProbes (right) with settings 0.549, 1.94 and (27,3,3), 256 respectively, in the Corridor scene.}
-	\label{fig:comp1}
+	\includegraphics[width=\linewidth]{Graphics/results/corridor.jpg}
+	\caption{The Corridor scene \parencite{Corridor2021} without any light probes placed. We show only the area of the scene that is inside the bounds of both LPNN and LumiProbes tools.}
+	\label{fig:corridor}
 \end{figure}
 
 As shown in figure \ref{fig:comp1}, we can clearly see that the LPNN tool has correctly placed light probes between the blue and green light sources, as well as between the green and red light sources, locations with great variance in Chrominance, It has additionally kept the amount of probes at a minimum, only placing one probe at each location mentioned. This result is close to optimal placement, since the distance between the light sources is only 4 units, making additional probes unnecessary in most scenarios. It should be noted that the tool did correctly place probes on the edges of the bounds, seen as light-green colored lines. This ensures that any dynamic object that moves outside the bounds set by the user continues to have some light-probes information for its illumination. 
 
-Furthermore, in figure \ref{fig:comp2} we can see a similar result. The light probe between the two white light sources is vital. The areas left and right from the two light sources have light probes only in the dark areas, making the light transition when a dynamic object moves within this section of the scene smooth. Additionally, the light sources are next to an opaque wall, meaning no light present on the other side of the wall. Therefore, the model decided that placing light probes is only important on the edges of the wall, which is what we see in the example. It is important to note that on the left side of the corridor, as seen in the left image of figure \ref{fig:comp2}, the model has placed a great amount of light probes, even though there is low light variance since that section of the scene is not illuminated. 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{Graphics/results/concats/comparison1.png}
+	\caption{An indoor 3D Scene showing a comparison of light probe placement in a \textbf{high} color-variance scenario, between LPNN (left) and LumiProbes (right) with settings 0.549, 1.94 and (27,3,3), 256 respectively, in the Corridor scene.}
+	\label{fig:comp1}
+\end{figure}
 
-Additionally, as seen in figure \ref{fig:comp3}, the model suffers from under-sampling in certain scenarios; placing fewer light probes than necessary, resulting in partially incorrect lighting. However, this can be resolved in two immediate ways; the user can execute the tool again with different parameters, as seen in figure \ref{fig:comp4}, or the user can manually place a small number of light probes in locations they deem vital. The tool has placed only 2 light probes on the lower section of the scene, resulting in elongated tetrahedrons and incorrect lighting for dynamic objects placed low. Additionally, the light probes placed on the dark side of the wall in figure \ref{fig:comp3} require one more row of light probes placed next to the wall, making any object inside that section of the scene completely dark due to the lack of light in that section. With the settings present in figures \ref{fig:comp1}, \ref{fig:comp2}, and \ref{fig:comp3}, the tool doesn't have enough light probes in the desired locations to correct this issue. This can be fixed by decreasing the cell size parameter, as seen in figure \ref{fig:corr_1}.
+Furthermore, in figure \ref{fig:comp2} we can see a similar result. The light probe between the two white light sources is vital. The areas left and right from the two light sources have light probes only in the dark areas, making the light transition when a dynamic object moves within this section of the scene smooth. Additionally, the light sources are next to an opaque wall, meaning no light present on the other side of the wall. Therefore, the model decided that placing light probes is only important on the edges of the wall, which is what we see in the example. It is important to note that on the left side of the corridor, as seen in the left image of figure \ref{fig:comp2}, the model has placed a great amount of light probes, even though there is low light variance since that section of the scene is not illuminated. 
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.25]{Graphics/results/concats/comparison2.png}
+	\includegraphics[width=\linewidth]{Graphics/results/concats/comparison2.png}
 	\caption{A 3D Scene showing a comparison of light probe placement in a \textbf{low} color-variance scenario, but \textbf{high} luminance variance, between LPNN (left) and LumiProbes (right) with settings 0.615, 1.5 and (27,3,3), 256 respectively, in the Corridor scene.}
 	\label{fig:comp2}
 \end{figure}
 
+Additionally, as seen in figure \ref{fig:comp3}, the model suffers from under-sampling in certain scenarios; placing fewer light probes than necessary, resulting in partially incorrect lighting. However, this can be resolved in two immediate ways; the user can execute the tool again with different parameters, as seen in figure \ref{fig:comp4}, or the user can manually place a small number of light probes in locations they deem vital. The tool has placed only 2 light probes on the lower section of the scene, resulting in elongated tetrahedrons and incorrect lighting for dynamic objects placed low. Additionally, the light probes placed on the dark side of the wall in figure \ref{fig:comp3} require one more row of light probes placed next to the wall, making any object inside that section of the scene completely dark due to the lack of light in that section. With the settings present in figures \ref{fig:comp1}, \ref{fig:comp2}, and \ref{fig:comp3}, the tool doesn't have enough light probes in the desired locations to correct this issue. This can be fixed by decreasing the cell size parameter, as seen in figure \ref{fig:corr_1}.
+
+With better grid layout, the model correctly placed probes on both sides of the wall, correctly capturing the lighting information of the area. This can be seen in figure \ref{fig:corr_1}. On the left side of the wall, a number of probes were placed around the light sources, making any dynamic object that traverses the location have accurate illumination data. Similarly, on the right side of the wall, we can see probes placed flush with the wall, capturing the lack of light of the area, regardless of the proximity to light sources. This ensures that a dynamic object will remain unlit from the two light sources, if it is placed on the right side of the wall. 
+
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.5]{Graphics/results/corridor_0.244_1.3.jpg}
+	\includegraphics[scale=0.4]{Graphics/results/corridor_0.244_1.3.jpg}
 	\caption{A 3D Scene showing a better placement of light probes in the Corridor scene, fixing the under-sampling issue of figure \ref{fig:comp2}. The example was captured with LPNN with settings 0.244, 1.3.}
 	\label{fig:corr_1}
 \end{figure}
-
-With better grid layout, the model correctly placed probes on both sides of the wall, correctly capturing the lighting information of the area. This can be seen in figure \ref{fig:corr_1}. On the left side of the wall, a number of probes were placed around the light sources, making any dynamic object that traverses the location have accurate illumination data. Similarly, on the right side of the wall, we can see probes placed flush with the wall, capturing the lack of light of the area, regardless of the proximity to light sources. This ensures that a dynamic object will remain unlit from the two light sources, if it is placed on the right side of the wall. 
 
 It is worth noting that the model inferred that more points between the two light sources are important, placing three instead of one in figure \ref{fig:comp2}. Even though this can be considered as slight oversampling, the amount of additional light probes is minimal.
 
@@ -84,20 +94,92 @@ This result can be recreated for figures \ref{fig:comp1} and \ref{fig:comp3} wit
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.207]{Graphics/results/concats/comparison3.png}
+	\includegraphics[width=\linewidth]{Graphics/results/concats/comparison3.png}
 	\caption{A 3D Scene showing under-sampling of light probe placement in the Corridor scene. The example was captured with LPNN with settings 0.615, 1.5.}
 	\label{fig:comp3}
 \end{figure}
 
-As mentioned. with different settings, we can resolve the under-sampling issue from figure \ref{fig:comp3}, as seen in figure \ref{fig:comp4}. By increasing the cell size but reducing the threshold, the tool has placed more probes on the lower section of the scene, from just 2 to 8, leading to better results overall. This can be further increased with additional tuning of the settings, but it may lead to oversampling in certain high-variance locations elsewhere in the scene.
+As mentioned, with different settings, we can resolve the under-sampling issue from figure \ref{fig:comp3}, as seen in figure \ref{fig:comp4}. By increasing the cell size but reducing the threshold, the tool has placed more probes on the lower section of the scene, from just 2 to 8, leading to better results overall. This can be further increased with additional tuning of the settings, but it may lead to oversampling in certain high-variance locations elsewhere in the scene.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.32]{Graphics/results/corridor_0.549_1.94_E2.jpg}
-	\includegraphics[scale=0.4623]{Graphics/results/corridor_0.549_1.94_E3.jpg}
+	\includegraphics[width=\linewidth]{Graphics/results/corridor_0.549_1.94_E2.jpg}
+	\includegraphics[width=\linewidth]{Graphics/results/corridor_0.549_1.94_E3.jpg}
 	\caption{A 3D Scene showing improved light probe placement in the Corridor scene. The example was captured with LPNN with settings 0.549, 1.94.}
 	\label{fig:comp4}
 \end{figure}
+
+
+\subsection{Outdoors Example}
+\label{sec:outdoors}
+
+So far, only results of indoors scenes have been shown and described. Indoor scenes are ones where all the illumination provided by the light sources, (lamps or the outdoor light leaking through the windows of a room) is contained within an area bounded by opaque surfaces like walls. However, in addition to indoor scenes, outdoor scenes are equally as important in a lot of 3D applications. The Sponza scene \parencite{Sponza2017} is an outdoors environment, where illumination is provided by a light source closely imitating a sun. The presence of walls without a ceiling, together with the sun angle being not-vertical to the floor, leads to interesting shadows and light interactions within the objects. As we will see shortly, LPNN speeds up the process of placing light probes in the scene significantly, requiring only minimal manual tweaking.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{Graphics/results/sponza.jpg}
+	\caption{The Sponza scene \parencite{Sponza2017} without any light probes placed. We show only the area of high importance, where the light probes should be placed.}
+	\label{fig:sponza}
+\end{figure}
+
+Seen in figure \ref{fig:comp5}, the LumiProbes tool has placed several light probes on the two sides of the shadow created by the angled sun direction. This ensures that a dynamic object traversing the floor of the scene will receive GI information from the light probes, making the transition between the illuminated side on the right and the shadowed side on the left smooth. 
+
+At first glance, the layout proposed by the LPNN tool for the settings mentioned in the caption of the figure, seems incorrect. The edge between the illuminated and the shadowed sides lacks light probes, resulting in incorrect illumination for any dynamic object traversing the scene. However, even though the initial placement is sub-optimal, with minimal manual tweaking this can be improved significantly.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{Graphics/results/concats/comparison4.png}
+	\caption{A 3D Scene showing a comparison of light probe placement between LPNN (left) and LumiProbes (right) with settings 0.4, 2.0 and (12,4,5), 256 respectively, in the outdoor Sponza scene.}
+	\label{fig:comp5}
+\end{figure}
+
+In figure \ref{fig:comp6} we can see the resulting layout, after manually translating the light probes a few units to the right. This process comprises of a small number of inputs required by the user, taking a few seconds to complete. The speedup of the tool is still present, even if it requires a few manual tweaks, saving time for the developer during this part of the process when developing 3D applications. In the improved layout seen in figure \ref{fig:comp6} on the right, the light probes are placed on both sides of the edge created by the angled sun illumination being occluded by the walls of the building.\newline
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{Graphics/results/concats/comparison5.png}
+	\caption{A 3D Scene showing a comparison of the default light probe placement of the LPNN tool (left) and after translating the LightProbeGroup object a small number of units to the right (right).}
+	\label{fig:comp6}
+\end{figure}
+
+Additionally, the tweaked layout places light probes in front of the colored surfaces on the right wall of the scene. A dynamic object that requires indirect lighting will correctly be colored lightly by the colored materials of the surfaces, and the color will also be interpolated when traversing between them. Shown closer in figure \ref{fig:sponza_detail}, we can clearly see that light probes are placed only in front of the colored materials. Taking into consideration the context of the scene, placing light probes at every grid location on that close-up area results to oversampling, placing more probes than needed, increasing the memory usage of the scene. Therefore, placing a probe between the blue and red surfaces is unnecessary, something that the LPNN model has correctly avoided. 
+
+However, it has still dictated that a light probe between the nearby red and greed surfaces is required. With the same reasoning, we can determine that it is not vital for a light probe to be present in that location. The indirect illumination from the surfaces will be soft enough to not warrant a dense light probe layout at each location. Additionally, the edge of the shadowed area is still covered by the light probes around the mentioned position of the unnecessary light probe, since the transition between the illuminated and shadowed areas stays consistent through the scene. We decided to not manually remove the mentioned light probe for the sake of completeness, however doing so is a trivial process, comprising of only a couple of user inputs, adding only a few seconds to the total time needed for this step of the process of development.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{Graphics/results/sponza_0.4_2_C.jpg}
+	\caption{Detailed view of the tweaked layout shown in figure \ref{fig:comp6}, showing light probes being placed in front of the colored materials, able to capture indirect illumination data for dynamic objects moving between them.}
+	\label{fig:sponza_detail}
+\end{figure}
+
+Similar results were present regardless of the settings used for LPNN. The translation tool was required often, but not always. We decided to show an example with the settings that we felt best displayed the layout we wanted to present, that additionally placed the same amount of light probes with LumiProbes. The settings for both tools can be seen in the caption of figure \ref{fig:comp5}, or in table \ref{table:times}.
+
+\subsection{Shortcomings of LPNN}
+
+It should be of note that the light probe layout described in sub-section \ref{sec:outdoors} is sub-optimal by nature. Any harsh edge in illumination, an example of which is present in the Sponza seen shown in the same sub-section, requires a tightly-packed light probe layout surrounding it, in order to ensure that a dynamic object has an instant transition between the different illuminations.
+
+A sparser grid like the one used in the same sub-section will correctly place light probes on both sides of the light-edge, however the distance between them will make the transition smooth, resulting in inaccurate GI on the surface of a dynamic object. This can not be resolved in any way by the model, since it is a fault stemming from the cell size used by the user. Even with a theoretical perfect model, faulty user usage of the tool places the model in a state that it can only minimize the user error as best as it can. It can not resolve it, making user error one of the largest factors of sub-optimal light probe placement using the LPNN tool.\newline
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{Graphics/results/office.jpg}
+	\caption{The Office scene \parencite{Office2021} without any light probes placed.}
+	\label{fig:office}
+\end{figure}
+
+The LPNN model used during the creation of this thesis can be improved. In rare occasions, the inferred importance scores fail to cover areas of high GI variance. As seen in figure \ref{fig:office_faulty}, the light probes placed by LPNN (left) fail to completely capture the lighting information of the three colored light sources in one room. Additionally, no light probes were placed in the left of the scene, near the white light source. Any dynamic object in this scene will receive insufficient illumination data, resulting in incorrect surface color.\newline
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{Graphics/results/concats/comparison6.png}
+	\caption{Overview of faulty light probe placement inferred by the model. Settings used are 0.758, 1.87 for LPNN (left) and (12,3,4), 128 for LumiProbes (right).}
+	\label{fig:office_faulty}
+\end{figure}
+
+Additionally, in the same scene, we can see that the right half of the building contains multiple light probes, even in areas where the change in illumination is minimal or non-existent. Not all light probes are unnecessary. A dynamic object in this part of the scene will have sufficient data from the light probes surrounding it, therefore the surface of the object will be shaded correctly. However, due to the lack of significant illumination changes, the amount of placed light probes can be reduced significantly, while keeping the same visual quality. The currently oversampled area results in increased memory usage with no improvements in the quality of GI on dynamic objects.\newline
+
+This problem results from the model itself. It is important to have sufficient amount of high quality data during training; data from a variety of scenes and examples, including many edge cases and variations. As mentioned in section \ref{sec:model_training}, we trained the model using 3485 total feature vectors from different scenes. However, a bigger dataset can improve the accuracy of the model, potentially avoiding the issue mentioned. In cases like the one described, it is necessary that the user attempts using different settings for the tool and potentially requiring an increased manual tweaking process to provide the desired results.
 
 
 
