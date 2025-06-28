@@ -12,11 +12,11 @@
 \contentsline {subsection}{\numberline {2.4.1}Graphics Engine}{15}{subsection.2.4.1}%
 \contentsline {subsection}{\numberline {2.4.2}Sentis}{15}{subsection.2.4.2}%
 \contentsline {subsection}{\numberline {2.4.3}3D Scenes}{15}{subsection.2.4.3}%
-\contentsline {subsection}{\numberline {2.4.4}Python and TensorFlow}{15}{subsection.2.4.4}%
+\contentsline {subsection}{\numberline {2.4.4}Python and TensorFlow}{16}{subsection.2.4.4}%
 \contentsline {chapter}{\numberline {3}Our Approach}{17}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Feature Collection}{17}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Label Collection}{21}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Model Training}{21}{section.3.3}%
+\contentsline {section}{\numberline {3.3}Model Training}{22}{section.3.3}%
 \contentsline {subsection}{\numberline {3.3.1}Data Preparation}{22}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2}Model Architecture \bbl@greek@ampersand Training}{22}{subsection.3.3.2}%
 \contentsline {section}{\numberline {3.4}Light Probe Prediction}{23}{section.3.4}%
@@ -26,7 +26,8 @@
 \contentsline {chapter}{\numberline {4}Experiments}{29}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Performance}{29}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Quality}{30}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Indoors Example}{30}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Outdoors Example}{33}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Shortcomings of LPNN}{36}{subsection.4.2.3}%
-\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{38}{chapter.5}%
+\contentsline {subsection}{\numberline {4.2.1}Light Probe placement Quality}{30}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Indoors Example}{31}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Outdoors Example}{35}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Shortcomings of LPNN}{37}{subsection.4.2.4}%
+\contentsline {chapter}{\numberline {5}Conclusions and Future Work}{41}{chapter.5}%

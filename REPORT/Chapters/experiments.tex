@@ -43,12 +43,39 @@ Figures for the results are shown in section \ref{sec:4_quality}. Memory require
 \label{table:times}
 \end{table}
 
-For execution times greater than 20000 seconds (approximately 5 hours and 30 minutes) the execution was forcibly stopped. 
+For execution times greater than 20000 seconds (approximately 5 hours and 30 minutes) the execution was forcibly stopped. Therefore, results for those occurrences are not collected, since for most scenarios and 3D scenes, the time needed for manual placement of light probes is shorter than 5 hours.
 
 \section{Quality}
 \label{sec:4_quality}
 
 The tools were tested on the aforementioned edited Sponza scene \parencite{Sponza2017}, Corridor scene \parencite{Corridor2021} and Office scene \parencite{Office2021}. We will present the qualitative results. As we will see shortly, LPNN correctly places light probes in areas of high variance.
+
+\subsection{Light Probe placement Quality}
+\label{sec:lp_quality}
+
+Before we can describe and analyze the layout provided by the tool, it is vital to describe what defines a high-quality light probe layout.
+
+High-quality light probe placement optimally balances capturing lighting fidelity against the desired resource constraints. Light probes should be concentrated in regions where direct or indirect illumination exhibits rapid variation in space, such as near shadow edges, light occluders or areas with strong color bleeding. Placement of light probes in such locations is vital in order to minimize interpolation error of the irradiance information. Conversely, uniformly lit areas, such us open environments, probe density can be reduced to a minimum without perceptible loss of quality.
+
+As seen in figure \ref{fig:transition_comparison} and figure \ref{fig:transition_comparison_lp}, the light probe layout depends highly on the surrounding context of the scene. By adapting probe density to lighting variance and geometric complexity, we ensure that the global illumination information received by dynamic objects in the scene is sufficient to reconstruct a close approximation of the true ground-truth solution, being path-tracing as mentioned in section \ref{sec:offline}, while placing the fewest probes possible depending on the resource limits.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{Graphics/results/concats/comparison7.png}
+	\caption{Comparison between a location of gradual transition of the illumination, compared to a more instantaneous change. Examples taken from Corridor scene (left) and Sponza scene (right).}
+	\label{fig:transition_comparison}
+\end{figure}
+
+A lower amount of light probes avoids long light baking times as well as reducing memory requirements in runtime. Additionally, if the probes are placed manually, a smaller amount of light probes makes the manual layout a process taking a fraction of the time required by a larger count. This enables artists to iterate rapidly, both in cases of manual placement and automatic placement tools, like the one proposed in this thesis.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{Graphics/results/concats/comparison8.png}
+	\caption{Scenes depicting locations of close-to-optimal light probe placement, depending on the context of the scene and the location currently shown. Worth noting is the fact that the amount of light probes depicted is not enough to created a working light probe group inside Unity, which requires four or more light probes to create a tetrahedron. The layout depicted is only for clarity reasons, and not application-ready. Examples taken from Corridor scene (left) and Sponza scene (right).}
+	\label{fig:transition_comparison_lp}
+\end{figure}
+
+Equally important to the density of the probes is maintaining spatial uniformity and coverage of the scene. Light probes must be far apart enough that the developer avoids wasting memory and reduces bake time, but clustered enough that no interpolation errors are present; errors that produce visible seams in the lighting as objects move between the tetrahedral cells of the probes. A high-quality placement strategy enforces a range of ideal distance between light probes to avoid gaps or clusters.
 
 \subsection{Indoors Example}
 
@@ -153,13 +180,13 @@ However, it has still dictated that a light probe between the nearby red and gre
 	\label{fig:sponza_detail}
 \end{figure}
 
-Similar results were present regardless of the settings used for LPNN. The translation tool was required often, but not always. We decided to show an example with the settings that we felt best displayed the layout we wanted to present, that additionally placed the same amount of light probes with LumiProbes. The settings for both tools can be seen in the caption of figure \ref{fig:comp5}, or in table \ref{table:times}.
+Similar results were present regardless of the settings used for LPNN. The translation tool was required often, but not always. We chose to show an example using settings that best displayed our desired layout, ensuring the same number of light probes were placed with LumiProbes. The settings for both tools can be seen in the caption of figure \ref{fig:comp5}, or in table \ref{table:times}.
 
 \subsection{Shortcomings of LPNN}
 
-It should be of note that the light probe layout described in sub-section \ref{sec:outdoors} is sub-optimal by nature. Any harsh edge in illumination, an example of which is present in the Sponza seen shown in the same sub-section, requires a tightly-packed light probe layout surrounding it, in order to ensure that a dynamic object has an instant transition between the different illuminations.
+It is important to note that the light probe layout described in sub-section \ref{sec:outdoors} is inherently sub-optimal, which impacts the accuracy of dynamic object illumination. Any harsh edge in illumination, an example of which is present in the Sponza seen shown in the same sub-section, requires a tightly-packed light probe layout surrounding it, in order to ensure that a dynamic object has an instant transition between the different illuminations.
 
-A sparser grid like the one used in the same sub-section will correctly place light probes on both sides of the light-edge, however the distance between them will make the transition smooth, resulting in inaccurate GI on the surface of a dynamic object. This can not be resolved in any way by the model, since it is a fault stemming from the cell size used by the user. Even with a theoretical perfect model, faulty user usage of the tool places the model in a state that it can only minimize the user error as best as it can. It can not resolve it, making user error one of the largest factors of sub-optimal light probe placement using the LPNN tool.\newline
+A sparser grid like the one used in the same sub-section will correctly place light probes on both sides of the light-edge, however the distance between them will make the transition smooth, resulting in inaccurate GI on the surface of a dynamic object. This issue cannot be resolved by the model, as it originates from the cell size chosen by the user, highlighting the importance of user input in achieving optimal results. Even with a theoretical perfect model, faulty user usage of the tool places the model in a state that it can only minimize the user error as best as it can. It can not resolve it, making user error one of the largest factors of sub-optimal light probe placement using the LPNN tool.\newline
 
 \begin{figure}[h]
 	\centering
@@ -179,9 +206,32 @@ The LPNN model used during the creation of this thesis can be improved. In rare 
 
 Additionally, in the same scene, we can see that the right half of the building contains multiple light probes, even in areas where the change in illumination is minimal or non-existent. Not all light probes are unnecessary. A dynamic object in this part of the scene will have sufficient data from the light probes surrounding it, therefore the surface of the object will be shaded correctly. However, due to the lack of significant illumination changes, the amount of placed light probes can be reduced significantly, while keeping the same visual quality. The currently oversampled area results in increased memory usage with no improvements in the quality of GI on dynamic objects.\newline
 
-This problem results from the model itself. It is important to have sufficient amount of high quality data during training; data from a variety of scenes and examples, including many edge cases and variations. As mentioned in section \ref{sec:model_training}, we trained the model using 3485 total feature vectors from different scenes. However, a bigger dataset can improve the accuracy of the model, potentially avoiding the issue mentioned. In cases like the one described, it is necessary that the user attempts using different settings for the tool and potentially requiring an increased manual tweaking process to provide the desired results.
+This problem results from the model itself. It is important to have sufficient amount of high quality data during training; data from a variety of scenes and examples, including many edge-cases and variations. We trained the model using 3485 total feature vectors from different scenes, as detailed in section \ref{sec:model_training}. However, a bigger dataset can improve the accuracy of the model, potentially avoiding the issue mentioned. In cases like the one described, it is necessary that the user attempts using different settings for the tool and potentially requiring an increased manual tweaking process to provide the desired results.
 
+With different settings, mainly a much denser EP grid, the importance scores inferred by the model improve slightly. Even though they are still suboptimal, the light probes are located in areas of variance more often, but still failing to appear in all and with proper layout. As seen in figure \ref{fig:office_faulty_new}, the model successfully placed light probes around the three differently-colored light sources in the central room, and additionally placed probes on the white light source to the left of the room. Furthermore, a few light probes were placed on the dark rooms on the two corners of the building, ensuring a dynamic object will be properly shaded when entering those areas.
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{Graphics/results/concats/comparison9.png}
+	\caption{Overview of faulty light probe placement inferred by the model. Settings used are 0.611, 1 (left) and 0.785, 1 (right), done in the Office scene.}
+	\label{fig:office_faulty_new}
+\end{figure}
 
+However, it is apparent that this layout is still not sufficient. The large amount of light probes placed, even with an increased threshold, as seen in the same figure \ref{fig:office_faulty_new}, results in much higher memory usage during runtime, greatly impacting the performance of the application. Furthermore, in an attempt to reduce the number of light probes by increasing the threshold, keeping only the most important light probes, we can see a significant gap in light probe placement in areas of high variance. Namely, on the image on the right of figure \ref{fig:office_faulty_new}, the rooms on the bottom of the figure, as well as the room with the two white light sources lack significantly in light probe coverage. Any dynamic object traversing those rooms will receive incorrect lighting, immediately visible to the user. 
 
+Furthermore, the dense grid and consequently the large amount of light probes placed makes manual tweaking by the developer a very time-consuming task. It is natural for the developer to require the most optimal layout for the present scene, but relocating each light probe in this current scenario will take approximately the same amount of time than placing the light probes manually.\newline
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{Graphics/results/office_0.35_1.49.jpg}
+	\caption{Overview of an improved light probe placement inferred by the model. Small manual tweaking was done to remove a small number of light probes. Settings used are 0.35, 1.49 in the Office scene.}
+	\label{fig:office_faulty_better}
+\end{figure}
+
+Even though the two examples shown in figures \ref{fig:office_faulty} and \ref{fig:office_faulty_new} are from the same scene, with the only difference being the size of the cell which results in a denser grid, the innate uncertainty of a Neural Network model results in an inferred output that can on occasion be faulty or incorrect, as presented. Additional tweaking of the cell size and the threshold value can create an improved layout for the light probes, as seen in figure \ref{fig:office_faulty_better}. 
+
+The new layout has placed more light probes on the areas mentioned before, specifically those that contained minimal or none at all. The rooms on the right of the building have enough light probes to capture the transition between the colored lights and the white lights, the orange lights and the white lights as well as the white light sources and the dark rooms on the right corner of the building. This resolves most issues with the previous layout, as well as reducing the density of the grid and therefore the amount of light probes present in the scene.
+
+However, it is important to mention that the layout present in figure \ref{fig:office_faulty_better} has been tweaked manually, and is not the default result inferred by the LPNN model with the setting specified in the caption of the figure. We manually tweaked the layout by removing a small number of light probes from densely populated areas, since their impact to the accuracy of lighting information on a dynamic object is not vital. No other manual tweaking was done; the positions of light probes that were not removed is the same, and no light probes were added to the grid and placed manually. The manual process was completed within 5 minutes from the moment the model placed the initial layout of light probes with the provided settings. In total, from the moment we first opened the scene in Unity to the moment of capturing the result, the time spent was close to 10 minutes of real time. Even though manually placing the light probes is a process that requires much more time, especially on larger scenes, the results present can still be improved upon to approach the theoretical optimal even more.
+
+We can clearly see that the process of finding the best layout by experimenting with the settings is a process that can on occasion result to sub-optimal light probe layouts, requiring manual tweaking or ,on rare occasions, even restart of the process. Work can be done to improve the model and the tool, as described in section \ref{sec:Conclusions}.

@@ -2,7 +2,7 @@ In this chapter, we will present the pipeline of the tool and its implementation
 
 \section{Feature Collection}
 \label{sec:feature_collection}
-A necessary step before collecting scene and lighting features is to first place points in the scene to collect data per-point. We decided to create an algorithm that places those points, called Evaluation Points (EP) henceforth, inside a collection of user-defined scene bounds of arbitrary shape. As shown in algorithm \ref{alg:grid_place}, we begin by placing the Evaluation Points on a volume that surrounds the collection of bounds the user defined, then we remove the points that are not within the bounds, as seen in figure \ref{fig:grid}.
+A necessary step before collecting scene and lighting features is to first place points in the scene to collect data per-point. We decided to create an algorithm that places those points, called Evaluation Points (EP) henceforth, inside a collection of user-defined scene bounds of arbitrary dimensions. As shown in algorithm \ref{alg:grid_place}, we begin by placing the Evaluation Points on a volume that surrounds the collection of bounds the user defined, then we remove the points that are not within the bounds, as seen in figure \ref{fig:grid}.
 
 
 \begin{algorithm}
@@ -174,9 +174,19 @@ The supervised-learning approach we decided on for this thesis requires that the
 	\end{algorithmic}
 \end{algorithm}
 
-The nature of this label extraction method beckons for the ground-truth light probe placement to be close to the optimal placement, determined by the user's intuition, experience, and demands for the specific scene.
+The nature of this label extraction method beckons for the ground-truth light probe placement to be close to the optimal placement, determined by the user's intuition, experience, and demands for the specific scene. We define a high-quality light probe layout in sub-section \ref{sec:lp_quality}.
 
-After collecting the labels into a list, they are saved into a file on the hard disk for use in training of the model, as seen in section \ref{sec:model_training}. As mentioned previously, it is possible to collect labels from multiple scenes, creating a bigger dataset for the model to train on.
+After collecting the labels into a list, they are saved into a file on the hard disk for use in training of the model, as seen in section \ref{sec:model_training}. As mentioned previously, it is possible to collect labels from multiple scenes, creating a bigger dataset for the model to train on. The layout of the feature vectors stored in the files is as follows:
+
+\begin{enumerate}
+	\item \textbf{L2 SH}, 6 RGBA values depicting the red, green, blue, and alpha channel in each of the axis in positive and negative directions. This results in 24 floating-point values.
+	\item \textbf{Light Variance}, the variance of irradiance strength as desribed beforehand.
+	\item \textbf{Normal Variance}, the variance of the normal vectors of the surrounding objects, if any.
+	\item \textbf{Occlusion Factor}, the percentage of rays that collided with an opaque object within a set distance to the total amount of rays casted.
+	\item \textbf{RGB Variance}, similar to Light Variance, depicts the change of color within a certain radius around the point. Each channel is calculated independently, resulting in 3 floating point values.
+\end{enumerate}
+
+At the start of the file, a number describing the amount of features within each feature vector is prepended, for easier extracting during the pre-processing for the training step, seen in section \ref{sec:model_training}. The format present is arbitrary, and it can be changed with no impact to the tool or the training of the model.
 
 \section{Model Training}
 \label{sec:model_training}

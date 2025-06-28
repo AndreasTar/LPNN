@@ -37,6 +37,7 @@ Light probes, in particular, represent a compelling middle-ground, flexible enou
 There is an abundance of work in the literature addressing the problem of Global Illumination. These studies aim to achieve realistic lighting in 3D scenes by employing various approaches and techniques, each offering unique advantages and disadvantages, but they share a common goal: to maximize visual fidelity while minimizing computational costs.
 
 \subsection{Offline Methods}
+\label{sec:offline}
 Offline Illumination methods refer to techniques that are not viable for real-time applications and are therefore used only in situations where the importance of high visual fidelity far outweighs the need for computational speed, typically in non-interactive 3D renders, most commonly in movies or pre-rendered scenes. Classic Path-Tracing, first introduced in 1986 \parencite{Kajiya1986}, tracks the movement of a photon ray emitted from a source, typically the camera, and simulates physics interactions to calculate the color of each screen pixel accurately. The immense computational cost of path-tracing led to the development of performance improvements, such as the Metropolis Light Transport (MLT) method introduced in 1997 \parencite{Veach1997}, and variants like bi-directional Path-Trace \parencite{Lafortune1993}, which build on Monte-Carlo algorithms \parencite{Lafortune1996}.
 
 \subsection{Online Methods} % maybe section these?
