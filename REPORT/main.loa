@@ -1,5 +1,5 @@
 \contentsline {algorithm}{\numberline {1}{\ignorespaces Placement of Evaluation Points on a grid-like layout}}{17}{algorithm.1}%
-\contentsline {algorithm}{\numberline {2}{\ignorespaces Feature Extraction: Spherical Harmonics around a point}}{18}{algorithm.2}%
+\contentsline {algorithm}{\numberline {2}{\ignorespaces Feature Extraction: Spherical Harmonics around a point}}{19}{algorithm.2}%
 \contentsline {algorithm}{\numberline {3}{\ignorespaces Feature Extraction: Light Variance around a point}}{19}{algorithm.3}%
 \contentsline {algorithm}{\numberline {4}{\ignorespaces Feature Extraction: RGB Variance around a point}}{19}{algorithm.4}%
 \contentsline {algorithm}{\numberline {5}{\ignorespaces Feature Extraction: Normal Variance around a point}}{20}{algorithm.5}%
