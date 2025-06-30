@@ -29,7 +29,7 @@ In algorithm \ref{alg:grid_place}, \textit{cellsize} is the distance between eac
 	\label{fig:grid}
 \end{figure}
 
-After placing the EP, we use each point to calculate the data needed for the feature vectors. The aim of the LPNN model is to give an importance value to each of those EP that it is given. Therefore, it is vital that it understands what defines a significant point via the features that it is trained on. Our knowledge dictates that an important location for a light probe is one that has great variance in illumination. Therefore, we include light-, RGB- and normal-variance as features for each point. Light-Variance dictates how much the light intensity changes around a point. RGB-Variance is similar, since it shows the change in Red, Green, and Blue light around each point, each channel being independent from the others. Normal-Variance is a value that makes locations like corners distinct from empty areas or from locations near a wall. Similarly, we also calculate Occlusion-Factor, a feature that gives each point a value depending on how empty or cluttered the area around it is. Normal-Variance together with Occlusion-Factor inform the model of areas that are enclosed or close to complex geometry. This makes the model able to distinguish these locations, even when all other values are identical, making it able to give different importance values to those distinct locations.\newline
+After placing the EP, we use each point to calculate the data needed for the feature vectors. The aim of the LPNN model is to give an importance value to each of those EP that it is given. Therefore, it is vital that it understands what defines a significant point via the features that it is trained on. As we will see in section \ref{sec:lp_quality}, an important location for a light probe is one that has great variance in illumination. Therefore, we include light-, RGB- and normal-variance as features for each point. Light-Variance dictates how much the light intensity changes around a point. RGB-Variance is similar, since it shows the change in Red, Green, and Blue light around each point, each channel being independent from the others. Normal-Variance is a value that makes locations like corners distinct from empty areas or from locations near a wall. Similarly, we also calculate Occlusion-Factor, a feature that gives each point a value depending on how empty or cluttered the area around it is. Normal-Variance together with Occlusion-Factor inform the model of areas that are enclosed or close to complex geometry. This makes the model able to distinguish these locations, even when all other values are identical, making it able to give different importance values to those distinct locations.\newline
 
 Along with the features mentioned above, we additionally include a vector that contains the spherical-harmonic values for a small amount of distinct directions around each point. The implementations of each feature collection method are shown in \ref{alg:feat_sh}, \ref{alg:feat_lv}, \ref{alg:feat_rgbv}, \ref{alg:feat_nv}, and \ref{alg:feat_of}.
 
@@ -71,9 +71,9 @@ Along with the features mentioned above, we additionally include a vector that c
 	\end{algorithmic}
 \end{algorithm}
 
-In line \algref{alg:feat_lv}{alg:feat_lv:7}, to convert from RGB channel values to perceived light intensity of the pixel, also known as luminance, we use the formula shown in \cite{Luminance2015}, under section 3 item 3.2. This formula is used to calculate how bright a pixel in regards to the RGB channel values it currently shows.
+In line 7 of algorithm \ref{alg:feat_lv}, to convert from RGB channel values to perceived light intensity of the pixel, also known as luminance, we use the formula shown in \cite{Luminance2015}, under section 3 item 3.2. This formula is used to calculate how bright a pixel in regards to the RGB channel values it currently shows.
 
-Similarly, we collect the RGB-Variance independently for each channel. The formula is similar to Light-Variance, with the exception of line \algref{alg:feat_lv}{alg:feat_lv:7}, since it is not applicable. We need each channel RGB value to be unaffected by any conversion. This is seen in algorithm \ref{alg:feat_rgbv}.
+Similarly, we collect the RGB-Variance independently for each channel. The formula is similar to Light-Variance, with the exception of line 7 of algorithm \ref{alg:feat_lv}, since it is not applicable. We need each channel RGB value to be unaffected by any conversion. This is seen in algorithm \ref{alg:feat_rgbv}.
 
 \begin{algorithm}
 	\caption{Feature Extraction: RGB Variance around a point}
@@ -120,7 +120,7 @@ Similarly, we collect the RGB-Variance independently for each channel. The formu
 	\end{algorithmic}
 \end{algorithm}
 
-In line \algref{alg:feat_nv}{alg:feat_nv:12}, we want the higher values to define the areas with more complex geometry. The dot product of vectors is a value between 0 and 1, therefore we subtract the dot product from 1, to invert the range of the variance.\newline
+In line 12 of algorithm \ref{alg:feat_nv}, we want the higher values to define the areas with more complex geometry. The dot product of vectors is a value between 0 and 1, therefore we subtract the dot product from 1, to invert the range of the variance.\newline
 
 \begin{algorithm}
 	\caption{Feature Extraction: Occlusion Factor around a point}
@@ -258,7 +258,7 @@ The complete function for remapping a value $x$ from a \([min1, max1]\) range to
 
 \[ result = min2 + (max2 - min2) * ((x - min1)/(max1 - min1)) \]
 
-For our purposes, the ranges are \([min, max]\) and \([0, 1]\). Therefore, the function can be simplified to the one seen in line \algref{alg:lp_place}{alg:lp_place:11}.\newline
+For our purposes, the ranges are \([min, max]\) and \([0, 1]\). Therefore, the function can be simplified to the one seen in line 11 of algorithm \ref{alg:lp_place}.\newline
 
 With the values remapped, the threshold system can be used without delicate control. We decided on a percentile threshold system, meaning that the user can decide what percentage of the total amount of light probes they want to be placed, with the most important ones appearing first. The algorithm for this is simple, as seen in \ref{alg:lp_thres}. First, we duplicate the list, leaving the original unaffected, which the duplicate is then sorted in a descending order. Then, from the ordered list, the top percentage of the values is kept, depending on the threshold value that is currently set by the user.
 
@@ -284,7 +284,7 @@ With the values remapped, the threshold system can be used without delicate cont
 	\end{algorithmic}
 \end{algorithm}
 
-In line \algref{alg:lp_thres}{alg:lp_thres:1}, we invert the threshold, since, as mentioned before, we want the higher-importance values to appear first. This means that with a 0.9 threshold, meaning 90\%, the top 10\% light probes with the highest importance score should be placed, while the remaining 90\% with lower significance should be ignored.\newline 
+In line 1 of algorithm \ref{alg:lp_thres}, we invert the threshold, since, as mentioned before, we want the higher-importance values to appear first. This means that with a 0.9 threshold, meaning 90\%, the top 10\% light probes with the highest importance score should be placed, while the remaining 90\% with lower significance should be ignored.\newline 
 
 Finally, we set the positions of the Light Probes for the Light Probe Group Unity object to be the ones that are within the threshold that we calculated, seen as the $positions$ variable in the algorithm mentioned. As we will see in section \ref{sec:LPNN_UI}, the light probes are now placed in the scene and visible to the user, completing the execution of the tool.
 
