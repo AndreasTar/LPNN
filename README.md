@@ -19,7 +19,7 @@ The whole repository is licensed under the MIT License found in the [LICENSE](LI
 
 ![image](Thesis_Report_code/Graphics/results/sponza_0.4_2.jpg)
 
-In this thesis, a tool to automatically evaluate scene positions and place Light Probes was created, using AI. The term *LPNN* is short-hand for *Light Probe Neural Network*, refering to the entire system and the architecture of the AI model.
+In this thesis, a tool to automatically evaluate scene positions and place Light Probes was created, using AI. The term "***LPNN***" is short-hand for "*Light Probe Neural Network*", refering to the entire system and the architecture of the AI model.
 
 A direct replica of the *Abstract* of the thesis follows. It can also be found in the [*Thesis_Report_code/*](Thesis_Report_code) folder, in [*this file*](Thesis_Report_code/main.pdf).
 
