@@ -13,7 +13,7 @@ print("NumPy version:", np.__version__)
 
 def make_model_pointnet(feature_dim: int):
     """
-    PointNet‑style network that predicts one importance score per point.
+    PointNet-style network that predicts one importance score per point.
       feature_dim: number of features per point (e.g. 4).
     """
 
