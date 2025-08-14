@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Unity_diploma_Impl.sln"
+    "dotnet.defaultSolution": "LPNN_Unity_Project.sln"
 }
