@@ -1,5 +1,5 @@
 using UnityEngine;
-using Unity.Sentis;
+
 using Unity.VisualScripting;
 using Unity.Mathematics;
 using System.Linq;
@@ -7,14 +7,14 @@ using System.Collections.Generic;
 
 public class LightProbeAI : MonoBehaviour
 {
-    public ModelAsset modelAsset;
-    private Model runtimeModel;
-    private Worker worker;
+    public Unity.InferenceEngine.ModelAsset modelAsset;
+    private Unity.InferenceEngine.Model runtimeModel;
+    private Unity.InferenceEngine.Worker worker;
 
     void Start()
     {
-        runtimeModel = ModelLoader.Load(modelAsset);
-        worker = new Worker(runtimeModel, BackendType.GPUCompute);
+        runtimeModel = Unity.InferenceEngine.ModelLoader.Load(modelAsset);
+        worker = new Unity.InferenceEngine.Worker(runtimeModel, Unity.InferenceEngine.BackendType.GPUCompute);
     }
 
     public float[] Predict(Dictionary<Vector3, float[][]> inputFeatures) // {key: [features]}
@@ -24,7 +24,7 @@ public class LightProbeAI : MonoBehaviour
         int N = inputFeatures.Count; // Number of light probes
         float[] flattenedInput = inputFeatures.First().Value.SelectMany(x => x).ToArray(); // Flatten the first feature set to get the number of features per node
         int F = flattenedInput.Length; // Number of total values of the features per node
-        Tensor<float> input = new (new TensorShape(1, N, F));
+        Unity.InferenceEngine.Tensor<float> input = new (new Unity.InferenceEngine.TensorShape(1, N, F));
         print("Input shape: " + input.shape.ToString());
 
         int i = 0;
@@ -41,7 +41,7 @@ public class LightProbeAI : MonoBehaviour
         });
 
         worker.Schedule(input);
-        Tensor<float> output = worker.PeekOutput() as Tensor<float>;  // shape: [1, N, 1]
+        Unity.InferenceEngine.Tensor<float> output = worker.PeekOutput() as Unity.InferenceEngine.Tensor<float>;  // shape: [1, N, 1]
 
         float[] importance = output.DownloadToArray();
 
