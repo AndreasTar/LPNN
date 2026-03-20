@@ -35,3 +35,25 @@ shaped bounds of the scene. We sample per-point lighting information, including 
 To deploy in Unity, the trained model is then exported to an .ONNX file and imported via Sentis, the official Unity package for handling AI models inside a Unity Runtime; at edit-time, it ingests per-point scene data and returns per-point importance values. Predicted high-importance locations are then used to populate a Unity LightProbeGroup object, giving developers immediate, visually appropriate probe distributions, with easy to control thresh-holding if higher- or lower-importance locations are desired.
 
 We demonstrate that our AI model generalizes across grid sizes and shapes without retraining, as well as giving immediate results for any scene. Although our evaluation remains mostly qualitative, based on visual inspection of GI results and light-probe placement across a variety of indoor and outdoor scenes, we consistently observe that the generated probe layouts capture important scene light-data with minimal or no manual tweaking. By replacing manual probe placement with a simpler AI-based workflow, artists and developers save time and achieve a faster iteration process throughout the development of a 3D application.
+
+## How to Cite
+The license is [MIT](LICENSE). If you use the contents of this repository for your work, please cite it as described below:
+
+### LaTeX and BibTeX example usage
+
+<blockquote>
+<pre style="white-space:pre-wrap;">
+In our work, we have used the source code ~\cite{tarasidis_2026}, available at <em>'https://github.com/AndreasTar/LPNN'</em>.
+</pre>
+
+<pre style="white-space:pre-wrap;">
+@article{tarasidis_2026
+    booktitle = {Eurographics 2026 - Posters},
+    editor = {Gerrits, T. and Teschner M.},
+    title = {Deep Illumination–Guided Light Probe Placement}},
+    author = {Tarasidis, Andreas and Vasilakis, Andreas A. and Fudos, Ioannis},
+    year = {2026},
+    publisher = {The Eurographics Association}
+}
+</pre>
+</blockquote>
