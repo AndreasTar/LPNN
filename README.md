@@ -1,6 +1,6 @@
 # LPNN
 
-This is the repository containing the source code of my Thesis project about using AI to intelligently place Light Probes in a 3D-scene inside the Unity game engine, presented as a *[Eurographics 2026 Poster: Deep Illumination–Guided Light Probe Placement](https://diglib.eg.org/handle/10.2312/3607272)*, in collaboration with [A. A. Vasilakis](https://orcid.org/0000-0001-6895-3324) and [I. Fudos](https://orcid.org/0000-0002-4137-0986).
+This is the repository containing the source code of my Thesis project about using AI to intelligently place Light Probes in a 3D-scene inside the Unity game engine, presented as a *[Eurographics 2026 Poster: Deep Illumination–Guided Light Probe Placement](https://diglib.eg.org/handle/10.2312/3607272)*, in collaboration with [A. A. Vasilakis](https://orcid.org/0000-0001-6895-3324) and [I. Fudos](https://orcid.org/0000-0002-4137-0986). The poster can also be found in the repository, *[here](https://github.com/AndreasTar/LPNN/blob/main/Deep_Illumination_Guided_Light_Probe_Placement_CRC.pdf)*.
 
 Completed during my final year of studies in the [Department of Computer Science & Engineering](https://www.cse.uoi.gr/?lang=en) of [University of Ioannina](https://uoi.gr/), in 2025. Original Thesis version, prior to any changes made, can be found [here](https://github.com/AndreasTar/LPNN/releases/tag/Original) or in the *Releases* section of the repository.
 
